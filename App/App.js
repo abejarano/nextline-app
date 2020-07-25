@@ -1,11 +1,17 @@
 import React from 'react';
-import {  SafeAreaView,  StyleSheet,  ScrollView,  View,  Text,  StatusBar,} from 'react-native';
-import {  Header,  LearnMoreLinks,  Colors,  DebugInstructions,  ReloadInstructions,} from 'react-native/Libraries/NewAppScreen';
-import database from '@react-native-firebase/database';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+} from 'react-native';
+import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
 import LoginClient from './Containers/LoginClient';
 import ChatClient from './Containers/ChatClient';
 
-const App: () => React$Node = () => {
+const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -16,8 +22,8 @@ const App: () => React$Node = () => {
           <Header />
           <View style={styles.body}>
             <Text style={styles.body}> nextline</Text>
-            <LoginClient/>
-            <ChatClient/>
+            <LoginClient />
+            <ChatClient />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -27,7 +33,7 @@ const App: () => React$Node = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter
+    backgroundColor: Colors.lighter,
   },
   engine: {
     textAlign: 'center',
