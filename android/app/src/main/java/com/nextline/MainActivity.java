@@ -1,4 +1,4 @@
-package com.nextline;
+package com.jaspersoft.nextline;
 
 import com.facebook.react.ReactActivity;
 
