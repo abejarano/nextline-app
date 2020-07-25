@@ -3,6 +3,7 @@ import {  SafeAreaView,  StyleSheet,  ScrollView,  View,  Text,  StatusBar,} fro
 import {  Header,  LearnMoreLinks,  Colors,  DebugInstructions,  ReloadInstructions,} from 'react-native/Libraries/NewAppScreen';
 import database from '@react-native-firebase/database';
 import LoginClient from './Containers/LoginClient';
+import ChatClient from './Containers/ChatClient';
 
 const App: () => React$Node = () => {
   return (
@@ -16,6 +17,7 @@ const App: () => React$Node = () => {
           <View style={styles.body}>
             <Text style={styles.body}> nextline</Text>
             <LoginClient/>
+            <ChatClient/>
           </View>
         </ScrollView>
       </SafeAreaView>
