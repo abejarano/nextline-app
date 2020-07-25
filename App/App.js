@@ -2,6 +2,7 @@ import React from 'react';
 import {  SafeAreaView,  StyleSheet,  ScrollView,  View,  Text,  StatusBar,} from 'react-native';
 import {  Header,  LearnMoreLinks,  Colors,  DebugInstructions,  ReloadInstructions,} from 'react-native/Libraries/NewAppScreen';
 import database from '@react-native-firebase/database';
+import LoginClient from './Containers/LoginClient';
 
 const App: () => React$Node = () => {
   return (
@@ -14,6 +15,7 @@ const App: () => React$Node = () => {
           <Header />
           <View style={styles.body}>
             <Text style={styles.body}> nextline</Text>
+            <LoginClient/>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -23,7 +25,7 @@ const App: () => React$Node = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+    backgroundColor: Colors.lighter
   },
   engine: {
     textAlign: 'center',
