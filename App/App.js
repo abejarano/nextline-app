@@ -7,13 +7,15 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import {Provider} from 'react-redux';
 import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
 import LoginClient from './Containers/LoginClient';
 import ChatClient from './Containers/ChatClient';
+import {configStore} from './reducers/store';
 
 const App = () => {
   return (
-    <>
+    <Provider store={configStore()}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
@@ -27,7 +29,7 @@ const App = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </>
+    </Provider>
   );
 };
 
