@@ -1,5 +1,5 @@
 import {ofType} from 'redux-observable';
-import {} from 'rxjs';
+import {of} from 'rxjs';
 import {mergeMap, map, catchError} from 'rxjs/operators';
 import {ajax} from 'rxjs/ajax';
 import {
@@ -16,9 +16,9 @@ const loginEpic = (action$) =>
   action$.pipe(
     ofType(LOGIN_SENDING_DATA),
     mergeMap((action) =>
-      ajax.post(`${process.env.api}/login`).pipe(
+      ajax.post(`${process.env.api}/login`, action.payload).pipe(
         map((response) => loginSucces(response)),
-        catchError((error) => loginFailed(error)),
+        catchError((error) => of(loginFailed(error))),
       ),
     ),
   );
@@ -29,7 +29,7 @@ const signupEpic = (action$) =>
     mergeMap((action) =>
       ajax.post(`${process.env.api}/signup`).pipe(
         map((response) => signupSucces(response)),
-        catchError((error) => signupFailed(error)),
+        catchError((error) => of(signupFailed(error))),
       ),
     ),
   );

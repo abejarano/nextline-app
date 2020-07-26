@@ -1,5 +1,6 @@
 import {
   LOGIN_SUCCESS,
+  LOGIN_SENDING_DATA,
   LOGIN_FAILED,
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
@@ -20,6 +21,11 @@ export const authReducer = (state = authState, {type, payload}) => {
         user: payload.user,
         token: payload.token,
         sending: false,
+      };
+    case LOGIN_SENDING_DATA:
+      return {
+        ...state,
+        sending: true,
       };
     case LOGIN_FAILED:
       return {
