@@ -1,28 +1,22 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {  View, Text, Button, StatusBar} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
-class LoginClient extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <View
+export function RegisterScreen(){
+	return(
+		<>
+			<View
         style={{
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text>Login Client!</Text>
+        <Text>Register Client!</Text>
         <Button
           title="Register"
           onPress={() => this.props.navigation.push('Register')}
         />
       </View>
-    );
-  }
+		</>
+	)
 }
-
-export default LoginClient; 
