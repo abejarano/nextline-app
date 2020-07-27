@@ -11,6 +11,7 @@ const authState = {
   token: '',
   sending: false,
   error: '',
+  loggedIn: false,
 };
 
 export const authReducer = (state = authState, {type, payload}) => {
