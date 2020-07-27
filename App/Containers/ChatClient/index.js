@@ -53,7 +53,8 @@ class ChatClient extends Component {
       .then((data) => {
         this.setState({mensagem_feedback: 'hola oki'});
         console.log('data ', data);
-        this.updateVisualizations();
+				this.updateVisualizations();
+				this.savePushToken();
       })
       .catch((error) => {
         console.log('error ', error);
@@ -80,7 +81,16 @@ class ChatClient extends Component {
       })
       .then(() => console.log('Data set.'))
       .catch((e) => console.warn(e));
-  }
+	}
+	
+	savePushToken = () => {
+		dbRef = database()
+      .ref(`pushTokens/${this.state.chatId}/visualizations`)
+      .set({
+        client: 0,
+        admin: 0,
+      });
+	}
 
   render() {
     return (
