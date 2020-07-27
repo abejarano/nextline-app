@@ -27,7 +27,7 @@ const signupEpic = (action$) =>
   action$.pipe(
     ofType(SIGNUP_SENDING_DATA),
     mergeMap((action) =>
-      ajax.post(`${process.env.api}/signup`).pipe(
+      ajax.post(`${process.env.api}/signup`, action.payload).pipe(
         map((response) => signupSucces(response)),
         catchError((error) => of(signupFailed(error))),
       ),
