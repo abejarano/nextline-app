@@ -1,28 +1,38 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import React from 'react';
+import {StyleSheet, View, Text, Button, TextInput} from 'react-native';
+import {login} from '../../actions/auth';
+import {useDispatch} from 'react-redux';
+import {ButtonStyled} from '../../Components/button';
+const LoginClient = () => {
+  const dispatch = useDispatch();
+  return (
+    <View style={styles.view}>
+      <Text>Bienvenido!</Text>
+      <Text>Inicia sesion para disfrutar de nuestros servicios</Text>
+      <TextInput>Email</TextInput>
+      <TextInput>clave</TextInput>
+      <ButtonStyled
+        onPress={() => dispatch(login({email: '', password: ''}))}
+        backgroundColor="#57585a"
+        color="#f5f5f5"
+        text={'Iniciar Sesion'}
+      />
+      <Text>Olvido su contrase;a?</Text>
+      <Text>+ velocidad + estabilidad + inovacion</Text>
 
-class LoginClient extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+      <Button
+        title="Register"
+        onPress={() => this.props.navigation.push('Register')}
+      />
+    </View>
+  );
+};
 
-  render() {
-    return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <Text>Login Client!</Text>
-        <Button
-          title="Register"
-          onPress={() => this.props.navigation.push('Register')}
-        />
-      </View>
-    );
-  }
-}
-
-export default LoginClient; 
+export default LoginClient;
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

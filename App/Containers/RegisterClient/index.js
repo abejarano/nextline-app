@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {  View, Text, Button, StatusBar} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {View, Text, Button, StatusBar} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 
-export function RegisterScreen(){
-	return(
-		<>
-			<View
+export function RegisterScreen() {
+  return (
+    <>
+      <View
         style={{
           flex: 1,
           alignItems: 'center',
@@ -17,6 +17,6 @@ export function RegisterScreen(){
           onPress={() => this.props.navigation.push('Register')}
         />
       </View>
-		</>
-	)
+    </>
+  );
 }
