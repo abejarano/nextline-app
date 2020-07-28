@@ -9,6 +9,7 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 export const configStore = () => {
   const logger = createLogger({});
+  process.env.api = 'https://nextline.jaspesoft.com/api/v1';
   const epicMiddleware = createEpicMiddleware();
   const middlewares = [epicMiddleware];
   console.log(IS_RUNNING_IN_CHROME, IS_PRODUCTION);

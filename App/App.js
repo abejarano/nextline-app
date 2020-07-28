@@ -1,19 +1,14 @@
 import React from 'react';
-import LoginNavigator from './Navigators/LoginNavigator';
-import TabsNavigator from './Navigators/TabsNavigator';
-
-const isLoggedIn = false;
+import {Provider} from 'react-redux';
+import {configStore} from './reducers/store';
+import {MainNavigator} from './Navigators/index';
 
 const App = () => {
-	if (isLoggedIn) {
-		return (
-			<TabsNavigator/>
-		);
-	}else{
-		return (
-			<LoginNavigator/>
-		);	
-	}
+  return (
+    <Provider store={configStore()}>
+      <MainNavigator />
+    </Provider>
+  );
 };
 
 export default App;
