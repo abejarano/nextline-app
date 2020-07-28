@@ -1,8 +1,7 @@
 import React from 'react';
-import { Image, Platform} from 'react-native';
+import { Image } from 'react-native';
 
 export const LogoLogin = () => {
-	console.log('Platform', Platform.OS);
   return (
 		<Image 
 			source={require('../assets/images/logoClip.png')} 

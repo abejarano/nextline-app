@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import React, { useState } from 'react';
+import {StyleSheet, View, Text, Button, KeyboardAvoidingView} from 'react-native';
 import {login} from '../../actions/auth';
 import {useDispatch} from 'react-redux';
 import {ButtonStyled} from '../../Components/button';
@@ -10,24 +10,35 @@ import globalStyles from '../../styles';
 
 const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
+  const [email, setEmail] = useState( '' );
+  const [password, setPassword] = useState( '' );
+
   return (
     <>
       <View style={styles.view}>
         <LogoLogin />
         <Text style={styles.title}>Bienvenido!</Text>
         <Text style={styles.text}>Inicia sesion para disfrutar de nuestros servicios</Text>
-        <InputStyled value="Email ..."  />
-        <InputStyled value="Clave ..." secureTextEntry={true} style={styles.button} />
-        <ButtonStyled
-          onPress={() => dispatch(login({email: '', password: ''}))}
-          backgroundColor={theme.GRAY_COLOR}
-          color={theme.WHITE_COLOR}
-          text={'Iniciar Sesion'}
-          style={styles.button}
-        />
-        <Text style={styles.text}>Olvido su contraseña?</Text>
-        <Text style={styles.text}>+ velocidad + estabilidad + inovacion</Text>
-        <Button title="Registro/Solicitar Servicio" onPress={() => navigation.push('Register')} />
+        
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          style={styles.keyboardContainer}
+          keyboardVerticalOffset={8}
+        >
+          <InputStyled value="Email ..." onChange={e => setEmail(e.target.value)} />
+          <InputStyled value="Clave ..." secureTextEntry={true} style={styles.button} />
+          <ButtonStyled
+            onPress={() => dispatch(login({email: '', password: ''}))}
+            backgroundColor={theme.GRAY_COLOR}
+            color={theme.WHITE_COLOR}
+            text={'Iniciar Sesion'}
+            style={styles.button}
+          />
+          <Text style={styles.text}>Olvido su contraseña?</Text>
+          <Text style={styles.text}>+ velocidad + estabilidad + inovacion</Text>
+          <Button title="Registro/Solicitar Servicio" onPress={() => navigation.push('Register')} />
+        </KeyboardAvoidingView>
+
       </View>
     </>
   );
@@ -67,5 +78,10 @@ const styles = StyleSheet.create({
   },
   register: {
     color: 'red'
-  }
+  },
+  keyboardContainer: {
+    alignItems: 'center',
+    padding: 0,
+    width: '100%',
+  }, 
 });
