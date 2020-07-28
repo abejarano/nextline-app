@@ -1,7 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {configStore} from './reducers/store';
-import {MainNavigator} from './Navigators/TabsNavigator';
+import {MainNavigator} from './Navigators/index';
 
 const App = () => {
   return (

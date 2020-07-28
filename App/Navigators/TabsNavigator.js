@@ -1,20 +1,19 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
-import {Provider, useSelector} from 'react-redux';
+import {View, Text, Button, StyleSheet} from 'react-native';
+import {Provider} from 'react-redux';
 import {configStore} from '../reducers/store';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import HomeClientScreen from '../Containers/HomeClient';
-import LoginNavigator from './LoginNavigator';
 
 const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function Profile() {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={styles.centered}>
       <Text>Profile Screen</Text>
     </View>
   );
@@ -22,7 +21,7 @@ function Profile() {
 
 function PlansScreen({navigation}) {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={styles.centered}>
       <Text>PlansScreen Screen</Text>
       <View>
         <Button
@@ -36,7 +35,7 @@ function PlansScreen({navigation}) {
 
 function PlansDetailsScreen() {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{}}>
       <Text>Details!</Text>
     </View>
   );
@@ -65,9 +64,12 @@ const TabsNavigator = () => {
   );
 };
 
-export const MainNavigator = () => {
-  const isLoggedIn = useSelector((state) => state.auth.loggedIn);
-  return isLoggedIn ? <TabsNavigator /> : <LoginNavigator />;
-};
+const styles = StyleSheet.create({
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default TabsNavigator;
