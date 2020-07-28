@@ -3,7 +3,6 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 export const InputStyled = ({value, secureTextEntry}) => {
-	
   return (
 		<TextInput 
       style={{...styles.input}}
