@@ -16,7 +16,7 @@ const loginEpic = (action$) =>
   action$.pipe(
     ofType(LOGIN_SENDING_DATA),
     mergeMap((action) =>
-      ajax.post(`${process.env.api}/login`, action.payload).pipe(
+      ajax.post(`${process.env.api}/config/auth/`, action.payload).pipe(
         map((response) => loginSucces(response)),
         catchError((error) => of(loginFailed(error))),
       ),
@@ -27,10 +27,12 @@ const signupEpic = (action$) =>
   action$.pipe(
     ofType(SIGNUP_SENDING_DATA),
     mergeMap((action) =>
-      ajax.post(`${process.env.api}/signup`, action.payload).pipe(
-        map((response) => signupSucces(response)),
-        catchError((error) => of(signupFailed(error))),
-      ),
+      ajax
+        .post(`${process.env.api}​/admon​/service-request`, action.payload)
+        .pipe(
+          map((response) => signupSucces(response)),
+          catchError((error) => of(signupFailed(error))),
+        ),
     ),
   );
 
