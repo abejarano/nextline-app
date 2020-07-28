@@ -1,25 +1,32 @@
 import {ofType} from 'redux-observable';
 import {from, of} from 'rxjs';
 import {mergeMap, map, catchError} from 'rxjs/operators';
-import {ajax} from 'rxjs/ajax';
 import {
   LOGIN_SENDING_DATA,
-  loginSucces,
+  loginSuccess,
   loginFailed,
   SIGNUP_SENDING_DATA,
-  signupSucces,
+  signupSuccess,
   signupFailed,
+  LOGIN_SUCCESS,
+  tokenSaved,
+  tokenSaveFailed,
+  STORAGE_CHECK_TOKEN,
+  SIGNOUT,
+  signoutSuccess,
+  signoutFailed,
 } from '../actions/auth';
 import {combineEpics} from 'redux-observable';
 import axios from 'axios';
 import {PLAN_SELECTED} from '../actions/plan';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const loginEpic = (action$) =>
   action$.pipe(
     ofType(LOGIN_SENDING_DATA),
     mergeMap((action) =>
       from(axios.post(`${process.env.api}/config/auth/`, action.payload)).pipe(
-        map((response) => loginSucces(response)),
+        map((response) => loginSuccess(response.data)),
         catchError((error) => {
           let errorMsg = '';
           if (
@@ -38,6 +45,39 @@ const loginEpic = (action$) =>
     ),
   );
 
+const loginStorageEpic = (action$) =>
+  action$.pipe(
+    ofType(LOGIN_SUCCESS),
+    mergeMap((action) =>
+      from(AsyncStorage.setItem('nl-token', action.payload.token)).pipe(
+        map(() => tokenSaved(action.payload.token)),
+        catchError((error) => of(tokenSaveFailed(error))),
+      ),
+    ),
+  );
+
+const signoutEpic = (action$) =>
+  action$.pipe(
+    ofType(SIGNOUT),
+    mergeMap((action) =>
+      from(AsyncStorage.removeItem('nl-token')).pipe(
+        map(() => signoutSuccess(action.payload.token)),
+        catchError((error) => of(signoutFailed(error))),
+      ),
+    ),
+  );
+
+const checkTokenStorageEpic = (action$) =>
+  action$.pipe(
+    ofType(STORAGE_CHECK_TOKEN),
+    mergeMap((action) =>
+      from(AsyncStorage.getItem('nl-token')).pipe(
+        map((token) => tokenSaved(token)),
+        catchError((error) => of(tokenSaveFailed(error))),
+      ),
+    ),
+  );
+
 const signupEpic = (action$, state$) =>
   action$.pipe(
     ofType(PLAN_SELECTED),
@@ -50,7 +90,7 @@ const signupEpic = (action$, state$) =>
           longitud: action.payload.position.logitude,
         }),
       ).pipe(
-        map((response) => signupSucces(response)),
+        map((response) => signupSuccess(response.data)),
         catchError((error) => {
           let errorMsg = '';
           console.log({
@@ -76,4 +116,10 @@ const signupEpic = (action$, state$) =>
     ),
   );
 
-export const authEpics = combineEpics(loginEpic, signupEpic);
+export const authEpics = combineEpics(
+  loginEpic,
+  signupEpic,
+  loginStorageEpic,
+  checkTokenStorageEpic,
+  signoutEpic,
+);
