@@ -5,6 +5,7 @@ import {
   Text,
   Button,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {login} from '../../actions/auth';
 import {useDispatch} from 'react-redux';
@@ -28,20 +29,21 @@ const LoginClient = ({navigation}) => {
         </Text>
 
         <KeyboardAvoidingView
-          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.keyboardContainer}
           keyboardVerticalOffset={8}>
           <InputStyled
-            value="Email ..."
+            placeholder="Email ..."
             onChange={(e) => setEmail(e.target.value)}
           />
           <InputStyled
-            value="Clave ..."
+            placeholder="Clave ..."
             secureTextEntry={true}
+            onChange={(e) => setPassword(e.target.value)}
             style={styles.button}
           />
           <ButtonStyled
-            onPress={() => dispatch(login({email: '', password: ''}))}
+            onPress={() => dispatch(login({email: email, clave: password}))}
             backgroundColor={globalStyles.GRAY_COLOR}
             color={globalStyles.WHITE_COLOR}
             text={'Iniciar Sesion'}
