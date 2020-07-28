@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 
 export const LogoLogin = () => {
   return (
@@ -7,9 +7,15 @@ export const LogoLogin = () => {
       source={require('../assets/images/logoClip.png')}
       x="0"
       y="0"
-      width="100%"
-      height="55%"
+      style={styles.image}
       preserveAspectRatio="xMidYMid slice"
     />
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    height: '45%',
+    width: '100%',
+  },
+});

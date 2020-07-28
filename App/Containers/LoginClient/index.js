@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,9 +6,10 @@ import {
   Button,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import {login} from '../../actions/auth';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ButtonStyled} from '../../Components/button';
 import {InputStyled} from '../../Components/input';
 import {LogoLogin} from '../../Components/LogoLogin';
@@ -16,8 +17,15 @@ import globalStyles from '../../styles';
 
 const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
+  const error = useSelector((state) => state.auth.error);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (error !== '') {
+      Alert.alert('Error al autenticarse :(', error);
+    }
+  }, [error]);
 
   return (
     <>
@@ -34,12 +42,17 @@ const LoginClient = ({navigation}) => {
           keyboardVerticalOffset={8}>
           <InputStyled
             placeholder="Email ..."
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(text) => {
+              setEmail(text);
+            }}
+            value={email}
           />
           <InputStyled
             placeholder="Clave ..."
             secureTextEntry={true}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(text) => {
+              setPassword(text);
+            }}
             style={styles.button}
           />
           <ButtonStyled

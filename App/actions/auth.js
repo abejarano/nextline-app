@@ -4,7 +4,7 @@ export const LOGIN_SENDING_DATA = '@auth/login/SENDING_DATA';
 
 export const SIGNUP_SUCCESS = '@auth/signup/SUCCESS';
 export const SIGNUP_FAILED = '@auth/signup/FAILED';
-export const SIGNUP_SENDING_DATA = '@auth/login/SENDING_DATA';
+export const SIGNUP_SENDING_DATA = '@auth/signup/SENDING_DATA';
 export const SIGNUP_SET_DATA = '@auth/login/SET_DATA';
 
 export const login = (payload) => ({

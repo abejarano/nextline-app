@@ -33,7 +33,7 @@ export const authReducer = (state = authState, {type, payload}) => {
       return {
         ...state,
         sending: false,
-        error: payload.error,
+        error: payload,
       };
 
     case SIGNUP_SUCCESS:

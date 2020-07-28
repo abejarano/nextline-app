@@ -2,12 +2,20 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 
-export const InputStyled = ({value, secureTextEntry, placeholder}) => {
+export const InputStyled = ({
+  value,
+  secureTextEntry,
+  placeholder,
+  onChange,
+}) => {
   return (
     <TextInput
       style={{...styles.input}}
       clearTextOnFocus={true}
       placeholder={placeholder}
+      onChangeText={(text) => {
+        onChange(text);
+      }}
       secureTextEntry={secureTextEntry}>
       {value}
     </TextInput>

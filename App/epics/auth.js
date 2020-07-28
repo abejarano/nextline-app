@@ -1,5 +1,5 @@
 import {ofType} from 'redux-observable';
-import {of} from 'rxjs';
+import {from, of} from 'rxjs';
 import {mergeMap, map, catchError} from 'rxjs/operators';
 import {ajax} from 'rxjs/ajax';
 import {
@@ -11,14 +11,28 @@ import {
   signupFailed,
 } from '../actions/auth';
 import {combineEpics} from 'redux-observable';
+import axios from 'axios';
 
 const loginEpic = (action$) =>
   action$.pipe(
     ofType(LOGIN_SENDING_DATA),
     mergeMap((action) =>
-      ajax.post(`${process.env.api}/config/auth/`, action.payload).pipe(
+      from(axios.post(`${process.env.api}/config/auth/`, action.payload)).pipe(
         map((response) => loginSucces(response)),
-        catchError((error) => of(loginFailed(error))),
+        catchError((error) => {
+          let errorMsg = '';
+          if (
+            error.response.data.email &&
+            !Array.isArray(error.response.data.email)
+          ) {
+            errorMsg = error.response.data.email;
+          } else {
+            if (error.response.data.clave) {
+              errorMsg = error.response.data.clave[0];
+            }
+          }
+          return of(loginFailed(errorMsg));
+        }),
       ),
     ),
   );
