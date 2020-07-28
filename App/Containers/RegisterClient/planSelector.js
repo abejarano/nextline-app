@@ -45,9 +45,8 @@ export function PlanSelectScreen({navigation}) {
   useEffect(() => {
     if (hasLocationPermission) {
       Geolocation.getCurrentPosition(
-        (position) => {
-          setPosition(position);
-          console.log(position);
+        (positionData) => {
+          setPosition(positionData);
         },
         (error) => {
           // See error code charts below.
@@ -77,7 +76,7 @@ export function PlanSelectScreen({navigation}) {
             <Text style={styles.modalText}>Hello World!</Text>
 
             <TouchableHighlight
-              style={{...styles.openButton, backgroundColor: '#2196F3'}}
+              style={styles.openButton}
               onPress={async () => {
                 let granted;
                 if (Platform.OS === 'ios') {
@@ -142,7 +141,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: '#F194FF',
+    backgroundColor: '#2196F3',
     borderRadius: 20,
     padding: 10,
     elevation: 2,
