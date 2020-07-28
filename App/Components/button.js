@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import globalStyles from '../styles';
 
 export const ButtonStyled = ({onPress, color, text, backgroundColor}) => {
   return (
@@ -14,15 +15,15 @@ export const ButtonStyled = ({onPress, color, text, backgroundColor}) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#57585a',
+    backgroundColor: globalStyles.GRAY_COLOR,
     width: '60%',
     padding: 15,
     borderRadius: 10,
     marginTop: 5,
-    marginBottom: 5
+    marginBottom: 5,
   },
   text: {
     textAlign: 'center',
-    color: '#f5f5f5',
+    color: globalStyles.WHITE_COLOR,
   },
 });
