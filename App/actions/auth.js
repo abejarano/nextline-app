@@ -5,6 +5,7 @@ export const LOGIN_SENDING_DATA = '@auth/login/SENDING_DATA';
 export const SIGNUP_SUCCESS = '@auth/signup/SUCCESS';
 export const SIGNUP_FAILED = '@auth/signup/FAILED';
 export const SIGNUP_SENDING_DATA = '@auth/login/SENDING_DATA';
+export const SIGNUP_SET_DATA = '@auth/login/SET_DATA';
 
 export const login = (payload) => ({
   type: LOGIN_SENDING_DATA,
@@ -20,8 +21,14 @@ export const loginFailed = (payload) => ({
   type: LOGIN_FAILED,
   payload,
 });
+
 export const signup = (payload) => ({
   type: SIGNUP_SENDING_DATA,
+  payload,
+});
+
+export const setSignupPartialData = (payload) => ({
+  type: SIGNUP_SET_DATA,
   payload,
 });
 

@@ -4,7 +4,7 @@ import {login} from '../../actions/auth';
 import {useDispatch} from 'react-redux';
 import {ButtonStyled} from '../../Components/button';
 import theme from '../../styles';
-const LoginClient = () => {
+const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
   return (
     <View style={styles.view}>
@@ -21,10 +21,7 @@ const LoginClient = () => {
       <Text>Olvido su contrase;a?</Text>
       <Text>+ velocidad + estabilidad + inovacion</Text>
 
-      <Button
-        title="Register"
-        onPress={() => this.props.navigation.push('Register')}
-      />
+      <Button title="Register" onPress={() => navigation.push('Register')} />
     </View>
   );
 };

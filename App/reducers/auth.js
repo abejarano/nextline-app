@@ -4,6 +4,7 @@ import {
   LOGIN_FAILED,
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
+  SIGNUP_SET_DATA,
 } from '../actions/auth';
 
 const authState = {
@@ -47,6 +48,15 @@ export const authReducer = (state = authState, {type, payload}) => {
         ...state,
         sending: false,
         error: payload.error,
+      };
+    case SIGNUP_FAILED:
+      return {
+        ...state,
+        sending: false,
+        user: {
+          ...state.user,
+          ...payload,
+        },
       };
     default:
       return state;
