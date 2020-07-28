@@ -16,7 +16,7 @@ const options = {
   },
 };
 
-export function RegisterScreen({navigation}) {
+export function ProfileScreen({navigation}) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [image, setImage] = useState(null);
@@ -72,6 +72,11 @@ export function RegisterScreen({navigation}) {
           }}
         />
       )}
+      <>
+        <View>
+          <Text>Sasha Gray</Text>
+        </View>
+      </>
 
       <Button
         title="back"
@@ -141,7 +146,7 @@ export function RegisterScreen({navigation}) {
         }}
         backgroundColor={globalStyles.GRAY_COLOR}
         color={globalStyles.WHITE_COLOR}
-        text={'Registrar'}
+        text={'Aceptar'}
         style={styles.button}
       />
     </View>
@@ -150,7 +155,7 @@ export function RegisterScreen({navigation}) {
 const styles = StyleSheet.create({
   view: {
     marginTop: -30,
-    backgroundColor: globalStyles.PRIMARY_COLOR,
+    backgroundColor: globalStyles.WHITE_COLOR,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
