@@ -20,7 +20,11 @@ function SelectRole() {
 const LoginNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
         <Stack.Screen name="Login" component={LoginClient} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="PlanSelect" component={PlanSelectScreen} />
