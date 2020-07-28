@@ -10,10 +10,10 @@ import {PermissionsAndroid} from 'react-native';
 
 const options = {
   title: 'Seleccionar Avatar',
-  // storageOptions: {
-  //   skipBackup: true,
-  //   path: 'images',
-  // },
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
 };
 
 export function RegisterScreen({navigation}) {
@@ -29,15 +29,7 @@ export function RegisterScreen({navigation}) {
   return (
     <View style={styles.view}>
       {image ? (
-        <Image
-          source={image}
-          style={{
-            borderColor: 'red',
-            borderRadius: 100,
-            height: 150,
-            width: 150,
-          }}
-        />
+        <Image source={image} style={styles.image} />
       ) : (
         <Button
           title="Image"
@@ -162,6 +154,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    height: '50px',
+    borderRadius: 100,
+    height: 150,
+    width: 150,
   },
 });
