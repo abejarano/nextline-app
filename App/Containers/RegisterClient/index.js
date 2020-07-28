@@ -40,11 +40,13 @@ export function RegisterScreen({navigation}) {
                 title: 'We need your permission',
               },
             );
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-              /**
-               * The first arg is the options object for customization (it can also be null or omitted for default options),
-               * The second arg is the callback which sends object: response (more info in the API Reference)
-               */
+            
+            let canUse = false;
+            if (granted === PermissionsAndroid.RESULTS.GRANTED && Platform.OS === 'android') canUse = true
+            if (Platform.OS === 'ios') canUse = true
+            
+            if (canUse) {
+              
               ImagePicker.showImagePicker(options, (response) => {
                 console.log('Response = ', response);
 
