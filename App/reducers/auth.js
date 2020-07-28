@@ -6,6 +6,7 @@ import {
   SIGNUP_FAILED,
   SIGNUP_SET_DATA,
 } from '../actions/auth';
+import {PLAN_SELECTED} from '../actions/plan';
 
 const authState = {
   user: {},
@@ -13,6 +14,7 @@ const authState = {
   sending: false,
   error: '',
   loggedIn: false,
+  message: '',
 };
 
 export const authReducer = (state = authState, {type, payload}) => {
@@ -39,9 +41,8 @@ export const authReducer = (state = authState, {type, payload}) => {
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        user: payload.user,
-        token: payload.token,
         sending: false,
+        message: payload.data.message,
       };
     case SIGNUP_FAILED:
       return {
@@ -49,13 +50,21 @@ export const authReducer = (state = authState, {type, payload}) => {
         sending: false,
         error: payload.error,
       };
-    case SIGNUP_FAILED:
+    case SIGNUP_SET_DATA:
       return {
         ...state,
         sending: false,
         user: {
           ...state.user,
           ...payload,
+        },
+      };
+    case PLAN_SELECTED:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          location: payload.position,
         },
       };
     default:

@@ -12,6 +12,7 @@ import {
 } from '../actions/auth';
 import {combineEpics} from 'redux-observable';
 import axios from 'axios';
+import {PLAN_SELECTED} from '../actions/plan';
 
 const loginEpic = (action$) =>
   action$.pipe(
@@ -37,16 +38,41 @@ const loginEpic = (action$) =>
     ),
   );
 
-const signupEpic = (action$) =>
+const signupEpic = (action$, state$) =>
   action$.pipe(
-    ofType(SIGNUP_SENDING_DATA),
+    ofType(PLAN_SELECTED),
     mergeMap((action) =>
-      ajax
-        .post(`${process.env.api}​/admon​/service-request`, action.payload)
-        .pipe(
-          map((response) => signupSucces(response)),
-          catchError((error) => of(signupFailed(error))),
-        ),
+      from(
+        axios.post(`${process.env.api}/admon/service-request`, {
+          ...state$.value.auth.user,
+          plan: action.payload.plan.id,
+          latitud: action.payload.position.altitude,
+          longitud: action.payload.position.logitude,
+        }),
+      ).pipe(
+        map((response) => signupSucces(response)),
+        catchError((error) => {
+          let errorMsg = '';
+          console.log({
+            ...state$.value.auth.user,
+            plan: action.payload.plan.id,
+            latitud: action.payload.position.altitude,
+            longitud: action.payload.position.logitude,
+          });
+          console.log(error.response.data);
+          if (
+            error.response.data.email &&
+            !Array.isArray(error.response.data.email)
+          ) {
+            errorMsg = error.response.data.email;
+          } else {
+            if (error.response.data.clave) {
+              errorMsg = error.response.data.clave[0];
+            }
+          }
+          return of(signupFailed(errorMsg));
+        }),
+      ),
     ),
   );
 
