@@ -11,18 +11,16 @@ const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
   return (
     <>
-      <View style={styles.header}>
+      <View style={styles.view}>
         <Image 
             source={require('../../aasets/images/logoClip.png')} 
             style={styles.logo} 
             x="0" 
             y="0" 
             width="100%" 
-            height="60%" 
+            height="55%" 
             preserveAspectRatio="xMidYMid slice" 
-          />
-      </View>
-      <View style={styles.view}>
+        />
         <Text style={styles.text}>Bienvenido!</Text>
         <Text style={styles.text}>Inicia sesion para disfrutar de nuestros servicios</Text>
         <InputStyled value="Email ..."  />
@@ -36,7 +34,6 @@ const LoginClient = ({navigation}) => {
         />
         <Text style={styles.text}>Olvido su contraseña?</Text>
         <Text style={styles.text}>+ velocidad + estabilidad + inovacion</Text>
-
         <Button title="Registro/Solicitar Servicio" onPress={() => navigation.push('Register')} />
       </View>
     </>
@@ -48,7 +45,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: globalStyles.WHITE_COLOR,
     marginTop: 25,
-    marginBottom: -243
+    marginBottom: -203
   },
   view: {
     marginTop: -30,
