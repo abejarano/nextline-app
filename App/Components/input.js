@@ -7,10 +7,11 @@ export const InputStyled = ({
   secureTextEntry,
   placeholder,
   onChange,
+  style
 }) => {
   return (
     <TextInput
-      style={{...styles.input}}
+      style={{...styles.input, ...style}}
       clearTextOnFocus={true}
       placeholder={placeholder}
       onChangeText={(text) => {
