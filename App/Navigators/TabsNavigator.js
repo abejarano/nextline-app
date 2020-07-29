@@ -33,7 +33,10 @@ const PlansDetailsScreen = () => {
 
 const HomeStackScreen = () => {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <HomeStack.Screen name="Home" component={HomeClientScreen} />
       <HomeStack.Screen name="Plans" component={PlansScreen} />
       <HomeStack.Screen name="PlansDetails" component={PlansDetailsScreen} />
@@ -43,7 +46,10 @@ const HomeStackScreen = () => {
 
 const TabsNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Tab.Screen name="Home" component={HomeStackScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
