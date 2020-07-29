@@ -1,25 +1,15 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
-import {Provider} from 'react-redux';
-import {configStore} from '../reducers/store';
-import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import HomeClientScreen from '../Containers/HomeClient';
+import {ProfileScreen} from '../Containers/Profile';
 
 const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Profile() {
-  return (
-    <View style={styles.centered}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-function PlansScreen({navigation}) {
+const PlansScreen = ({navigation}) => {
   return (
     <View style={styles.centered}>
       <Text>PlansScreen Screen</Text>
@@ -31,17 +21,17 @@ function PlansScreen({navigation}) {
       </View>
     </View>
   );
-}
+};
 
-function PlansDetailsScreen() {
+const PlansDetailsScreen = () => {
   return (
     <View style={{}}>
       <Text>Details!</Text>
     </View>
   );
-}
+};
 
-function HomeStackScreen() {
+const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeClientScreen} />
@@ -49,18 +39,14 @@ function HomeStackScreen() {
       <HomeStack.Screen name="PlansDetails" component={PlansDetailsScreen} />
     </HomeStack.Navigator>
   );
-}
+};
 
 const TabsNavigator = () => {
   return (
-    <Provider store={configStore()}>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeStackScreen} />
-          <Tab.Screen name="Profile" component={Profile} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeStackScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
   );
 };
 

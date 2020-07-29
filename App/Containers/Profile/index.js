@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, Image} from 'react-native';
+import {View, Text, Button, StyleSheet, Image, Platform} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {setSignupPartialData} from '../../actions/auth';
+import {setSignupPartialData, signout} from '../../actions/auth';
 import globalStyles from '../../styles';
 import {InputStyled} from '../../Components/input';
 import {ButtonStyled} from '../../Components/button';
@@ -40,13 +40,16 @@ export function ProfileScreen({navigation}) {
                 title: 'We need your permission',
               },
             );
-            
+
             let canUse = false;
-            if (granted === PermissionsAndroid.RESULTS.GRANTED && Platform.OS === 'android') canUse = true
-            if (Platform.OS === 'ios') canUse = true
-            
+            if (
+              granted === PermissionsAndroid.RESULTS.GRANTED &&
+              Platform.OS === 'android'
+            )
+              canUse = true;
+            if (Platform.OS === 'ios') canUse = true;
+
             if (canUse) {
-              
               ImagePicker.showImagePicker(options, (response) => {
                 console.log('Response = ', response);
 
@@ -147,6 +150,16 @@ export function ProfileScreen({navigation}) {
         backgroundColor={globalStyles.GRAY_COLOR}
         color={globalStyles.WHITE_COLOR}
         text={'Aceptar'}
+        style={styles.button}
+      />
+
+      <ButtonStyled
+        onPress={() => {
+          dispatch(signout());
+        }}
+        backgroundColor={globalStyles.GRAY_COLOR}
+        color={globalStyles.WHITE_COLOR}
+        text={'Cerrar sesion'}
         style={styles.button}
       />
     </View>

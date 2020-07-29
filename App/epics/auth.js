@@ -61,7 +61,7 @@ const signoutEpic = (action$) =>
     ofType(SIGNOUT),
     mergeMap((action) =>
       from(AsyncStorage.removeItem('nl-token')).pipe(
-        map(() => signoutSuccess(action.payload.token)),
+        map(() => signoutSuccess()),
         catchError((error) => of(signoutFailed(error))),
       ),
     ),

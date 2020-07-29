@@ -18,6 +18,7 @@ import globalStyles from '../../styles';
 const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

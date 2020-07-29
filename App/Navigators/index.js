@@ -1,15 +1,33 @@
 import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
 
 import LoginNavigator from './LoginNavigator';
 import TabsNavigator from './TabsNavigator';
 import {checkToken} from '../actions/auth';
 
+const MainStack = createStackNavigator();
+
 export const MainNavigator = () => {
-  const isLoggedIn = useSelector((state) => state.auth.loggedIn);
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
   useEffect(() => {
     dispatch(checkToken());
   }, [dispatch]);
-  return isLoggedIn ? <TabsNavigator /> : <LoginNavigator />;
+
+  return (
+    <NavigationContainer>
+      <MainStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        {token == null ? (
+          <MainStack.Screen name="Auth" component={LoginNavigator} />
+        ) : (
+          <MainStack.Screen name="App" component={TabsNavigator} />
+        )}
+      </MainStack.Navigator>
+    </NavigationContainer>
+  );
 };

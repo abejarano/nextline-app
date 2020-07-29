@@ -6,12 +6,13 @@ import {
   SIGNUP_FAILED,
   SIGNUP_SET_DATA,
   LOGIN_STORAGE_TOKEN_SUCCESS,
+  SIGNOUT_SUCCESS,
 } from '../actions/auth';
 import {PLAN_SELECTED} from '../actions/plan';
 
 const authState = {
   user: {},
-  token: '',
+  token: null,
   sending: false,
   error: '',
   loggedIn: false,
@@ -74,6 +75,13 @@ export const authReducer = (state = authState, {type, payload}) => {
         ...state,
         token: payload,
         loggedIn: payload ? true : false,
+      };
+    case SIGNOUT_SUCCESS:
+      console.log(state, 'test');
+      return {
+        ...state,
+        loggedIn: false,
+        token: null,
       };
     default:
       return state;
