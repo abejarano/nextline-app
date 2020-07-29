@@ -18,11 +18,15 @@ import {
 import {combineEpics} from 'redux-observable';
 import axios from 'axios';
 
-const loadProfileEpic = (action$) =>
+const loadProfileEpic = (action$, state$) =>
   action$.pipe(
     ofType(LOAD_PROFILE),
 		mergeMap((action) =>
-			from(axios.get(`${process.env.api}/admon/perfil/`, { headers: {'Authorization': `Token ${payload.token}`} } )).pipe(
+			from(axios.get(`${process.env.api}/admon/perfil/`, {
+				headers: {
+					Authorization: `Token ${state$.value.auth.token}`,
+				},
+			})).pipe(
 				map((response) => loginSuccess(response.data)),
 				catchError((error) => of(loadProfileFailed(error))),
 			), 
