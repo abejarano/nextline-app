@@ -39,9 +39,9 @@ export function ProfileScreen({navigation}) {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.keyboardContainer}
       keyboardVerticalOffset={8}>
-
       <ScrollView style={styles.keyboardContainer}>
         <View style={styles.view}>
+          
           {imageModeUri ? (
             <Image source={image} style={styles.image} />
           ) : (
@@ -58,15 +58,15 @@ export function ProfileScreen({navigation}) {
                 },
               );
 
-              let canUse = false;
+              let canUseImagePicker = false;
               if (
                 granted === PermissionsAndroid.RESULTS.GRANTED &&
                 Platform.OS === 'android'
               )
-                canUse = true;
-              if (Platform.OS === 'ios') canUse = true;
+                canUseImagePicker = true;
+              if (Platform.OS === 'ios') canUseImagePicker = true;
 
-              if (canUse) {
+              if (canUseImagePicker) {
                 ImagePicker.showImagePicker(options, (response) => {
                   console.log('Response = ', response);
 
@@ -177,7 +177,6 @@ export function ProfileScreen({navigation}) {
               style={styles.button}
             />
 
-
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -186,7 +185,7 @@ export function ProfileScreen({navigation}) {
 }
 const styles = StyleSheet.create({
   view: {
-    marginTop: 30,
+    marginTop: 55,
     backgroundColor: globalStyles.WHITE_COLOR,
     flex: 1,
     alignItems: 'center',
