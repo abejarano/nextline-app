@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, Image, Platform, KeyboardAvoidingView} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Image,
+  Platform,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setSignupPartialData, signout} from '../../actions/auth';
 import globalStyles from '../../styles';
@@ -7,8 +15,7 @@ import {InputStyled} from '../../Components/input';
 import {ButtonStyled} from '../../Components/button';
 import ImagePicker from 'react-native-image-picker';
 import {PermissionsAndroid} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const options = {
   title: 'Seleccionar Avatar',
@@ -28,10 +35,9 @@ export function ProfileScreen({navigation}) {
   const [nombrerzb, setNombreRzb] = useState('');
   const [phone, setPhone] = useState('');
   const [repassword, setRepassword] = useState('12341234');
-  const imgPlaceHolder = 'https://w7.pngwing.com/pngs/340/956/png-transparent-profile-user-icon-computer-icons-user-profile-head-ico-miscellaneous-black-desktop-wallpaper.png';
   const user = {
-    name: "Sasha Gray",
-    image: 'https://www.gstatic.com/tv/thumb/persons/500192/500192_v9_ba.jpg'
+    name: 'Sasha Gray',
+    image: 'https://www.gstatic.com/tv/thumb/persons/500192/500192_v9_ba.jpg',
   };
 
   return (
@@ -41,7 +47,6 @@ export function ProfileScreen({navigation}) {
       keyboardVerticalOffset={8}>
       <ScrollView style={styles.keyboardContainer}>
         <View style={styles.view}>
-          
           {imageModeUri ? (
             <Image source={image} style={styles.image} />
           ) : (
@@ -62,9 +67,12 @@ export function ProfileScreen({navigation}) {
               if (
                 granted === PermissionsAndroid.RESULTS.GRANTED &&
                 Platform.OS === 'android'
-              )
+              ) {
                 canUseImagePicker = true;
-              if (Platform.OS === 'ios') canUseImagePicker = true;
+              }
+              if (Platform.OS === 'ios') {
+                canUseImagePicker = true;
+              }
 
               if (canUseImagePicker) {
                 ImagePicker.showImagePicker(options, (response) => {
@@ -98,89 +106,87 @@ export function ProfileScreen({navigation}) {
             </View>
           </>
 
-            <InputStyled
-              placeholder="Nombre o razon social"
-              onChange={(text) => {
-                setNombreRzb(text);
-              }}
-              style={styles.input}
-            />
-            <InputStyled
-              placeholder="Cedula o RIF"
-              onChange={(text) => {
-                setCedulaRif(text);
-              }}
-              style={styles.input}
-            />
-            <InputStyled
-              placeholder="Email"
-              onChange={(text) => {
-                setEmail(text);
-              }}
-              style={styles.input}
-            />
-            <InputStyled
-              placeholder="Telefono"
-              onChange={(text) => {
-                setPhone(text);
-              }}
-              style={styles.input}
-            />
-            <>  
-              <View style={styles.paswwordChange}>
-                <Text style={styles.paswwordChange}>Cambio de clave</Text>
-              </View>
-            </>
-            <InputStyled
-              placeholder="Antigua clave"
-              secureTextEntry={true}
-              onChange={(text) => {
-                setPassword(text);
-              }}
-              style={styles.input}
-            />
-            <InputStyled
-              placeholder="Nueva clave"
-              secureTextEntry={true}
-              onChange={(text) => {
-                setRepassword(text);
-              }}
-              style={styles.input}
-            />
-            <ButtonStyled
-              onPress={() => {
-                if (repassword === password) {
-                  dispatch(
-                    setSignupPartialData({
-                      nombre_razsoc: nombrerzb,
-                      cedula_rif: cedularif,
-                      correo: email,
-                      celular: phone,
-                      clave: password,
-                    }),
-                  );
-                  navigation.push('PlanSelect');
-                }
-              }}
-              backgroundColor={globalStyles.GRAY_COLOR}
-              color={globalStyles.WHITE_COLOR}
-              text={'Aceptar'}
-              style={styles.button}
-            />
-            <ButtonStyled
-              onPress={() => {
-                dispatch(signout());
-              }}
-              backgroundColor={globalStyles.GRAY_COLOR}
-              color={globalStyles.WHITE_COLOR}
-              text={'Cerrar sesion'}
-              style={styles.button}
-            />
-
+          <InputStyled
+            placeholder="Nombre o razon social"
+            onChange={(text) => {
+              setNombreRzb(text);
+            }}
+            style={styles.input}
+          />
+          <InputStyled
+            placeholder="Cedula o RIF"
+            onChange={(text) => {
+              setCedulaRif(text);
+            }}
+            style={styles.input}
+          />
+          <InputStyled
+            placeholder="Email"
+            onChange={(text) => {
+              setEmail(text);
+            }}
+            style={styles.input}
+          />
+          <InputStyled
+            placeholder="Telefono"
+            onChange={(text) => {
+              setPhone(text);
+            }}
+            style={styles.input}
+          />
+          <>
+            <View style={styles.paswwordChange}>
+              <Text style={styles.paswwordChange}>Cambio de clave</Text>
+            </View>
+          </>
+          <InputStyled
+            placeholder="Antigua clave"
+            secureTextEntry={true}
+            onChange={(text) => {
+              setPassword(text);
+            }}
+            style={styles.input}
+          />
+          <InputStyled
+            placeholder="Nueva clave"
+            secureTextEntry={true}
+            onChange={(text) => {
+              setRepassword(text);
+            }}
+            style={styles.input}
+          />
+          <ButtonStyled
+            onPress={() => {
+              if (repassword === password) {
+                dispatch(
+                  setSignupPartialData({
+                    nombre_razsoc: nombrerzb,
+                    cedula_rif: cedularif,
+                    correo: email,
+                    celular: phone,
+                    clave: password,
+                  }),
+                );
+                navigation.push('PlanSelect');
+              }
+            }}
+            backgroundColor={globalStyles.GRAY_COLOR}
+            color={globalStyles.WHITE_COLOR}
+            text={'Aceptar'}
+            style={styles.button}
+          />
+          <ButtonStyled
+            onPress={() => {
+              dispatch(signout());
+            }}
+            backgroundColor={globalStyles.GRAY_COLOR}
+            color={globalStyles.WHITE_COLOR}
+            text={'Cerrar sesion'}
+            style={styles.button}
+          />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
-
   );
 }
 const styles = StyleSheet.create({
@@ -204,7 +210,7 @@ const styles = StyleSheet.create({
     color: globalStyles.GRAY_COLOR,
   },
   input: {
-    borderBottomColor: 'gray', 
+    borderBottomColor: 'gray',
     borderBottomWidth: 1,
   },
   keyboardContainer: {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, Image} from 'react-native';
+import {View, Text, Button, StyleSheet, Image, Platform} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setSignupPartialData} from '../../actions/auth';
 import globalStyles from '../../styles';
@@ -40,13 +40,19 @@ export function RegisterScreen({navigation}) {
                 title: 'We need your permission',
               },
             );
-            
+
             let canUse = false;
-            if (granted === PermissionsAndroid.RESULTS.GRANTED && Platform.OS === 'android') canUse = true
-            if (Platform.OS === 'ios') canUse = true
-            
+            if (
+              granted === PermissionsAndroid.RESULTS.GRANTED &&
+              Platform.OS === 'android'
+            ) {
+              canUse = true;
+            }
+            if (Platform.OS === 'ios') {
+              canUse = true;
+            }
+
             if (canUse) {
-              
               ImagePicker.showImagePicker(options, (response) => {
                 console.log('Response = ', response);
 

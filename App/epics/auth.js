@@ -5,7 +5,6 @@ import {
   LOGIN_SENDING_DATA,
   loginSuccess,
   loginFailed,
-  SIGNUP_SENDING_DATA,
   signupSuccess,
   signupFailed,
   LOGIN_SUCCESS,
