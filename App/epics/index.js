@@ -3,7 +3,8 @@ import {catchError} from 'rxjs/operators';
 import {authEpics} from './auth';
 import {planEpics} from './plan';
 import {servicioEpics} from './servicio';
-const epics = [authEpics, planEpics, servicioEpics];
+import {profileEpics} from './profile';
+const epics = [authEpics, planEpics, servicioEpics, profileEpics];
 export const rootEpic = (action$, store$, dependencies) =>
   combineEpics(...epics)(action$, store$, dependencies).pipe(
     catchError((error, source) => {
