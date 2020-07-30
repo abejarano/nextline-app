@@ -16,6 +16,6 @@ export const LogoLogin = () => {
 const styles = StyleSheet.create({
   image: {
     height: '45%',
-    width: '100%',
+    width: '60%',
   },
 });

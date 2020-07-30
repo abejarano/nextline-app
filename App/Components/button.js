@@ -16,9 +16,9 @@ export const ButtonStyled = ({onPress, color, text, backgroundColor}) => {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: globalStyles.GRAY_COLOR,
-    width: '60%',
+    width: '80%',
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 15,
     marginTop: 5,
     marginBottom: 5,
   },
