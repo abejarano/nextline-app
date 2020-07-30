@@ -7,7 +7,7 @@ export const InputStyled = ({
   secureTextEntry,
   placeholder,
   onChange,
-  style
+  style,
 }) => {
   return (
     <TextInput

@@ -9,13 +9,14 @@ import {
   Alert,
   ImageBackground,
   Dimensions,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import {login} from '../../actions/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {ButtonStyled} from '../../Components/button';
 import {InputStyled} from '../../Components/input';
-import {LogoLogin} from '../../Components/LogoLogin';
+import SolidLogo from '../../Components/SolidLogo';
+import InfoSvg from '../../Components/InfoSvg';
 import globalStyles from '../../styles';
 
 const LoginClient = ({navigation}) => {
@@ -34,59 +35,60 @@ const LoginClient = ({navigation}) => {
   return (
     <>
       <SafeAreaView style={styles.safe}>
-      <View style={styles.view}>
+        <View style={styles.view}>
+          <ImageBackground
+            source={require('../../assets/images/login_wallpapers/60.png')}
+            style={styles.backgroundImage}>
+            <InfoSvg style={styles.info} color={globalStyles.WHITE_COLOR} />
+            <SolidLogo color={globalStyles.WHITE_COLOR} />
 
-        <ImageBackground source={require('../../assets/images/login_wallpapers/60.png')}  style={styles.backgroundImage} >
-          <LogoLogin />
+            <KeyboardAvoidingView
+              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+              style={styles.keyboardContainer}
+              keyboardVerticalOffset={8}>
+              <InputStyled
+                placeholder="Email ..."
+                onChange={(text) => {
+                  setEmail(text);
+                }}
+                value={email}
+              />
+              <InputStyled
+                placeholder="Clave ..."
+                secureTextEntry={true}
+                onChange={(text) => {
+                  setPassword(text);
+                }}
+                style={styles.button}
+              />
+              <Text style={styles.forgetText}>Olvido su contraseña?</Text>
 
-          <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={styles.keyboardContainer}
-            keyboardVerticalOffset={8}>
-            <InputStyled
-              placeholder="Email ..."
-              onChange={(text) => {
-                setEmail(text);
-              }}
-              value={email}
-            />
-            <InputStyled
-              placeholder="Clave ..."
-              secureTextEntry={true}
-              onChange={(text) => {
-                setPassword(text);
-              }}
-              style={styles.button}
-            />
-            <Text style={styles.text}>Olvido su contraseña?</Text>
+              <ButtonStyled
+                onPress={() => dispatch(login({email: email, clave: password}))}
+                backgroundColor={globalStyles.GREEN_COLOR}
+                color={globalStyles.WHITE_COLOR}
+                text={'INGRESAR'}
+                style={styles.button}
+              />
 
-            <ButtonStyled
-              onPress={() => dispatch(login({email: email, clave: password}))}
-              backgroundColor={globalStyles.GREEN_COLOR}
-              color={globalStyles.WHITE_COLOR}
-              text={'INGRESAR'}
-              style={styles.button}
-            />
-            
-            <>
-              <View style={styles.division}>
-                <Text numberOfLines={1} style={styles.texDivision}> 
-                    _______________________________________________ 
-                </Text>
-              </View>
-            </>
-            
-            <ButtonStyled
-              onPress={() => dispatch(login({email: email, clave: password}))}
-              backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-              color={globalStyles.WHITE_COLOR}
-              text={'SOLICITA TU SERVICIO'}
-              style={styles.button}
-            /> 
-          </KeyboardAvoidingView>
-        </ImageBackground>
+              <>
+                <View style={styles.division}>
+                  <Text numberOfLines={1} style={styles.texDivision}>
+                    _______________________________________________
+                  </Text>
+                </View>
+              </>
 
-      </View>
+              <ButtonStyled
+                onPress={() => dispatch(login({email: email, clave: password}))}
+                backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+                color={globalStyles.WHITE_COLOR}
+                text={'SOLICITA TU SERVICIO'}
+                style={styles.button}
+              />
+            </KeyboardAvoidingView>
+          </ImageBackground>
+        </View>
       </SafeAreaView>
     </>
   );
@@ -96,13 +98,14 @@ export default LoginClient;
 
 const styles = StyleSheet.create({
   safe: {
-    flex:1
+    flex: 1,
   },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     width: '100%',
-    alignItems:'center',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   header: {
     backgroundColor: globalStyles.WHITE_COLOR,
@@ -113,7 +116,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logo: {},
+  info: {
+    alignSelf: 'flex-end',
+    marginRight: '5%',
+  },
   input: {
     backgroundColor: globalStyles.WHITE_COLOR,
   },
@@ -125,6 +131,11 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     margin: 10,
   },
+  forgetText: {
+    color: globalStyles.WHITE_COLOR,
+    margin: 10,
+    textDecorationLine: 'underline',
+  },
   text: {
     color: globalStyles.WHITE_COLOR,
     margin: 10,
@@ -133,8 +144,8 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   texDivision: {
-    color: globalStyles.WHITE_COLOR
-  },  
+    color: globalStyles.WHITE_COLOR,
+  },
   register: {
     color: 'red',
   },
@@ -142,5 +153,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 0,
     width: '100%',
+    marginBottom: '10%',
   },
 });
