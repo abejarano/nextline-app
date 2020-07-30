@@ -15,10 +15,10 @@ import {login} from '../../actions/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {ButtonStyled} from '../../Components/button';
 import {InputStyled} from '../../Components/input';
-import SolidLogo from '../../Components/SolidLogo';
-import InfoSvg from '../../Components/InfoSvg';
 import globalStyles from '../../styles';
 import EmailSvg from '../../assets/svg/Email';
+import SolidLogo from '../../assets/svg/SolidLogo';
+import InfoSvg from '../../assets/svg/Info';
 import LockSvg from '../../assets/svg/Lock';
 
 const LoginClient = ({navigation}) => {
