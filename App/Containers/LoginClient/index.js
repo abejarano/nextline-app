@@ -9,6 +9,7 @@ import {
   Alert,
   ImageBackground,
   Dimensions,
+  SafeAreaView
 } from 'react-native';
 import {login} from '../../actions/auth';
 import {useDispatch, useSelector} from 'react-redux';
@@ -32,6 +33,7 @@ const LoginClient = ({navigation}) => {
 
   return (
     <>
+      <SafeAreaView style={styles.safe}>
       <View style={styles.view}>
 
         <ImageBackground source={require('../../assets/images/login_wallpapers/60.png')}  style={styles.backgroundImage} >
@@ -85,6 +87,7 @@ const LoginClient = ({navigation}) => {
         </ImageBackground>
 
       </View>
+      </SafeAreaView>
     </>
   );
 };
@@ -92,8 +95,10 @@ const LoginClient = ({navigation}) => {
 export default LoginClient;
 
 const styles = StyleSheet.create({
+  safe: {
+    flex:1
+  },
   backgroundImage: {
-    marginTop: 40,
     flex: 1,
     resizeMode: 'cover',
     width: '100%',
@@ -101,8 +106,6 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: globalStyles.WHITE_COLOR,
-    marginTop: 25,
-    marginBottom: -203,
   },
   view: {
     backgroundColor: '#0058af',
