@@ -7,6 +7,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 import {login} from '../../actions/auth';
 import {useDispatch, useSelector} from 'react-redux';
@@ -31,60 +33,79 @@ const LoginClient = ({navigation}) => {
   return (
     <>
       <View style={styles.view}>
-        <LogoLogin />
-        <Text style={styles.title}>Bienvenido!</Text>
-        <Text style={styles.text}>
-          Inicia sesion para disfrutar de nuestros servicios
-        </Text>
 
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.keyboardContainer}
-          keyboardVerticalOffset={8}>
-          <InputStyled
-            placeholder="Email ..."
-            onChange={(text) => {
-              setEmail(text);
-            }}
-            value={email}
-          />
-          <InputStyled
-            placeholder="Clave ..."
-            secureTextEntry={true}
-            onChange={(text) => {
-              setPassword(text);
-            }}
-            style={styles.button}
-          />
-          <ButtonStyled
-            onPress={() => dispatch(login({email: email, clave: password}))}
-            backgroundColor={globalStyles.GRAY_COLOR}
-            color={globalStyles.WHITE_COLOR}
-            text={'Iniciar Sesion'}
-            style={styles.button}
-          />
-          <Text style={styles.text}>Olvido su contraseña?</Text>
-          <Text style={styles.text}>+ velocidad + estabilidad + inovacion</Text>
-          <Button
-            title="Registro/Solicitar Servicio"
-            onPress={() => navigation.push('Register')}
-          />
-        </KeyboardAvoidingView>
+        <ImageBackground source={require('../../assets/images/login_wallpapers/60.png')}  style={styles.backgroundImage} >
+          <LogoLogin />
+
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.keyboardContainer}
+            keyboardVerticalOffset={8}>
+            <InputStyled
+              placeholder="Email ..."
+              onChange={(text) => {
+                setEmail(text);
+              }}
+              value={email}
+            />
+            <InputStyled
+              placeholder="Clave ..."
+              secureTextEntry={true}
+              onChange={(text) => {
+                setPassword(text);
+              }}
+              style={styles.button}
+            />
+            <Text style={styles.text}>Olvido su contraseña?</Text>
+
+            <ButtonStyled
+              onPress={() => dispatch(login({email: email, clave: password}))}
+              backgroundColor={globalStyles.GREEN_COLOR}
+              color={globalStyles.WHITE_COLOR}
+              text={'INGRESAR'}
+              style={styles.button}
+            />
+            
+            <>
+              <View style={styles.division}>
+                <Text numberOfLines={1} style={styles.texDivision}> 
+                    _______________________________________________ 
+                </Text>
+              </View>
+            </>
+            
+            <ButtonStyled
+              onPress={() => dispatch(login({email: email, clave: password}))}
+              backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+              color={globalStyles.WHITE_COLOR}
+              text={'SOLICITA TU SERVICIO'}
+              style={styles.button}
+            /> 
+          </KeyboardAvoidingView>
+        </ImageBackground>
+
       </View>
     </>
   );
 };
 
 export default LoginClient;
+
 const styles = StyleSheet.create({
+  backgroundImage: {
+    marginTop: 40,
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    alignItems:'center',
+  },
   header: {
     backgroundColor: globalStyles.WHITE_COLOR,
     marginTop: 25,
     marginBottom: -203,
   },
   view: {
-    marginTop: -30,
-    backgroundColor: globalStyles.PRIMARY_COLOR,
+    backgroundColor: '#0058af',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -105,6 +126,12 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     margin: 10,
   },
+  division: {
+    margin: 20,
+  },
+  texDivision: {
+    color: globalStyles.WHITE_COLOR
+  },  
   register: {
     color: 'red',
   },
