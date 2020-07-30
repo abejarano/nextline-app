@@ -18,6 +18,8 @@ import {InputStyled} from '../../Components/input';
 import SolidLogo from '../../Components/SolidLogo';
 import InfoSvg from '../../Components/InfoSvg';
 import globalStyles from '../../styles';
+import EmailSvg from '../../assets/svg/Email';
+import LockSvg from '../../assets/svg/Lock';
 
 const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
@@ -52,6 +54,8 @@ const LoginClient = ({navigation}) => {
                   setEmail(text);
                 }}
                 value={email}
+                Icon={EmailSvg}
+                iconColor={globalStyles.PRIMARY_COLOR}
               />
               <InputStyled
                 placeholder="Clave ..."
@@ -60,6 +64,8 @@ const LoginClient = ({navigation}) => {
                   setPassword(text);
                 }}
                 style={styles.button}
+                Icon={LockSvg}
+                iconColor={globalStyles.PRIMARY_COLOR}
               />
               <Text style={styles.forgetText}>Olvido su contraseña?</Text>
 

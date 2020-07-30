@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 
 export const InputStyled = ({
@@ -8,18 +8,26 @@ export const InputStyled = ({
   placeholder,
   onChange,
   style,
+  Icon,
+  iconColor,
 }) => {
   return (
-    <TextInput
-      style={{...styles.input, ...style}}
-      clearTextOnFocus={true}
-      placeholder={placeholder}
-      onChangeText={(text) => {
-        onChange(text);
-      }}
-      secureTextEntry={secureTextEntry}>
-      {value}
-    </TextInput>
+    <View style={{...styles.input, ...style}}>
+      {Icon ? (
+        <Icon style={styles.icon} color={iconColor} />
+      ) : (
+        <Text style={styles.hidedText} />
+      )}
+      <TextInput
+        clearTextOnFocus={true}
+        placeholder={placeholder}
+        onChangeText={(text) => {
+          onChange(text);
+        }}
+        secureTextEntry={secureTextEntry}>
+        {value}
+      </TextInput>
+    </View>
   );
 };
 
@@ -31,9 +39,16 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 5,
     marginBottom: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     textAlign: 'center',
     color: '#f5f5f5',
   },
+  hidedText: {
+    display: 'none',
+  },
+  icon: {},
 });
