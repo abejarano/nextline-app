@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import LoginNavigator from './LoginNavigator';
 import TabsNavigator from './TabsNavigator';
 import {checkToken} from '../actions/auth';
+import FcmService from '../Services/fcm';
 
 const MainStack = createStackNavigator();
 
@@ -13,6 +14,8 @@ export const MainNavigator = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
+    console.log('_init_');
+    FcmService();
     dispatch(checkToken());
   }, [dispatch]);
 
