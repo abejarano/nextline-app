@@ -35,7 +35,7 @@ const PlanItem = ({item: plan, position, navigation}) => {
       <Text style={styles.month}>Precio Mes</Text>
       <View style={styles.pricing}>
         <Text style={styles.dollarPrice}>${plan.precio.split('USD')[0]}</Text>
-        <Text style={styles.bsPrice}>/ Bs 1.000.000</Text>
+        <Text style={styles.bsPrice}>/ {plan.precio_bs}</Text>
       </View>
     </TouchableOpacity>
   );
