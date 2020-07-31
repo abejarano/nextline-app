@@ -13,6 +13,9 @@ import {loadProfile} from '../../actions/profile';
 import LinearGradient from 'react-native-linear-gradient';
 import globalStyles from '../../styles';
 import SolidLogin from '../../assets/svg/SolidLogo';
+import {SpeedGroup} from '../../Components/speedGroup';
+import {TextInput} from 'react-native-gesture-handler';
+import {Avatar} from '../../Components/avatar';
 
 const HomeClientScreen = () => {
   const dispatch = useDispatch();
@@ -25,8 +28,11 @@ const HomeClientScreen = () => {
       <ImageBackground
         source={require('../../assets/images/wallpapers/home.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
+        <Avatar />
         <StatusBar barStyle="dark-content" />
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <Text style={styles.serviceLabel}>Eservice de solicitud</Text>
+        <Text style={styles.serviceText}>service</Text>
+        <View style={styles.gradientContainer}>
           <LinearGradient
             colors={[
               globalStyles.LIGTH_BLUE_COLOR,
@@ -46,7 +52,13 @@ const HomeClientScreen = () => {
               <Text style={styles.buttonLowerText}>PLAN</Text>
             </View>
           </LinearGradient>
-        </ScrollView>
+        </View>
+        <SpeedGroup />
+        <Text style={styles.statusLabel}>Estatus de solicitud</Text>
+        <View style={styles.statusContainer}>
+          <Text style={styles.statusText}>Status</Text>
+          <View style={styles.redCircle} />
+        </View>
       </ImageBackground>
     </View>
   );
@@ -56,8 +68,11 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     alignItems: 'center',
-    margin: 'auto',
-    height: '100%',
+    justifyContent: 'center',
+  },
+  gradientContainer: {
+    width: 240,
+    height: 240,
   },
   linearGradient: {
     flex: 1,
@@ -65,8 +80,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
 
-    width: 240,
-    height: 240,
     borderRadius: 240,
     shadowColor: globalStyles.PRIMARY_COLOR_DARK + '33',
     shadowOffset: {

@@ -14,6 +14,7 @@ import {Title} from '../../Components/title';
 import globalStyles from '../../styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ArrowSvg} from '../../assets/svg/Arrow';
+import {SpeedGroup} from '../../Components/speedGroup';
 
 const PlanItem = ({item: plan, position, navigation}) => {
   const dispatch = useDispatch();
@@ -25,20 +26,7 @@ const PlanItem = ({item: plan, position, navigation}) => {
       }}
       style={styles.planItem}>
       <Text style={styles.plan}>{plan.plan}</Text>
-      <View style={styles.speedGroup}>
-        <View style={styles.speedItem}>
-          <ArrowSvg style={styles.arrow} color={globalStyles.GREEN_COLOR} />
-          <Text style={styles.speed}>2 Mb</Text>
-        </View>
-        <View style={styles.speedItem}>
-          <ArrowSvg
-            style={styles.arrow}
-            direction="bottom"
-            color={globalStyles.GREEN_COLOR}
-          />
-          <Text style={styles.speed}>1 Mb</Text>
-        </View>
-      </View>
+      <SpeedGroup />
       <Text style={styles.month}>Precio Mes</Text>
       <View style={styles.pricing}>
         <Text style={styles.dollarPrice}>${plan.precio.split('USD')[0]}</Text>
@@ -103,16 +91,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  arrow: {
-    width: 45,
-    height: 45,
-  },
-  speedGroup: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '80%',
-    justifyContent: 'space-evenly',
-  },
   pricing: {
     display: 'flex',
     flexDirection: 'row',
@@ -131,14 +109,12 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     textAlignVertical: 'center',
   },
-  speedItem: {},
+
   month: {
     color: globalStyles.GRAY_TEXT_COLOR + '50',
     textTransform: 'uppercase',
   },
-  speed: {
-    color: globalStyles.GRAY_TEXT_COLOR,
-  },
+
   plan: {
     color: globalStyles.PRIMARY_COLOR,
     fontSize: 68,
