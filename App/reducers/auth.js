@@ -77,7 +77,6 @@ export const authReducer = (state = authState, {type, payload}) => {
         ...state,
         user: {
           ...state.user,
-          location: payload.position,
         },
       };
     case LOGIN_STORAGE_TOKEN_SUCCESS:

@@ -1,15 +1,7 @@
 import React, {useEffect} from 'react';
-import {
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
+import {View, Text, StatusBar, StyleSheet, ImageBackground} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {servicioStatusFetch} from '../../actions/servicio';
-import {loadProfile} from '../../actions/profile';
 import LinearGradient from 'react-native-linear-gradient';
 import globalStyles from '../../styles';
 import SolidLogin from '../../assets/svg/SolidLogo';
@@ -22,7 +14,7 @@ const HomeClientScreen = () => {
   const status = useSelector(
     (state) => state.servicio.status.data.solicitud_servicio,
   );
-  const nombreRazsoc = useSelector((state) => state.auth.user.nombre_razsoc);
+  const nombreRzn = useSelector((state) => state.auth.user.nombre_razsoc);
   useEffect(() => {
     dispatch(servicioStatusFetch());
   }, [dispatch]);
@@ -36,7 +28,7 @@ const HomeClientScreen = () => {
           <Avatar />
           <View style={styles.usernameContainer}>
             <Text style={styles.usernameLabel}>Usuario</Text>
-            <Text style={styles.usernameText}>{nombreRazsoc}</Text>
+            <Text style={styles.usernameText}>{nombreRzn}</Text>
           </View>
         </View>
         <StatusBar barStyle="dark-content" />
