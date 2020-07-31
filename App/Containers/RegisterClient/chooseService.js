@@ -4,14 +4,26 @@ import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
 import globalStyles from '../../styles';
 import {useDispatch, useSelector} from 'react-redux';
-import {servicioFetch} from '../../actions/servicio';
+import {servicioFetch, servicioSelect} from '../../actions/servicio';
 
-const Service = ({id, servicio, activo}) => {
-  console.log(servicio, id, activo);
+const Service = ({id, servicio, activo, index, navigation}) => {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.serviceView}>
       <Text style={styles.serviceText}>{servicio}</Text>
-      <TouchableOpacity style={styles.serviceButton}>
+      <TouchableOpacity
+        onPress={() => {
+          dispatch(servicioSelect(id));
+          navigation.push('PlanSelect');
+        }}
+        style={{
+          ...styles.serviceButton,
+          backgroundColor:
+            globalStyles[
+              globalStyles.LIST_COLORS[index % globalStyles.LIST_COLORS.length]
+            ],
+        }}>
         <Text style={styles.plus}>+</Text>
       </TouchableOpacity>
     </View>
@@ -30,8 +42,13 @@ export const ChooseService = ({navigation}) => {
     <View style={styles.view}>
       <Header navigation={navigation} />
       <Title text={'Selecciona        un Servicio'} />
-      {services.map((service) => (
-        <Service key={`serv-sign-${service.id}`} {...service} />
+      {services.map((service, index) => (
+        <Service
+          key={`serv-sign-${service.id}`}
+          navigation={navigation}
+          index={index}
+          {...service}
+        />
       ))}
     </View>
   );
@@ -44,6 +61,8 @@ const styles = StyleSheet.create({
   },
   serviceText: {
     color: globalStyles.PRIMARY_COLOR,
+    fontSize: 25,
+    marginLeft: 5,
   },
   plus: {
     color: globalStyles.WHITE_COLOR,
@@ -63,7 +82,11 @@ const styles = StyleSheet.create({
   serviceView: {
     display: 'flex',
     backgroundColor: globalStyles.GRAY_COLOR,
-    justifyContent: 'center',
+    margin: 15,
+    padding: 15,
+    borderRadius: 15,
+    width: '80%',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },

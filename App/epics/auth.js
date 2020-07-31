@@ -14,10 +14,10 @@ import {
   SIGNOUT,
   signoutSuccess,
   signoutFailed,
+  SIGNUP_SENDING_DATA,
 } from '../actions/auth';
 import {combineEpics} from 'redux-observable';
 import axios from 'axios';
-import {PLAN_SELECTED} from '../actions/plan';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const loginEpic = (action$) =>
@@ -79,7 +79,7 @@ const checkTokenStorageEpic = (action$) =>
 
 const signupEpic = (action$, state$) =>
   action$.pipe(
-    ofType(PLAN_SELECTED),
+    ofType(SIGNUP_SENDING_DATA),
     mergeMap((action) =>
       from(
         axios.post(`${process.env.api}/admon/service-request`, {
