@@ -14,7 +14,8 @@ const HomeClientScreen = () => {
   const status = useSelector(
     (state) => state.servicio.status.data.solicitud_servicio,
   );
-  const nombreRzn = useSelector((state) => state.auth.user.nombre_razsoc);
+  const user = useSelector((state) => state.auth.user);
+  console.log(user);
   useEffect(() => {
     dispatch(servicioStatusFetch());
   }, [dispatch]);
@@ -28,7 +29,9 @@ const HomeClientScreen = () => {
           <Avatar />
           <View style={styles.usernameContainer}>
             <Text style={styles.usernameLabel}>Usuario</Text>
-            <Text style={styles.usernameText}>{nombreRzn}</Text>
+            <Text style={styles.usernameText}>
+              {user && user.nombre_razsoc}
+            </Text>
           </View>
         </View>
         <StatusBar barStyle="dark-content" />
