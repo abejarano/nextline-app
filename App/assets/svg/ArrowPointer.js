@@ -12,9 +12,9 @@ const rotation = (direction) => {
       return 'scale(-1,1)';
   }
 };
-function ArrowPointerSvg({bold, direction, color}) {
+function ArrowPointerSvg({bold, direction, color, style, onPress}) {
   return (
-    <Svg viewBox="0 0 172 172">
+    <Svg viewBox="0 0 172 172" style={style} onPress={onPress}>
       {bold ? (
         <G>
           <Path

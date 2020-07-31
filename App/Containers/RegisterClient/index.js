@@ -34,7 +34,7 @@ export function RegisterScreen({navigation}) {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}>
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          behavior={'padding'}
           style={styles.keyboardContainer}
           keyboardVerticalOffset={8}>
           <InputStyled
