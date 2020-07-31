@@ -45,14 +45,12 @@ export function ProfileScreen({navigation}) {
     <>
       {/* <SafeAreaView style={{ flex: 0, backgroundColor: globalStyles.PRIMARY_COLOR }} /> */}
       {/* <SafeAreaView style={{ flex: 1, backgroundColor: 'blue' }}></SafeAreaView> */}
-      
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardContainer}
         keyboardVerticalOffset={8}>
-
         <ScrollView style={styles.keyboardContainer}>
-      
           <View style={styles.view}>
             {imageModeUri ? (
               <Image source={image} style={styles.image} />

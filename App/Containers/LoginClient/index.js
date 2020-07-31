@@ -20,6 +20,7 @@ import EmailSvg from '../../assets/svg/Email';
 import SolidLogo from '../../assets/svg/SolidLogo';
 import InfoSvg from '../../assets/svg/Info';
 import LockSvg from '../../assets/svg/Lock';
+import {Header} from '../../Components/header';
 
 const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const LoginClient = ({navigation}) => {
           <ImageBackground
             source={require('../../assets/images/login_wallpapers/60.png')}
             style={styles.backgroundImage}>
-            <InfoSvg style={styles.info} color={globalStyles.WHITE_COLOR} />
+            <Header backVisible={false} />
             <SolidLogo color={globalStyles.WHITE_COLOR} />
 
             <KeyboardAvoidingView
@@ -86,7 +87,9 @@ const LoginClient = ({navigation}) => {
               </>
 
               <ButtonStyled
-                onPress={() => dispatch(login({email: email, clave: password}))}
+                onPress={() => {
+                  navigation.push('Register');
+                }}
                 backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
                 color={globalStyles.WHITE_COLOR}
                 text={'SOLICITA TU SERVICIO'}
@@ -122,10 +125,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  info: {
-    alignSelf: 'flex-end',
-    marginRight: '5%',
-  },
+
   input: {
     backgroundColor: globalStyles.WHITE_COLOR,
   },

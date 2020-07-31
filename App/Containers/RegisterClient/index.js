@@ -1,20 +1,20 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, Image, Platform} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setSignupPartialData} from '../../actions/auth';
 import globalStyles from '../../styles';
 import {InputStyled} from '../../Components/input';
 import {ButtonStyled} from '../../Components/button';
-import ImagePicker from 'react-native-image-picker';
-import {PermissionsAndroid} from 'react-native';
-
-const options = {
-  title: 'Seleccionar Avatar',
-  storageOptions: {
-    skipBackup: true,
-    path: 'images',
-  },
-};
+import {KeyboardAvoidingView} from 'react-native';
+import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
+import {Header} from '../../Components/header';
 
 export function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
@@ -28,142 +28,108 @@ export function RegisterScreen({navigation}) {
 
   return (
     <View style={styles.view}>
-      {image ? (
-        <Image source={image} style={styles.image} />
-      ) : (
-        <Button
-          title="Image"
-          onPress={async () => {
-            const granted = await PermissionsAndroid.request(
-              PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-              {
-                title: 'We need your permission',
-              },
-            );
+      <Header navigation={navigation} />
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollViewContent}>
+        <Text>Register Client!</Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardContainer}
+          keyboardVerticalOffset={8}>
+          <InputStyled
+            placeholder="Nombre o razon social"
+            onChange={(text) => {
+              setNombreRzb(text);
+            }}
+            style={styles.button}
+          />
+          <InputStyled
+            placeholder="Cedula o RIF"
+            onChange={(text) => {
+              setCedulaRif(text);
+            }}
+            style={styles.button}
+          />
+          <InputStyled
+            placeholder="Email"
+            onChange={(text) => {
+              setEmail(text);
+            }}
+            style={styles.button}
+          />
+          <InputStyled
+            placeholder="Telefono"
+            onChange={(text) => {
+              setPhone(text);
+            }}
+            style={styles.button}
+          />
+          <InputStyled
+            placeholder="Clave"
+            secureTextEntry={true}
+            onChange={(text) => {
+              setPassword(text);
+            }}
+            style={styles.button}
+          />
+          <InputStyled
+            placeholder="Confirmar clave"
+            secureTextEntry={true}
+            onChange={(text) => {
+              setRepassword(text);
+            }}
+            style={styles.button}
+          />
+        </KeyboardAvoidingView>
 
-            let canUse = false;
-            if (
-              granted === PermissionsAndroid.RESULTS.GRANTED &&
-              Platform.OS === 'android'
-            ) {
-              canUse = true;
-            }
-            if (Platform.OS === 'ios') {
-              canUse = true;
-            }
-
-            if (canUse) {
-              ImagePicker.showImagePicker(options, (response) => {
-                console.log('Response = ', response);
-
-                if (response.didCancel) {
-                  console.log('User cancelled image picker');
-                } else if (response.error) {
-                  console.log('ImagePicker Error: ', response.error);
-                } else if (response.customButton) {
-                  console.log(
-                    'User tapped custom button: ',
-                    response.customButton,
-                  );
-                } else {
-                  // const source = {uri: response.uri};
-
-                  // You can also display the image using data:
-                  const source = response;
-                  setImage(source);
-                  console.log(source);
-                }
-              });
+        <ButtonStyled
+          onPress={() => {
+            if (repassword === password) {
+              dispatch(
+                setSignupPartialData({
+                  nombre_razsoc: nombrerzb,
+                  cedula_rif: cedularif,
+                  correo: email,
+                  celular: phone,
+                  clave: password,
+                }),
+              );
+              navigation.push('PlanSelect');
             }
           }}
+          backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+          color={globalStyles.WHITE_COLOR}
+          text={'Continuar'}
+          styleText={styles.button}
+          Icon={ArrowPointerSvg}
+          iconColor={globalStyles.WHITE_COLOR}
         />
-      )}
-
-      <Button
-        title="back"
-        onPress={() => {
-          navigation.goBack();
-        }}
-      />
-      <Text>Register Client!</Text>
-      <InputStyled
-        placeholder="Nombre o razon social"
-        onChange={(text) => {
-          setNombreRzb(text);
-        }}
-        style={styles.button}
-      />
-      <InputStyled
-        placeholder="Cedula o RIF"
-        onChange={(text) => {
-          setCedulaRif(text);
-        }}
-        style={styles.button}
-      />
-      <InputStyled
-        placeholder="Email"
-        onChange={(text) => {
-          setEmail(text);
-        }}
-        style={styles.button}
-      />
-      <InputStyled
-        placeholder="Telefono"
-        onChange={(text) => {
-          setPhone(text);
-        }}
-        style={styles.button}
-      />
-      <InputStyled
-        placeholder="Clave"
-        secureTextEntry={true}
-        onChange={(text) => {
-          setPassword(text);
-        }}
-        style={styles.button}
-      />
-      <InputStyled
-        placeholder="Confirmar clave"
-        secureTextEntry={true}
-        onChange={(text) => {
-          setRepassword(text);
-        }}
-        style={styles.button}
-      />
-      <ButtonStyled
-        onPress={() => {
-          if (repassword === password) {
-            dispatch(
-              setSignupPartialData({
-                nombre_razsoc: nombrerzb,
-                cedula_rif: cedularif,
-                correo: email,
-                celular: phone,
-                clave: password,
-              }),
-            );
-            navigation.push('PlanSelect');
-          }
-        }}
-        backgroundColor={globalStyles.GRAY_COLOR}
-        color={globalStyles.WHITE_COLOR}
-        text={'Registrar'}
-        style={styles.button}
-      />
+      </ScrollView>
     </View>
   );
 }
 const styles = StyleSheet.create({
   view: {
-    marginTop: -30,
-    backgroundColor: globalStyles.PRIMARY_COLOR,
+    backgroundColor: globalStyles.BACKGROUND_BOTOM,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  image: {
-    borderRadius: 100,
-    height: 150,
-    width: 150,
+  keyboardContainer: {
+    alignItems: 'center',
+    padding: 0,
+    width: '100%',
+    marginBottom: '10%',
+  },
+  scrollView: {
+    padding: 0,
+    width: '100%',
+  },
+  scrollViewContent: {
+    alignItems: 'center',
+  },
+  button: {
+    fontSize: 20,
   },
 });
