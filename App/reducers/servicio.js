@@ -12,7 +12,10 @@ const servicioState = {
   fetching: false,
   error: '',
   status: {
-    data: null,
+    data: {
+      contratos: [],
+      solicitud_servicio: null,
+    },
     fetching: false,
     error: '',
   },
@@ -49,6 +52,7 @@ export const servicioReducer = (state = servicioState, {type, payload}) => {
       return {
         ...state,
         status: {
+          ...state.status,
           fetching: true,
         },
       };
@@ -56,6 +60,7 @@ export const servicioReducer = (state = servicioState, {type, payload}) => {
       return {
         ...state,
         status: {
+          ...state.status,
           fetching: false,
           error: payload.error,
         },

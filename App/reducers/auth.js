@@ -9,9 +9,19 @@ import {
   SIGNOUT_SUCCESS,
 } from '../actions/auth';
 import {PLAN_SELECTED} from '../actions/plan';
+import {SERVICIO_STATUS_FETCH_SUCCESS} from '../actions/servicio';
 
 const authState = {
-  user: {},
+  user: {
+    avatar: '',
+    cedula_rif: '',
+    celular: '',
+    correo: '',
+    direccion: '',
+    latitud: '',
+    longitud: '',
+    nombre_razsoc: '',
+  },
   token: null,
   sending: false,
   error: '',
@@ -82,6 +92,14 @@ export const authReducer = (state = authState, {type, payload}) => {
         ...state,
         loggedIn: false,
         token: null,
+      };
+    case SERVICIO_STATUS_FETCH_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...payload.solicitud_servicio,
+        },
       };
     default:
       return state;

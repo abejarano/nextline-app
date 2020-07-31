@@ -24,7 +24,7 @@ const fetchServicioStatusEpic = (action$, state$) =>
           },
         }),
       ).pipe(
-        map((response) => servicioStatusFetchSucces(response)),
+        map((response) => servicioStatusFetchSucces(response.data)),
         catchError((error) => of(servicioStatusFetchFailed(error))),
       ),
     ),

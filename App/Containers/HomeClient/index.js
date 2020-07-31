@@ -7,31 +7,41 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
-import {servicioFetch} from '../../actions/servicio';
+import {useDispatch, useSelector} from 'react-redux';
+import {servicioStatusFetch} from '../../actions/servicio';
 import {loadProfile} from '../../actions/profile';
 import LinearGradient from 'react-native-linear-gradient';
 import globalStyles from '../../styles';
 import SolidLogin from '../../assets/svg/SolidLogo';
 import {SpeedGroup} from '../../Components/speedGroup';
-import {TextInput} from 'react-native-gesture-handler';
 import {Avatar} from '../../Components/avatar';
+import {Header} from '../../Components/header';
 
 const HomeClientScreen = () => {
   const dispatch = useDispatch();
+  const status = useSelector(
+    (state) => state.servicio.status.data.solicitud_servicio,
+  );
+  const nombreRazsoc = useSelector((state) => state.auth.user.nombre_razsoc);
   useEffect(() => {
-    dispatch(servicioFetch());
-    dispatch(loadProfile());
+    dispatch(servicioStatusFetch());
   }, [dispatch]);
   return (
     <View style={styles.view}>
       <ImageBackground
         source={require('../../assets/images/wallpapers/home.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Avatar />
+        <Header backVisible={false} />
+        <View style={styles.userContainer}>
+          <Avatar />
+          <View style={styles.usernameContainer}>
+            <Text style={styles.usernameLabel}>Usuario</Text>
+            <Text style={styles.usernameText}>{nombreRazsoc}</Text>
+          </View>
+        </View>
         <StatusBar barStyle="dark-content" />
-        <Text style={styles.serviceLabel}>Eservice de solicitud</Text>
-        <Text style={styles.serviceText}>service</Text>
+        <Text style={styles.serviceLabel}>tipo de servicio</Text>
+        <Text style={styles.serviceText}>Residencial @</Text>
         <View style={styles.gradientContainer}>
           <LinearGradient
             colors={[
@@ -56,7 +66,7 @@ const HomeClientScreen = () => {
         <SpeedGroup />
         <Text style={styles.statusLabel}>Estatus de solicitud</Text>
         <View style={styles.statusContainer}>
-          <Text style={styles.statusText}>Status</Text>
+          <Text style={styles.statusText}>{status && status.status}</Text>
           <View style={styles.redCircle} />
         </View>
       </ImageBackground>
@@ -73,6 +83,7 @@ const styles = StyleSheet.create({
   gradientContainer: {
     width: 240,
     height: 240,
+    marginBottom: 20,
   },
   linearGradient: {
     flex: 1,
@@ -125,6 +136,70 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  serviceLabel: {
+    fontSize: 10,
+    opacity: 1,
+    color: globalStyles.LIGTH_BLUE_COLOR,
+    textTransform: 'uppercase',
+  },
+  serviceText: {
+    fontSize: 25,
+    color: globalStyles.WHITE_COLOR,
+    textTransform: 'uppercase',
+    marginBottom: 20,
+  },
+  statusLabel: {
+    fontSize: 10,
+    color: globalStyles.GRAY_TEXT_COLOR,
+    textTransform: 'uppercase',
+    marginTop: '10%',
+  },
+  statusText: {
+    color: globalStyles.PRIMARY_COLOR,
+    textTransform: 'uppercase',
+  },
+  statusContainer: {
+    display: 'flex',
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: globalStyles.GRAY_TEXT_COLOR + '15',
+    height: 36,
+    alignItems: 'center',
+    borderRadius: 18,
+  },
+  redCircle: {
+    width: 20,
+    height: 20,
+    borderRadius: 20,
+    backgroundColor: globalStyles.RED_COLOR,
+  },
+  userContainer: {
+    display: 'flex',
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginTop: -20,
+    marginBottom: 20,
+  },
+  usernameContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginLeft: 20,
+  },
+  usernameLabel: {
+    fontSize: 10,
+    opacity: 1,
+    color: globalStyles.LIGTH_BLUE_COLOR,
+    textTransform: 'uppercase',
+  },
+  usernameText: {
+    fontSize: 20,
+    color: globalStyles.WHITE_COLOR,
+    textTransform: 'capitalize',
   },
 });
 
