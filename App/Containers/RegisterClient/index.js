@@ -15,11 +15,11 @@ import {ButtonStyled} from '../../Components/button';
 import {KeyboardAvoidingView} from 'react-native';
 import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {Header} from '../../Components/header';
+import {Title} from '../../Components/title';
 
 export function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
-  const [image, setImage] = useState(null);
   const [password, setPassword] = useState('12341234');
   const [cedularif, setCedulaRif] = useState('');
   const [nombrerzb, setNombreRzb] = useState('');
@@ -29,10 +29,10 @@ export function RegisterScreen({navigation}) {
   return (
     <View style={styles.view}>
       <Header navigation={navigation} />
+      <Title text={'Formulario Personal'} />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}>
-        <Text>Register Client!</Text>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.keyboardContainer}
@@ -131,5 +131,21 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize: 20,
+  },
+  title: {
+    height: '10%',
+    display: 'flex',
+    width: '100%',
+    marginLeft: '15%',
+    marginBottom: '10%',
+  },
+  titleText: {
+    fontSize: 45,
+    marginLeft: '2%',
+    fontWeight: 'bold',
+    color: globalStyles.WHITE_COLOR,
+  },
+  texDivision: {
+    color: globalStyles.WHITE_COLOR,
   },
 });
