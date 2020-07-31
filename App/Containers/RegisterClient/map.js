@@ -17,6 +17,5 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.BACKGROUND_BOTOM,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
