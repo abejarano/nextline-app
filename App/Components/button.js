@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     width: '80%',
-    marginLeft: '10%',
     color: globalStyles.WHITE_COLOR,
   },
   icon: {

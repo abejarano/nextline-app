@@ -46,7 +46,7 @@ const LoginClient = ({navigation}) => {
             <SolidLogo color={globalStyles.WHITE_COLOR} />
 
             <KeyboardAvoidingView
-              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+              behavior="padding"
               style={styles.keyboardContainer}
               keyboardVerticalOffset={8}>
               <InputStyled
