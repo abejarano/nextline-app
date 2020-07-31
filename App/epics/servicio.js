@@ -15,7 +15,7 @@ import {
 
 const fetchServicioStatusEpic = (action$, state$) =>
   action$.pipe(
-    ofType(SERVICIO_FETCHING_DATA),
+    ofType(SERVICIO_STATUS_FETCHING_DATA),
     mergeMap((action) =>
       from(
         axios.get(`${process.env.api}/admon/solicitud-status`, {
@@ -24,19 +24,19 @@ const fetchServicioStatusEpic = (action$, state$) =>
           },
         }),
       ).pipe(
-        map((response) => servicioFetchSucces(response)),
-        catchError((error) => of(servicioFetchFailed(error))),
+        map((response) => servicioStatusFetchSucces(response)),
+        catchError((error) => of(servicioStatusFetchFailed(error))),
       ),
     ),
   );
 
 const fetchServiciosEpic = (action$, state$) =>
   action$.pipe(
-    ofType(SERVICIO_STATUS_FETCHING_DATA),
+    ofType(SERVICIO_FETCHING_DATA),
     mergeMap((action) =>
       from(axios.get(`${process.env.api}/config/tipo-servicios/`)).pipe(
-        map((response) => servicioStatusFetchSucces(response)),
-        catchError((error) => of(servicioStatusFetchFailed(error))),
+        map((response) => servicioFetchSucces(response.data.results)),
+        catchError((error) => of(servicioFetchFailed(error))),
       ),
     ),
   );

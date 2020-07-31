@@ -1,11 +1,11 @@
 import {
-	LOAD_PROFILE,
-	LOAD_PROFILE_SUCCESS,
-	LOAD_PROFILE_FAILED,
+  LOAD_PROFILE,
+  LOAD_PROFILE_SUCCESS,
+  LOAD_PROFILE_FAILED,
 } from '../actions/profile';
 
 const profileState = {
-	data: null,
+  data: null,
   fetching: false,
   error: '',
 };
@@ -15,7 +15,6 @@ export const profileReducer = (state = profileState, {type, payload}) => {
     case LOAD_PROFILE:
       return {
         ...state,
-        data: payload.results,
         fetching: true,
       };
     case LOAD_PROFILE_SUCCESS:

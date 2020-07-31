@@ -2,11 +2,13 @@ import React, {useEffect} from 'react';
 import {ScrollView, View, Text, StatusBar, Button} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {servicioFetch} from '../../actions/servicio';
+import {loadProfile} from '../../actions/profile';
 
 const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(servicioFetch());
+    dispatch(loadProfile());
   }, [dispatch]);
   return (
     <>

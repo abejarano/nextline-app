@@ -17,13 +17,13 @@ const loadProfileEpic = (action$, state$) =>
     ofType(LOAD_PROFILE),
     mergeMap((action) =>
       from(
-        axios.get(`${process.env.api}/admon/perfil/`, {
+        axios.get(`${process.env.api}/admon/perfil`, {
           headers: {
             Authorization: `Token ${state$.value.auth.token}`,
           },
         }),
       ).pipe(
-        map((response) => loadProfileSuccess(response.data)),
+        map((response) => loadProfileSuccess(response)),
         catchError((error) => of(loadProfileFailed(error))),
       ),
     ),

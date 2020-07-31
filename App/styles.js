@@ -6,6 +6,7 @@ export default {
   RED_COLOR: '#D52941',
   WHITE_COLOR: '#F5F5F5',
   BACKGROUND_BOTOM: '#0071bf',
+  GRAY_COLOR: '#edf6fb',
 };
 // export default {
 //   PRIMARY_COLOR: '#00aeef',
