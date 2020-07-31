@@ -1,23 +1,22 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setSignupPartialData} from '../../actions/auth';
-import globalStyles from '../../styles';
+import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {InputStyled} from '../../Components/input';
 import {ButtonStyled} from '../../Components/button';
-import {KeyboardAvoidingView} from 'react-native';
-import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {Header} from '../../Components/header';
 import {Title} from '../../Components/title';
+import globalStyles from '../../styles';
 
 export function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('12341234');
+  const [password, setPassword] = useState('');
   const [cedularif, setCedulaRif] = useState('');
   const [nombrerzb, setNombreRzb] = useState('');
   const [phone, setPhone] = useState('');
-  const [repassword, setRepassword] = useState('12341234');
+  const [repassword, setRepassword] = useState('');
 
   return (
     <View style={styles.view}>
@@ -89,7 +88,7 @@ export function RegisterScreen({navigation}) {
                     clave: password,
                   }),
                 );
-                navigation.push('PlanSelect');
+                navigation.push('ActualLocation');
               }
             }}
             backgroundColor={globalStyles.LIGTH_BLUE_COLOR}

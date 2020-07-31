@@ -9,6 +9,10 @@ import {
 import LoginClient from '../Containers/LoginClient';
 import {RegisterScreen} from '../Containers/RegisterClient';
 import {PlanSelectScreen} from '../Containers/RegisterClient/planSelector';
+import {ChooseService} from '../Containers/RegisterClient/chooseService';
+import {ActualLocation} from '../Containers/RegisterClient/actualLocation';
+import {LocationDetails} from '../Containers/RegisterClient/locationDetails';
+import {MapView} from '../Containers/RegisterClient/map';
 
 const Stack = createStackNavigator();
 
@@ -48,11 +52,44 @@ const LoginNavigator = () => {
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
+
       <Stack.Screen
         name="PlanSelect"
         component={PlanSelectScreen}
         options={{
           title: 'PlanSelect',
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+      <Stack.Screen
+        name="ServiceSelect"
+        component={ChooseService}
+        options={{
+          title: 'ServiceSelect',
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+      <Stack.Screen
+        name="ActualLocation"
+        component={ActualLocation}
+        options={{
+          title: 'ActualLocation',
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+      <Stack.Screen
+        name="LocationDetails"
+        component={LocationDetails}
+        options={{
+          title: 'LocationDetails',
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+      <Stack.Screen
+        name="Map"
+        component={MapView}
+        options={{
+          title: 'Map',
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
