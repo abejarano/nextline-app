@@ -31,6 +31,7 @@ export const InputStyled = ({
 const styles = StyleSheet.create({
   input: {
     backgroundColor: '#f5f5f5',
+    height: 40,
     width: '80%',
     paddingLeft: 15,
     borderRadius: 100,
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    marginLeft: 15,
     color: '#f5f5f5',
   },
   icon: {},
