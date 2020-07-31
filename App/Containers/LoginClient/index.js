@@ -3,12 +3,9 @@ import {
   StyleSheet,
   View,
   Text,
-  Button,
   KeyboardAvoidingView,
-  Platform,
   Alert,
   ImageBackground,
-  Dimensions,
   SafeAreaView,
 } from 'react-native';
 import {login} from '../../actions/auth';
@@ -18,7 +15,6 @@ import {InputStyled} from '../../Components/input';
 import globalStyles from '../../styles';
 import EmailSvg from '../../assets/svg/Email';
 import SolidLogo from '../../assets/svg/SolidLogo';
-import InfoSvg from '../../assets/svg/Info';
 import LockSvg from '../../assets/svg/Lock';
 import {Header} from '../../Components/header';
 
