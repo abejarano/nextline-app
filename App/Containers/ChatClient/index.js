@@ -4,7 +4,7 @@ import database from '@react-native-firebase/database';
 
 const screenSizeWidth = Dimensions.get('screen').width;
 
-class ChatClient extends Component {
+class ChatScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -106,7 +106,7 @@ class ChatClient extends Component {
   }
 }
 
-export default ChatClient;
+export default ChatScreen;
 
 const styles = StyleSheet.create({
   container: {

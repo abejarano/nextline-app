@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeClientScreen from '../Containers/HomeClient';
 import {ProfileScreen} from '../Containers/Profile';
 import HomeSvg from '../assets/svg/Home';
+import ChatScreen from '../Containers/ChatClient';
 import ProfileSvg from '../assets/svg/Profile';
 import {TabBar} from '../Components/tabBar';
 const HomeStack = createStackNavigator();
@@ -17,7 +18,7 @@ const HomeStackScreen = () => {
         headerShown: false,
       }}>
       <HomeStack.Screen name="Home" component={HomeClientScreen} />
-      {/* <HomeStack.Screen name="Plans" component={PlansScreen} /> */}
+      <HomeStack.Screen name="Chat" component={ChatScreen} />
       {/* <HomeStack.Screen name="PlansDetails" component={PlansDetailsScreen} /> */}
     </HomeStack.Navigator>
   );
