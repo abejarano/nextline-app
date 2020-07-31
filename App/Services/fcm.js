@@ -4,7 +4,6 @@ import {Platform} from 'react-native';
 import {Alert} from 'react-native';
 
 const FcmService = () => {
-
   async function requestUserPermission() {
     const authStatus = await messaging().requestPermission(settings);
     const enabled =

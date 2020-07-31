@@ -88,7 +88,7 @@ const LoginClient = ({navigation}) => {
 
               <ButtonStyled
                 onPress={() => {
-                  navigation.push('Register');
+                  navigation.push('ServiceSelect');
                 }}
                 backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
                 color={globalStyles.WHITE_COLOR}
