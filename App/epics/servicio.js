@@ -8,9 +8,12 @@ import {
   SERVICIO_FETCHING_DATA,
   servicioFetchSucces,
   servicioFetchFailed,
+  SERVICIO_STATUS_FETCHING_DATA,
+  servicioStatusFetchSucces,
+  servicioStatusFetchFailed,
 } from '../actions/servicio';
 
-const fetchServiciosEpic = (action$, state$) =>
+const fetchServicioStatusEpic = (action$, state$) =>
   action$.pipe(
     ofType(SERVICIO_FETCHING_DATA),
     mergeMap((action) =>
@@ -27,4 +30,18 @@ const fetchServiciosEpic = (action$, state$) =>
     ),
   );
 
-export const servicioEpics = combineEpics(fetchServiciosEpic);
+const fetchServiciosEpic = (action$, state$) =>
+  action$.pipe(
+    ofType(SERVICIO_STATUS_FETCHING_DATA),
+    mergeMap((action) =>
+      from(axios.get(`${process.env.api}/config/tipo-servicios/`)).pipe(
+        map((response) => servicioStatusFetchSucces(response)),
+        catchError((error) => of(servicioStatusFetchFailed(error))),
+      ),
+    ),
+  );
+
+export const servicioEpics = combineEpics(
+  fetchServiciosEpic,
+  fetchServicioStatusEpic,
+);

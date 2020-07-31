@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  Platform,
-  ScrollView,
-} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setSignupPartialData} from '../../actions/auth';
 import globalStyles from '../../styles';
@@ -83,28 +76,30 @@ export function RegisterScreen({navigation}) {
           />
         </KeyboardAvoidingView>
 
-        <ButtonStyled
-          onPress={() => {
-            if (repassword === password) {
-              dispatch(
-                setSignupPartialData({
-                  nombre_razsoc: nombrerzb,
-                  cedula_rif: cedularif,
-                  correo: email,
-                  celular: phone,
-                  clave: password,
-                }),
-              );
-              navigation.push('PlanSelect');
-            }
-          }}
-          backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-          color={globalStyles.WHITE_COLOR}
-          text={'Continuar'}
-          styleText={styles.button}
-          Icon={ArrowPointerSvg}
-          iconColor={globalStyles.WHITE_COLOR}
-        />
+        <View style={styles.buttonContainer}>
+          <ButtonStyled
+            onPress={() => {
+              if (repassword === password) {
+                dispatch(
+                  setSignupPartialData({
+                    nombre_razsoc: nombrerzb,
+                    cedula_rif: cedularif,
+                    correo: email,
+                    celular: phone,
+                    clave: password,
+                  }),
+                );
+                navigation.push('PlanSelect');
+              }
+            }}
+            backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+            color={globalStyles.WHITE_COLOR}
+            text={'Continuar'}
+            styleText={styles.continueButton}
+            Icon={ArrowPointerSvg}
+            iconColor={globalStyles.WHITE_COLOR}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -131,6 +126,12 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize: 20,
+  },
+  continueButton: {
+    fontSize: 20,
+  },
+  buttonContainer: {
+    marginTop: 50,
   },
   title: {
     height: '10%',
