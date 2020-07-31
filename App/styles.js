@@ -5,6 +5,7 @@ export default {
   MUSTARD_COLOR: '#FCD581',
   RED_COLOR: '#D52941',
   WHITE_COLOR: '#F5F5F5',
+  BACKGROUND_BOTOM: '#0071bf',
 };
 // export default {
 //   PRIMARY_COLOR: '#00aeef',

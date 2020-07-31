@@ -13,17 +13,14 @@ export const InputStyled = ({
 }) => {
   return (
     <View style={{...styles.input, ...style}}>
-      {Icon ? (
-        <Icon style={styles.icon} color={iconColor} />
-      ) : (
-        <Text style={styles.hidedText} />
-      )}
+      {Icon && <Icon style={styles.icon} color={iconColor} />}
       <TextInput
         clearTextOnFocus={true}
         placeholder={placeholder}
         onChangeText={(text) => {
           onChange(text);
         }}
+        style={styles.innerInput}
         secureTextEntry={secureTextEntry}>
         {value}
       </TextInput>
@@ -35,10 +32,11 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#f5f5f5',
     width: '80%',
-    padding: 15,
-    borderRadius: 15,
+    paddingLeft: 15,
+    borderRadius: 100,
     marginTop: 5,
     marginBottom: 5,
+    overflow: 'visible',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -47,8 +45,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#f5f5f5',
   },
-  hidedText: {
-    display: 'none',
-  },
   icon: {},
+  innerInput: {
+    width: '100%',
+  },
 });
