@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {ScrollView, View, Text, StatusBar, StyleSheet} from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {servicioFetch} from '../../actions/servicio';
 import {loadProfile} from '../../actions/profile';
@@ -15,28 +22,32 @@ const HomeClientScreen = () => {
   }, [dispatch]);
   return (
     <View style={styles.view}>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <LinearGradient
-          colors={[
-            globalStyles.LIGTH_BLUE_COLOR,
-            globalStyles.PRIMARY_COLOR,
-            globalStyles.PRIMARY_COLOR_DARK,
-          ]}
-          angle={180}
-          style={styles.linearGradient}>
-          <View style={styles.whiteCircle}>
-            <SolidLogin
-              width={80}
-              height={80}
-              style={styles.logo}
-              color={globalStyles.GRAY_COLOR + '80'}
-            />
-            <Text style={styles.buttonText}>10MB</Text>
-            <Text style={styles.buttonLowerText}>PLAN</Text>
-          </View>
-        </LinearGradient>
-      </ScrollView>
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/home.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <StatusBar barStyle="dark-content" />
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <LinearGradient
+            colors={[
+              globalStyles.LIGTH_BLUE_COLOR,
+              globalStyles.PRIMARY_COLOR,
+              globalStyles.PRIMARY_COLOR_DARK,
+            ]}
+            angle={180}
+            style={styles.linearGradient}>
+            <View style={styles.whiteCircle}>
+              <SolidLogin
+                width={80}
+                height={80}
+                style={styles.logo}
+                color={globalStyles.GRAY_COLOR + '80'}
+              />
+              <Text style={styles.buttonText}>10MB</Text>
+              <Text style={styles.buttonLowerText}>PLAN</Text>
+            </View>
+          </LinearGradient>
+        </ScrollView>
+      </ImageBackground>
     </View>
   );
 };
@@ -94,6 +105,13 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     backgroundColor: 'transparent',
     textTransform: 'uppercase',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
 });
 

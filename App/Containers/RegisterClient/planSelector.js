@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Alert, Text, FlatList} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Alert,
+  Text,
+  FlatList,
+  ImageBackground,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {planFetch, planSelect} from '../../actions/plan';
 import {Header} from '../../Components/header';
@@ -57,21 +64,25 @@ export function PlanSelectScreen({navigation}) {
 
   return (
     <View style={styles.view}>
-      <Header navigation={navigation} />
-      <Title text={'Planes de Internet'} />
-      <View style={styles.scroll}>
-        <FlatList
-          horizontal
-          data={plans}
-          renderItem={(props) => (
-            <PlanItem {...props} navigation={navigation} />
-          )}
-          keyExtractor={(plan) => `plan-item-${plan.id}`}
-        />
-      </View>
-      <Text numberOfLines={2} style={styles.lowText}>
-        Seleccione el plan de tu preferencia
-      </Text>
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/auth.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <Header navigation={navigation} />
+        <Title text={'Planes de Internet'} />
+        <View style={styles.scroll}>
+          <FlatList
+            horizontal
+            data={plans}
+            renderItem={(props) => (
+              <PlanItem {...props} navigation={navigation} />
+            )}
+            keyExtractor={(plan) => `plan-item-${plan.id}`}
+          />
+        </View>
+        <Text numberOfLines={2} style={styles.lowText}>
+          Seleccione el plan de tu preferencia
+        </Text>
+      </ImageBackground>
     </View>
   );
 }

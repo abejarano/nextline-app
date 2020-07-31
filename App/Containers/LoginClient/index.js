@@ -37,7 +37,7 @@ const LoginClient = ({navigation}) => {
         <View style={styles.view}>
           <ImageBackground
             source={require('../../assets/images/login_wallpapers/60.png')}
-            style={styles.backgroundImage}>
+            style={globalStyles.BACKGROUNDIMAGE}>
             <Header backVisible={false} />
             <SolidLogo color={globalStyles.WHITE_COLOR} />
 
@@ -105,18 +105,10 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
   },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    width: '100%',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
   header: {
     backgroundColor: globalStyles.WHITE_COLOR,
   },
   view: {
-    backgroundColor: '#0058af',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

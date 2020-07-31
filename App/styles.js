@@ -10,6 +10,12 @@ export default {
   GRAY_COLOR: '#edf6fb',
   GRAY_TEXT_COLOR: '#464545',
   LIST_COLORS: ['MUSTARD_COLOR', 'RED_COLOR', 'GREEN_COLOR'],
+  BACKGROUNDIMAGE: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    alignItems: 'center',
+  },
 };
 // export default {
 //   PRIMARY_COLOR: '#00aeef',

@@ -1,5 +1,11 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
 import globalStyles from '../../styles';
@@ -40,16 +46,20 @@ export const ChooseService = ({navigation}) => {
 
   return (
     <View style={styles.view}>
-      <Header navigation={navigation} />
-      <Title text={'Selecciona        un Servicio'} />
-      {services.map((service, index) => (
-        <Service
-          key={`serv-sign-${service.id}`}
-          navigation={navigation}
-          index={index}
-          {...service}
-        />
-      ))}
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/auth.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <Header navigation={navigation} />
+        <Title text={'Selecciona        un Servicio'} />
+        {services.map((service, index) => (
+          <Service
+            key={`serv-sign-${service.id}`}
+            navigation={navigation}
+            index={index}
+            {...service}
+          />
+        ))}
+      </ImageBackground>
     </View>
   );
 };

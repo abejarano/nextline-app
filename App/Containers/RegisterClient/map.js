@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ImageBackground} from 'react-native';
 import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
 import globalStyles from '../../styles';
@@ -7,8 +7,12 @@ import globalStyles from '../../styles';
 export const MapView = ({navigation}) => {
   return (
     <View style={styles.view}>
-      <Header navigation={navigation} />
-      <Title text={'Domicilio de Instalacion'} />
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/auth.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <Header navigation={navigation} />
+        <Title text={'Domicilio de Instalacion'} />
+      </ImageBackground>
     </View>
   );
 };
