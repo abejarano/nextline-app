@@ -29,7 +29,8 @@ const FcmService = () => {
 };
 
 const saveTokenToDatabase = (token) => {
-  console.warn('token', token);
+  console.warn('token', token, Platform.OS);
+  // todo save token
   listenWhenInBackground();
   return listenToNotifications();
 };
@@ -43,6 +44,12 @@ const listenToNotifications = () => {
 const listenWhenInBackground = () => {
   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
     console.log('Message handled in the background!', remoteMessage);
+  });
+};
+
+const onLogout = () => {
+  messaging().unregisterDeviceForRemoteMessages( () => {
+    console.log('unregisterDeviceForRemoteMessages!');
   });
 };
 
