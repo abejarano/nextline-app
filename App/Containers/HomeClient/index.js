@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, StatusBar, StyleSheet, ImageBackground} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {servicioStatusFetch} from '../../actions/servicio';
+import {servicioStatusFetch, contratoStatusFetch} from '../../actions/servicio';
 import LinearGradient from 'react-native-linear-gradient';
 import globalStyles from '../../styles';
 import SolidLogin from '../../assets/svg/SolidLogo';
@@ -15,10 +15,16 @@ const HomeClientScreen = () => {
     (state) => state.servicio.status.data.solicitud_servicio,
   );
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
+  const plan = useSelector((state) => state.plans.selected);
+  const service = useSelector((state) => state.servicio.selected);
+  const isClient = useSelector((state) => state.auth.isClient);
   useEffect(() => {
-    dispatch(servicioStatusFetch());
-  }, [dispatch]);
+    if (isClient) {
+      dispatch(contratoStatusFetch());
+    } else {
+      dispatch(servicioStatusFetch());
+    }
+  }, [dispatch, isClient]);
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -36,7 +42,7 @@ const HomeClientScreen = () => {
         </View>
         <StatusBar barStyle="dark-content" />
         <Text style={styles.serviceLabel}>tipo de servicio</Text>
-        <Text style={styles.serviceText}>Residencial @</Text>
+        <Text style={styles.serviceText}>{service.servicio}</Text>
         <View style={styles.gradientContainer}>
           <LinearGradient
             colors={[
@@ -53,12 +59,15 @@ const HomeClientScreen = () => {
                 style={styles.logo}
                 color={globalStyles.GRAY_COLOR + '80'}
               />
-              <Text style={styles.buttonText}>10MB</Text>
+              <Text style={styles.buttonText}>{plan.plan}</Text>
               <Text style={styles.buttonLowerText}>PLAN</Text>
             </View>
           </LinearGradient>
         </View>
-        <SpeedGroup />
+        <SpeedGroup
+          upSpeed={plan.velocidad_subida}
+          downSpeed={plan.velocidad_baja}
+        />
         <Text style={styles.statusLabel}>Estatus de solicitud</Text>
         <View style={styles.statusContainer}>
           <Text style={styles.statusText}>{status && status.status}</Text>

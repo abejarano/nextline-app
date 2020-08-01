@@ -6,12 +6,17 @@ import axios from 'axios';
 import {combineEpics} from 'redux-observable';
 import {
   SERVICIO_FETCHING_DATA,
+  CONTRATO_STATUS_FETCHING_DATA,
+  SERVICIO_STATUS_FETCHING_DATA,
   servicioFetchSucces,
   servicioFetchFailed,
-  SERVICIO_STATUS_FETCHING_DATA,
   servicioStatusFetchSucces,
   servicioStatusFetchFailed,
+  contratoStatusFetchSucces,
+  contratoStatusFetchFailed,
+  servicioSelect,
 } from '../actions/servicio';
+import {planSelect} from '../actions/plan';
 
 const fetchServicioStatusEpic = (action$, state$) =>
   action$.pipe(
@@ -30,6 +35,29 @@ const fetchServicioStatusEpic = (action$, state$) =>
     ),
   );
 
+const fetchContratoStatusEpic = (action$, state$) =>
+  action$.pipe(
+    ofType(CONTRATO_STATUS_FETCHING_DATA),
+    mergeMap((action) =>
+      from(
+        axios.get(`${process.env.api}/admon/contratos-status`, {
+          headers: {
+            Authorization: `Token ${state$.value.auth.token}`,
+          },
+        }),
+      ).pipe(
+        mergeMap((response) =>
+          of(
+            contratoStatusFetchSucces(response.data),
+            planSelect(response.data[0].plan),
+            servicioSelect(response.data[0].plan.tipo_servicio),
+          ),
+        ),
+        catchError((error) => of(contratoStatusFetchFailed(error))),
+      ),
+    ),
+  );
+
 const fetchServiciosEpic = (action$, state$) =>
   action$.pipe(
     ofType(SERVICIO_FETCHING_DATA),
@@ -44,4 +72,5 @@ const fetchServiciosEpic = (action$, state$) =>
 export const servicioEpics = combineEpics(
   fetchServiciosEpic,
   fetchServicioStatusEpic,
+  fetchContratoStatusEpic,
 );

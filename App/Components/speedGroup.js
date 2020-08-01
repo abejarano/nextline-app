@@ -3,12 +3,12 @@ import {StyleSheet, View, Text} from 'react-native';
 import ArrowSvg from '../assets/svg/Arrow';
 import globalStyles from '../styles';
 
-export const SpeedGroup = ({}) => {
+export const SpeedGroup = ({upSpeed, downSpeed}) => {
   return (
     <View style={styles.speedGroup}>
       <View style={styles.speedItem}>
         <ArrowSvg style={styles.arrow} color={globalStyles.GREEN_COLOR} />
-        <Text style={styles.speed}>2 Mb</Text>
+        <Text style={styles.speed}>{upSpeed} Mb</Text>
       </View>
       <View style={styles.speedItem}>
         <ArrowSvg
@@ -16,7 +16,7 @@ export const SpeedGroup = ({}) => {
           direction="bottom"
           color={globalStyles.GREEN_COLOR}
         />
-        <Text style={styles.speed}>1 Mb</Text>
+        <Text style={styles.speed}>{downSpeed} Mb</Text>
       </View>
     </View>
   );

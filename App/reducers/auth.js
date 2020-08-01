@@ -7,6 +7,7 @@ import {
   SIGNUP_SET_DATA,
   LOGIN_STORAGE_TOKEN_SUCCESS,
   SIGNOUT_SUCCESS,
+  STORAGE_TOKEN_READED_SUCCESS,
 } from '../actions/auth';
 import {PLAN_SELECTED} from '../actions/plan';
 import {SERVICIO_STATUS_FETCH_SUCCESS} from '../actions/servicio';
@@ -27,6 +28,7 @@ const authState = {
   error: '',
   loggedIn: false,
   message: '',
+  isClient: false,
 };
 
 export const authReducer = (state = authState, {type, payload}) => {
@@ -34,10 +36,10 @@ export const authReducer = (state = authState, {type, payload}) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        user: payload.user,
         token: payload.token,
         loggedIn: true,
         sending: false,
+        isClient: payload.es_cliente,
       };
     case LOGIN_SENDING_DATA:
       return {
@@ -79,11 +81,12 @@ export const authReducer = (state = authState, {type, payload}) => {
           ...state.user,
         },
       };
-    case LOGIN_STORAGE_TOKEN_SUCCESS:
+    case STORAGE_TOKEN_READED_SUCCESS:
       return {
         ...state,
-        token: payload,
-        loggedIn: payload ? true : false,
+        token: payload[0][1],
+        loggedIn: payload[0][1] ? true : false,
+        isClient: payload[1][1] === 'true',
       };
     case SIGNOUT_SUCCESS:
       console.log(state, 'test');
@@ -101,6 +104,6 @@ export const authReducer = (state = authState, {type, payload}) => {
         },
       };
     default:
-      return state;
+      return {...state};
   }
 };

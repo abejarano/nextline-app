@@ -15,6 +15,7 @@ import {
   signoutSuccess,
   signoutFailed,
   SIGNUP_SENDING_DATA,
+  tokenReaded,
 } from '../actions/auth';
 import {combineEpics} from 'redux-observable';
 import axios from 'axios';
@@ -48,7 +49,12 @@ const loginStorageEpic = (action$) =>
   action$.pipe(
     ofType(LOGIN_SUCCESS),
     mergeMap((action) =>
-      from(AsyncStorage.setItem('nl-token', action.payload.token)).pipe(
+      from(
+        AsyncStorage.multiSet([
+          ['nl-token', action.payload.token],
+          ['nl-isClient', action.payload.es_cliente + ''],
+        ]),
+      ).pipe(
         map(() => tokenSaved(action.payload.token)),
         catchError((error) => of(tokenSaveFailed(error))),
       ),
@@ -59,7 +65,7 @@ const signoutEpic = (action$) =>
   action$.pipe(
     ofType(SIGNOUT),
     mergeMap((action) =>
-      from(AsyncStorage.removeItem('nl-token')).pipe(
+      from(AsyncStorage.multiRemove(['nl-token', 'nl-isClient'])).pipe(
         map(() => signoutSuccess()),
         catchError((error) => of(signoutFailed(error))),
       ),
@@ -70,8 +76,8 @@ const checkTokenStorageEpic = (action$) =>
   action$.pipe(
     ofType(STORAGE_CHECK_TOKEN),
     mergeMap((action) =>
-      from(AsyncStorage.getItem('nl-token')).pipe(
-        map((token) => tokenSaved(token)),
+      from(AsyncStorage.multiGet(['nl-token', 'nl-isClient'])).pipe(
+        map((data) => tokenReaded(data)),
         catchError((error) => of(tokenSaveFailed(error))),
       ),
     ),

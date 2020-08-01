@@ -26,7 +26,10 @@ const PlanItem = ({item: plan, position, navigation}) => {
       }}
       style={styles.planItem}>
       <Text style={styles.plan}>{plan.plan}</Text>
-      <SpeedGroup />
+      <SpeedGroup
+        upSpeed={plan.velocidad_subida}
+        downSpeed={plan.velocidad_baja}
+      />
       <Text style={styles.month}>Precio Mes</Text>
       <View style={styles.pricing}>
         <Text style={styles.dollarPrice}>${plan.precio.split('USD')[0]}</Text>

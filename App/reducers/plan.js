@@ -9,7 +9,16 @@ const planState = {
   data: [],
   fetching: false,
   error: '',
-  selected: null,
+  selected: {
+    activo: null,
+    id: null,
+    plan: '',
+    precio: '',
+    precio_bs: '',
+    precio_currency: '',
+    velocidad_baja: null,
+    velocidad_subida: null,
+  },
 };
 
 export const planReducer = (state = planState, {type, payload}) => {

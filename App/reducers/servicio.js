@@ -5,6 +5,7 @@ import {
   SERVICIO_STATUS_FETCH_SUCCESS,
   SERVICIO_STATUS_FETCHING_DATA,
   SERVICIO_STATUS_FETCH_FAILED,
+  SERVICIO_SELECTED,
 } from '../actions/servicio';
 
 const servicioState = {
@@ -18,6 +19,11 @@ const servicioState = {
     },
     fetching: false,
     error: '',
+  },
+  selected: {
+    activo: null,
+    id: null,
+    servicio: '',
   },
 };
 
@@ -65,7 +71,14 @@ export const servicioReducer = (state = servicioState, {type, payload}) => {
           error: payload.error,
         },
       };
-
+    case SERVICIO_SELECTED:
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          ...payload,
+        },
+      };
     default:
       return state;
   }
