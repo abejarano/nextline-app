@@ -29,7 +29,6 @@ const FcmService = () => {
 };
 
 const saveTokenToDatabase = (token) => {
-  console.warn('token', token, Platform.OS);
   // todo save token
   listenWhenInBackground();
   return listenToNotifications();

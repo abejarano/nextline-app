@@ -3,45 +3,51 @@ import {StyleSheet, Dimensions, View, Text, Image} from 'react-native';
 import database from '@react-native-firebase/database';
 import { TextInput, FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
 const screenSizeWidth = Dimensions.get('screen').width;
 
 const ChatScreen = ({ route, navigation }) => {
   const [ message, setMessage ] = useState('');
+  const [ isEditable, setIsEditable ] = useState('');
   const { ticketId } = route.params;
-  const chats = [];
-  const currentEmail = '';
+  const dbRef = database().ref(`chatsCollections/${ticketId}`);
+
+  let chats = [];
+  const userId = '';
   const currentMessage = '';
   
-  // console.warn(ticketId);
-
-  const listenerFirebase = (dbRef) => {
+  const listenerFirebase = () => {
+    // const dbRef = database().ref(`chatsCollections${ticketId}`);
     console.log('listenerFirebase');
     dbRef.on('value', (dataSnapshot) => {
-      var feedbacks = [];
+      let messages = [];
 
       dataSnapshot.forEach((child) => {
-        feedbacks.push({
-          // mensagem: child.val().feedback.mensagem,
-          key: child.key,
+        console.log("_ val() chats", child.val().message)
+        console.log("_ val() chats {}", child.val())
+        messages.push({
+          customId: child.val().customId,
+          dateMessage: child.val().dateMessage,
+          typeMessage: child.val().typeMessage,
+          message: child.val().message,
         });
       });
       
-      console.log('data', feedbacks.reverse() )
+      // console.log('data', messages.reverse() );
+      chats = messages.reverse();
     });
   }
 
-  const saveMessage = (message) => {
-    console.log('saveMessage', message);
-    let feedback = {
-      customId: new Date() + 'asd',
-      message,
-    };
-    const dbRef = database().ref(`chatsCollections/${ticketId}`);
+  const saveMessage = (message, typeMessage="text") => {
+    isEditable = true;
+    console.log('saveMessage', message, typeMessage);
 
     dbRef
       .push({
-        feedback,
+        customId: "2",
+        dateMessage: new Date() + 'asd',
+        typeMessage,
         message,
       })
       .then((data) => {
@@ -62,20 +68,11 @@ const ChatScreen = ({ route, navigation }) => {
       });
   };
 
-  const dbRef = database().ref(`chatsCollections${ticketId}`);
-  listenerFirebase(dbRef);
-
-  
-
-  const sendMessage = (message) => {
-
-    console.warn('_ send _ message _ ', message);
-    saveMessage(message);
-  }; 
+  listenerFirebase();
 
   const myRenderItem = ({ item, index }) => {
     
-    if (item.sender === currentEmail) {
+    if (item.customId === userId) {
       return (
         <View style={styles.viewWrapItemRight}>
           <Text style={styles.textItemRight}>{item.content}</Text>
@@ -86,7 +83,7 @@ const ChatScreen = ({ route, navigation }) => {
       return (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           {(chats[index - 1] &&
-            chats[index - 1].sender === currentEmail) ||
+            chats[index - 1].customId === userId) ||
             index === 0 ? (
               <Image
                 style={styles.avatarItemLeft}
@@ -122,10 +119,13 @@ const ChatScreen = ({ route, navigation }) => {
                 style={styles.viewTextInput}
                 placeholder="Type your message..."
                 onChangeText={text => setMessage(text)}
+                onSubmitEditing={text => setMessage(text)}
                 value={message}
+                multiline={true}
+                editable={isEditable}
               />
 
-              <TouchableOpacity onPress={ () => sendMessage(message)}>
+              <TouchableOpacity onPress={ () => saveMessage(message, 'text')}>
                 <Image source={require('../../assets/images/send_plane.png')} style={styles.icSend} />
               </TouchableOpacity>
             </View>
