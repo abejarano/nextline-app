@@ -6,7 +6,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import LoginNavigator from './LoginNavigator';
 import TabsNavigator from './TabsNavigator';
 import {checkToken} from '../actions/auth';
-import FcmService from '../Services/fcm';
 import {connectFmc} from '../actions/fcm';
 
 const MainStack = createStackNavigator();

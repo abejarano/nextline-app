@@ -1,4 +1,4 @@
 export default {
-	sound: true,
-	announcement: true,
-}; 
+  sound: true,
+  announcement: true,
+};

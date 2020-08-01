@@ -13,7 +13,6 @@ import {Header} from '../../Components/header';
 import {Title} from '../../Components/title';
 import globalStyles from '../../styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {ArrowSvg} from '../../assets/svg/Arrow';
 import {SpeedGroup} from '../../Components/speedGroup';
 
 const PlanItem = ({item: plan, position, navigation}) => {
