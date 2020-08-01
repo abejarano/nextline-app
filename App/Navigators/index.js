@@ -7,6 +7,7 @@ import LoginNavigator from './LoginNavigator';
 import TabsNavigator from './TabsNavigator';
 import {checkToken} from '../actions/auth';
 import FcmService from '../Services/fcm';
+import {connectFmc} from '../actions/fcm';
 
 const MainStack = createStackNavigator();
 
@@ -15,7 +16,8 @@ export const MainNavigator = () => {
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
     console.log('_init_');
-    FcmService();
+    // FcmService();
+    dispatch(connectFmc());
     dispatch(checkToken());
   }, [dispatch]);
 
