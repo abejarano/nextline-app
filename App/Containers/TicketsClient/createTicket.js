@@ -18,36 +18,37 @@ import EmailSvg from '../../assets/svg/Email';
 import SolidLogo from '../../assets/svg/SolidLogo';
 import LockSvg from '../../assets/svg/Lock';
 import {Header} from '../../Components/header';
+import { TextInput } from 'react-native-gesture-handler';
 
-export const CreateTicketsScreen = ({}) => {
+export const CreateTicketsScreen = ({navigation}) => {
 
-	const tickets = [{id:1, name:'low speed'}, {id:2, name:'too much speed'}];
+	const { ticket, setTicket } = useState('');
 
 	return (
-		<View style={styles.view}>
-			<>
-				{tickets.map(ticket => (
-					<View key={ticket.id}>
-							<Text>
-								{ticket.name}
-							</Text>
+		<SafeAreaView>
+			<View style={styles.view}>
+				<>
+					<TextInput 
+						onChangeText={text => setTicket(text)}
+      			value={ticket}
+					>
+					</TextInput>
+				</>
+				<>
+					<View>
+						<ButtonStyled
+							onPress={() => {
+								navigation.push('Chat',{ ticketId: (Math.random() * (2100 - 1100) + 1100)});
+							}}
+							backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+							color={globalStyles.GREEN_COLOR}
+							text={'Save Ticket'}
+							style={styles.button}
+						/>
 					</View>
-				))}
-			</>
-			<>
-				<View>
-					<ButtonStyled
-						onPress={() => {
-							navigation.push('ServiceSelect');
-						}}
-						backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-						color={globalStyles.GREEN_COLOR}
-						text={'Save Ticket'}
-						style={styles.button}
-					/>
-				</View>
-			</>
-		</View>
+				</>
+			</View>
+		</SafeAreaView>
 	);
 };
 
