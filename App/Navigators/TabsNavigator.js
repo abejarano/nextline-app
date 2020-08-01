@@ -8,8 +8,8 @@ import HomeSvg from '../assets/svg/Home';
 import ChatScreen from '../Containers/ChatClient';
 import ProfileSvg from '../assets/svg/Profile';
 import {TabBar} from '../Components/tabBar';
-import { TicketsScreen } from '../Containers/TicketsClient';
-import { CreateTicketsScreen } from '../Containers/TicketsClient/createTicket';
+import {TicketsScreen} from '../Containers/TicketsClient';
+import {CreateTicketsScreen} from '../Containers/TicketsClient/createTicket';
 const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +22,10 @@ const HomeStackScreen = () => {
       <HomeStack.Screen name="Home" component={HomeClientScreen} />
       <HomeStack.Screen name="Chat" component={ChatScreen} />
       <HomeStack.Screen name="TicketsClient" component={TicketsScreen} />
-      <HomeStack.Screen name="TicketsCreateClient" component={CreateTicketsScreen} />
+      <HomeStack.Screen
+        name="TicketsCreateClient"
+        component={CreateTicketsScreen}
+      />
       {/* <HomeStack.Screen name="PlansDetails" component={PlansDetailsScreen} /> */}
     </HomeStack.Navigator>
   );
