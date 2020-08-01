@@ -46,13 +46,13 @@ const fetchContratoStatusEpic = (action$, state$) =>
           },
         }),
       ).pipe(
-        mergeMap((response) =>
-          of(
+        mergeMap((response) => {
+          return of(
             contratoStatusFetchSucces(response.data),
-            planSelect(response.data[0].plan),
-            servicioSelect(response.data[0].plan.tipo_servicio),
-          ),
-        ),
+            planSelect(response.data.contratos[0].plan),
+            servicioSelect(response.data.contratos[0].plan.tipo_servicio),
+          );
+        }),
         catchError((error) => of(contratoStatusFetchFailed(error))),
       ),
     ),
