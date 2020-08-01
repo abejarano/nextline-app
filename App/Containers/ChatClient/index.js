@@ -16,6 +16,7 @@ import {
 } from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
+import globalStyles from '../../styles';
 
 const screenSizeWidth = Dimensions.get('screen').width;
 
@@ -23,6 +24,8 @@ const ChatScreen = ({route, navigation}) => {
   const [message, setMessage] = useState('');
   const [isEditable, setIsEditable] = useState(true);
   const [chats, setChats] = useState([]);
+  const [user, setUser] = useState({id:2});
+  const [userMode, setUserMode] = useState('');
   const {ticketId} = route.params;
   const dbRef = database().ref(`chatsCollections/${ticketId}`);
 
@@ -87,32 +90,46 @@ const ChatScreen = ({route, navigation}) => {
   };
 
   const myRenderItem = ({item, index}) => {
-    return(
-      <View>
-        <Text>{item.message}</Text>
-      </View> 
-    )
-    // if (item.customId === userId) {
+    // return(
+    //   <View>
+    //     <Text>{user.id}</Text>
+    //     <Text>{item.message}</Text>
+    //   </View> 
+    // )
+    // if (item.customId == user.id) {
     //   return (
-    //     <View style={styles.viewWrapItemRight}>
-    //       <Text style={styles.textItemRight}>{item.message}</Text>
+    //     <View style={{}}>
+    //       <Text style={styles.textItemRight}>@ {item.message} {item.customId} {user.id}</Text>
     //     </View>
     //   );
     // } else {
     //   return (
-    //     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-    //       {(chats[index - 1] && chats[index - 1].customId === userId) ||
-    //       index === 0 ? (
-    //         <Image style={styles.avatarItemLeft} source={{uri: item.avatar}} />
-    //       ) : (
-    //         <View style={{width: 30, height: 30, marginLeft: 10}} />
-    //       )}
-    //       <View style={styles.viewWrapItemLeft}>
-    //         <Text style={styles.textItemLeft}>{item.content}</Text>
-    //       </View>
+    //     <View style={{}}>
+    //       <Text style={styles.textItemRight}>! {item.message} {item.customId} {user.id}</Text>
     //     </View>
     //   );
     // }
+    if (item.customId == user.id) {
+      return (
+        <View style={styles.viewWrapItemRight}>
+          <Text style={styles.textItemRight}>@ {item.message}</Text>
+        </View>
+      );
+    } else {
+      return (
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          {(chats[index - 1] && chats[index - 1].customId === user.id) ||
+          index === 0 ? (
+            <Image style={styles.avatarItemLeft} source={{uri: item.avatar}} />
+          ) : (
+            <View style={{width: 30, height: 30, marginLeft: 10}} />
+          )}
+          <View style={styles.viewWrapItemLeft}>
+            <Text style={styles.textItemLeft}>{item.message}</Text>
+          </View>
+        </View>
+      );
+    }
   };
 
   return (
@@ -137,9 +154,8 @@ const ChatScreen = ({route, navigation}) => {
                 style={styles.viewTextInput}
                 placeholder="Escribe tu mensaje..."
                 onChangeText={(text) => setMessage(text)}
-                onSubmitEditing={(text) => setMessage(text)}
                 value={message}
-                // multiline={true}
+                multiline={true}
                 editable={isEditable}
               />
 
@@ -195,7 +211,7 @@ const styles = StyleSheet.create({
   textItemRight: {
     borderRadius: 10,
     width: 170,
-    backgroundColor: 'white',
+    backgroundColor: globalStyles.LIGTH_BLUE_COLOR,
     color: 'black',
     paddingTop: 8,
     paddingBottom: 8,
@@ -211,9 +227,8 @@ const styles = StyleSheet.create({
   textItemLeft: {
     borderRadius: 10,
     width: 170,
-    backgroundColor: 'red',
-    // backgroundColor: '#203152',
-    color: 'white',
+    backgroundColor: globalStyles.GRAY_COLOR,
+    color: 'black',
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 10,
