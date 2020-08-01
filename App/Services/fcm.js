@@ -1,6 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
 import settings from './fcmSettings';
-import {Platform} from 'react-native';
 import {Alert} from 'react-native';
 
 const FcmService = () => {
@@ -47,7 +46,7 @@ const listenWhenInBackground = () => {
 };
 
 const onLogout = () => {
-  messaging().unregisterDeviceForRemoteMessages( () => {
+  messaging().unregisterDeviceForRemoteMessages(() => {
     console.log('unregisterDeviceForRemoteMessages!');
   });
 };
