@@ -1,57 +1,77 @@
-import React, { useState } from 'react';
-import {StyleSheet, Dimensions, View, Text, Image} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Dimensions,
+  View,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+} from 'react-native';
 import database from '@react-native-firebase/database';
-import { TextInput, FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import {
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
 
 const screenSizeWidth = Dimensions.get('screen').width;
 
-const ChatScreen = ({ route, navigation }) => {
-  const [ message, setMessage ] = useState('');
-  const [ isEditable, setIsEditable ] = useState('');
-  const { ticketId } = route.params;
+const ChatScreen = ({route, navigation}) => {
+  const [message, setMessage] = useState('');
+  const [isEditable, setIsEditable] = useState(true);
+  const [chats, setChats] = useState([]);
+  const {ticketId} = route.params;
   const dbRef = database().ref(`chatsCollections/${ticketId}`);
 
-  let chats = [];
-  const userId = '';
-  const currentMessage = '';
-  
+  useEffect(() => {
+    listenerFirebase();
+  }, []);
+
   const listenerFirebase = () => {
-    // const dbRef = database().ref(`chatsCollections${ticketId}`);
-    console.log('listenerFirebase');
-    dbRef.on('value', (dataSnapshot) => {
+    console.log('0 listenerFirebase');
+    const dbRef2 = database().ref(`chatsCollections/${ticketId}`);
+
+    dbRef2.on('value', (dataSnapshot) => {
+      console.log('1 listenerFirebase');
       let messages = [];
 
       dataSnapshot.forEach((child) => {
-        console.log("_ val() chats", child.val().message)
-        console.log("_ val() chats {}", child.val())
+      console.log('3 listenerFirebase');
+
+      console.log('_ key: ', child.key);
+        console.log('_ val() chats', child.val().message);
         messages.push({
+          id: child.key,
           customId: child.val().customId,
           dateMessage: child.val().dateMessage,
           typeMessage: child.val().typeMessage,
           message: child.val().message,
         });
       });
-      
-      // console.log('data', messages.reverse() );
-      chats = messages.reverse();
-    });
-  }
 
-  const saveMessage = (message, typeMessage="text") => {
-    isEditable = true;
+      setChats(messages.reverse());
+    });
+  };
+
+  const saveMessage = (message, typeMessage = 'text') => {
+    let msg = message;
+    setMessage('');
+    setIsEditable(false);
+
     console.log('saveMessage', message, typeMessage);
 
     dbRef
       .push({
-        customId: "2",
-        dateMessage: new Date() + 'asd',
+        customId: '2',
+        dateMessage: new Date(),
         typeMessage,
-        message,
+        message: msg,
       })
       .then((data) => {
-        setMessage('');
+        setIsEditable(true);
         updateVisualizations();
       })
       .catch((error) => {
@@ -60,90 +80,94 @@ const ChatScreen = ({ route, navigation }) => {
   };
 
   const updateVisualizations = () => {
-    dbRef = database()
-      .ref(`chatsCollections/${ticketId}/visualizations`)
-      .set({
-        client: 99,
-        admin: 99,
-      });
+    dbRef = database().ref(`chatsCollections/${ticketId}/visualizations`).set({
+      client: 99,
+      admin: 99,
+    });
   };
 
-  listenerFirebase();
-
-  const myRenderItem = ({ item, index }) => {
-    
-    if (item.customId === userId) {
-      return (
-        <View style={styles.viewWrapItemRight}>
-          <Text style={styles.textItemRight}>{item.content}</Text>
-        </View>
-      )
-    } else {
-      
-      return (
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          {(chats[index - 1] &&
-            chats[index - 1].customId === userId) ||
-            index === 0 ? (
-              <Image
-                style={styles.avatarItemLeft}
-                source={{ uri: item.avatar }}
-              />
-            ) : (
-              <View style={{ width: 30, height: 30, marginLeft: 10 }} />
-            )}
-          <View style={styles.viewWrapItemLeft}>
-            <Text style={styles.textItemLeft}>{item.content}</Text>
-          </View>
-        </View>
-      )
-    }
+  const myRenderItem = ({item, index}) => {
+    return(
+      <View>
+        <Text>{item.message}</Text>
+      </View> 
+    )
+    // if (item.customId === userId) {
+    //   return (
+    //     <View style={styles.viewWrapItemRight}>
+    //       <Text style={styles.textItemRight}>{item.message}</Text>
+    //     </View>
+    //   );
+    // } else {
+    //   return (
+    //     <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    //       {(chats[index - 1] && chats[index - 1].customId === userId) ||
+    //       index === 0 ? (
+    //         <Image style={styles.avatarItemLeft} source={{uri: item.avatar}} />
+    //       ) : (
+    //         <View style={{width: 30, height: 30, marginLeft: 10}} />
+    //       )}
+    //       <View style={styles.viewWrapItemLeft}>
+    //         <Text style={styles.textItemLeft}>{item.content}</Text>
+    //       </View>
+    //     </View>
+    //   );
+    // }
   };
 
-  return(
+  return (
     <>
       <SafeAreaView>
+        <KeyboardAvoidingView
+          behavior="padding"
+          style={styles.keyboardContainer}
+          keyboardVerticalOffset={8}>
           <View style={styles.viewContainer}>
             <FlatList
               inverted={true}
-              style={styles.viewContainer}
               data={chats}
-              renderItem={ myRenderItem}
-              keyExtractor={(item, index) => index.toString()}
-              contentContainerStyle={{ paddingTop: 10, paddingBottom: 10 }}
+              renderItem={myRenderItem}
+              keyExtractor={(item) => (item.id.toString() + Math.random()) }
+              contentContainerStyle={{paddingTop: 10, paddingBottom: 10}}
             />
 
             <View style={styles.viewWrapInput}>
               <TextInput
                 underlineColorAndroid="rgba(0,0,0,0)"
                 style={styles.viewTextInput}
-                placeholder="Type your message..."
-                onChangeText={text => setMessage(text)}
-                onSubmitEditing={text => setMessage(text)}
+                placeholder="Escribe tu mensaje..."
+                onChangeText={(text) => setMessage(text)}
+                onSubmitEditing={(text) => setMessage(text)}
                 value={message}
-                multiline={true}
+                // multiline={true}
                 editable={isEditable}
               />
 
-              <TouchableOpacity onPress={ () => saveMessage(message, 'text')}>
-                <Image source={require('../../assets/images/send_plane.png')} style={styles.icSend} />
+              <TouchableOpacity onPress={() => saveMessage(message, 'text')}>
+                <Image
+                  source={require('../../assets/images/send_plane.png')}
+                  style={styles.icSend}
+                />
               </TouchableOpacity>
             </View>
           </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </>
   );
-}
-// 
+};
 
 export default ChatScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
+  keyboardContainer: {
+    padding: 0,
+    width: '100%',
   },
   viewContainer: {
-    flex: 1
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'flex-start',
   },
   viewWrapInput: {
     flexDirection: 'row',
@@ -152,7 +176,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     paddingLeft: 20,
-    paddingRight: 10
+    paddingRight: 10,
   },
   viewTextInput: {
     flex: 1,
@@ -160,13 +184,13 @@ const styles = StyleSheet.create({
   icSend: {
     width: 35,
     height: 35,
-    marginLeft: 10
+    marginLeft: 10,
   },
   viewWrapItemRight: {
     alignSelf: 'flex-end',
     marginRight: 20,
     marginBottom: 6,
-    marginTop: 6
+    marginTop: 6,
   },
   textItemRight: {
     borderRadius: 10,
@@ -177,7 +201,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     paddingLeft: 10,
     paddingRight: 10,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   viewWrapItemLeft: {
     marginLeft: 10,
@@ -187,18 +211,19 @@ const styles = StyleSheet.create({
   textItemLeft: {
     borderRadius: 10,
     width: 170,
-    backgroundColor: '#203152',
+    backgroundColor: 'red',
+    // backgroundColor: '#203152',
     color: 'white',
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 10,
     paddingRight: 10,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   avatarItemLeft: {
     width: 30,
     height: 30,
     borderRadius: 15,
-    marginLeft: 10
-  }
+    marginLeft: 10,
+  },
 });
