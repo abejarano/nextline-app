@@ -38,7 +38,7 @@ export const CreateTicketsScreen = ({navigation}) => {
 					<View>
 						<ButtonStyled
 							onPress={() => {
-								navigation.push('Chat',{ ticketId: (Math.random() * (2100 - 1100) + 1100)});
+								navigation.push('Chat',{ ticketId: Math.trunc(Math.random() * (2100 - 1100) + 1100)});
 							}}
 							backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
 							color={globalStyles.GREEN_COLOR}

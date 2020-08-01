@@ -21,8 +21,7 @@ import {Header} from '../../Components/header';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const TicketsScreen = ({navigation}) => {
-
-	const tickets = [{id:123, name:'low speed'}, {id:234, name:'too much speed'}];
+	const tickets = [{id:123, name:'low speed'}, {id:234, name:'too much speed'},  {id:1, name:'testing the chat and ticket'}];
 
 	return (
 		<SafeAreaView>
