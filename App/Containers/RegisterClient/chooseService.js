@@ -5,12 +5,15 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  ScrollViewComponent,
 } from 'react-native';
 import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
 import globalStyles from '../../styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {servicioFetch, servicioSelect} from '../../actions/servicio';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Service = ({id, servicio, activo, index, navigation}) => {
   const dispatch = useDispatch();
@@ -51,14 +54,15 @@ export const ChooseService = ({navigation}) => {
         style={globalStyles.BACKGROUNDIMAGE}>
         <Header navigation={navigation} />
         <Title text={'Selecciona        un Servicio'} />
-        {services.map((service, index) => (
-          <Service
-            key={`serv-sign-${service.id}`}
-            navigation={navigation}
-            index={index}
-            {...service}
+        <SafeAreaView style={styles.scroll}>
+          <FlatList
+            data={services}
+            renderItem={({item, index}) => (
+              <Service {...item} index={index} navigation={navigation} />
+            )}
+            keyExtractor={(service) => `serv-sign-${service.id}`}
           />
-        ))}
+        </SafeAreaView>
       </ImageBackground>
     </View>
   );
@@ -99,5 +103,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+    marginLeft: '10%',
+  },
+  scroll: {
+    width: '90%',
+    flex: 1,
+    // paddingLeft: '10%',
   },
 });
