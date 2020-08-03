@@ -5,14 +5,13 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
-  ScrollViewComponent,
 } from 'react-native';
 import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
 import globalStyles from '../../styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {servicioFetch, servicioSelect} from '../../actions/servicio';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Service = ({id, servicio, activo, index, navigation}) => {
