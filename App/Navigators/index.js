@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
+import SplashScreen from 'react-native-splash-screen'
 
 import LoginNavigator from './LoginNavigator';
 import TabsNavigator from './TabsNavigator';
@@ -19,6 +20,10 @@ export const MainNavigator = () => {
     dispatch(connectFmc());
     dispatch(checkToken());
   }, [dispatch]);
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, [])
 
   return (
     <NavigationContainer>
