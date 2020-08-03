@@ -1,3 +1,5 @@
+import {actionGenerator} from './utils';
+
 export const LOGIN_SUCCESS = '@auth/login/SUCCESS';
 export const LOGIN_FAILED = '@auth/login/FAILED';
 export const LOGIN_SENDING_DATA = '@auth/login/SENDING_DATA';
@@ -15,69 +17,30 @@ export const SIGNOUT = '@auth/signout';
 export const SIGNOUT_SUCCESS = '@auth/signout/success';
 export const SIGNOUT_FAILED = '@auth/signout/failed';
 
-export const login = (payload) => ({
-  type: LOGIN_SENDING_DATA,
-  payload,
-});
+export const login = actionGenerator(LOGIN_SENDING_DATA);
 
-export const loginSuccess = (payload) => ({
-  type: LOGIN_SUCCESS,
-  payload,
-});
+export const loginSuccess = actionGenerator(LOGIN_SUCCESS);
 
-export const checkToken = () => ({
-  type: STORAGE_CHECK_TOKEN,
-});
+export const checkToken = actionGenerator(STORAGE_CHECK_TOKEN);
 
-export const loginFailed = (payload) => ({
-  type: LOGIN_FAILED,
-  payload,
-});
+export const loginFailed = actionGenerator(LOGIN_FAILED);
 
-export const signup = (payload) => ({
-  type: SIGNUP_SENDING_DATA,
-  payload,
-});
+export const signup = actionGenerator(SIGNUP_SENDING_DATA);
 
-export const tokenSaved = (payload) => ({
-  type: LOGIN_STORAGE_TOKEN_SUCCESS,
-  payload: payload,
-});
+export const tokenSaved = actionGenerator(LOGIN_STORAGE_TOKEN_SUCCESS);
 
-export const tokenReaded = (payload) => ({
-  type: STORAGE_TOKEN_READED_SUCCESS,
-  payload: payload,
-});
-export const tokenSaveFailed = (payload) => ({
-  type: LOGIN_STORAGE_TOKEN_FAILED,
-  payload,
-});
+export const tokenReaded = actionGenerator(STORAGE_TOKEN_READED_SUCCESS);
 
-export const setSignupPartialData = (payload) => ({
-  type: SIGNUP_SET_DATA,
-  payload,
-});
+export const tokenSaveFailed = actionGenerator(LOGIN_STORAGE_TOKEN_FAILED);
 
-export const signupSuccess = (payload) => ({
-  type: SIGNUP_SUCCESS,
-  payload,
-});
+export const setSignupPartialData = actionGenerator(SIGNUP_SET_DATA);
 
-export const signupFailed = (payload) => ({
-  type: SIGNUP_FAILED,
-  payload,
-});
+export const signupSuccess = actionGenerator(SIGNUP_SUCCESS);
 
-export const signout = () => ({
-  type: SIGNOUT,
-});
+export const signupFailed = actionGenerator(SIGNUP_FAILED);
 
-export const signoutSuccess = (payload) => ({
-  type: SIGNOUT_SUCCESS,
-  payload,
-});
+export const signout = actionGenerator(SIGNOUT);
 
-export const signoutFailed = (payload) => ({
-  type: SIGNOUT_FAILED,
-  payload,
-});
+export const signoutSuccess = actionGenerator(SIGNOUT_SUCCESS);
+
+export const signoutFailed = actionGenerator(SIGNOUT_FAILED);

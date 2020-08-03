@@ -11,6 +11,7 @@ import {
 } from '../actions/auth';
 import {PLAN_SELECTED} from '../actions/plan';
 import {SERVICIO_STATUS_FETCH_SUCCESS} from '../actions/servicio';
+import {LOAD_PROFILE_SUCCESS} from '../actions/profile';
 
 const authState = {
   user: {
@@ -79,6 +80,13 @@ export const authReducer = (state = authState, {type, payload}) => {
         ...state,
         user: {
           ...state.user,
+        },
+      };
+    case LOAD_PROFILE_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...payload,
         },
       };
     case STORAGE_TOKEN_READED_SUCCESS:

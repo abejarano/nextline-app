@@ -17,6 +17,7 @@ import {
   servicioSelect,
 } from '../actions/servicio';
 import {planSelect} from '../actions/plan';
+import {loadProfileSuccess} from '../actions/profile';
 
 const fetchServicioStatusEpic = (action$, state$) =>
   action$.pipe(
@@ -49,6 +50,7 @@ const fetchContratoStatusEpic = (action$, state$) =>
         mergeMap((response) => {
           return of(
             contratoStatusFetchSucces(response.data),
+            loadProfileSuccess(response.data.cliente),
             planSelect(response.data.contratos[0].plan),
             servicioSelect(response.data.contratos[0].plan.tipo_servicio),
           );
