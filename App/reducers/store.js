@@ -13,14 +13,14 @@ export const configStore = () => {
   process.env.api = 'https://nextline.jaspesoft.com/api/v1';
   const epicMiddleware = createEpicMiddleware();
   const middlewares = [epicMiddleware];
-  console.log(IS_RUNNING_IN_CHROME, IS_PRODUCTION);
   if (IS_RUNNING_IN_CHROME && !IS_PRODUCTION) {
     middlewares.push(logger);
   }
-  const store = createStore(
-    rootReducer,
-    compose(applyMiddleware(...middlewares), Reactotron.createEnhancer()),
-  );
+  const enhancer = IS_PRODUCTION
+    ? compose(applyMiddleware(...middlewares))
+    : compose(applyMiddleware(...middlewares), Reactotron.createEnhancer());
+
+  const store = createStore(rootReducer, enhancer);
   epicMiddleware.run(rootEpic);
   return store;
 };
