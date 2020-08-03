@@ -20,6 +20,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* nextlineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nextlineTests.m */; };
 		4523572F24CCA01A004DA57C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4523572E24CCA01A004DA57C /* GoogleService-Info.plist */; };
 		45282A8224CFAA9400BCE420 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45282A8124CFAA9400BCE420 /* File.swift */; };
+		454595BC24D8CFB100542967 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 454595BB24D8CFB000542967 /* Launch Screen.storyboard */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A939C18819AEC33FD6062D45 /* libPods-nextline.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E766D1446013670639B1FBD /* libPods-nextline.a */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		45282A8024CFAA9400BCE420 /* nextline-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "nextline-Bridging-Header.h"; sourceTree = "<group>"; };
 		45282A8124CFAA9400BCE420 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		4532B2AD24D3856C008C4B6E /* nextline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = nextline.entitlements; path = nextline/nextline.entitlements; sourceTree = "<group>"; };
+		454595BB24D8CFB000542967 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4ADF89EF79979BE4AF05905D /* Pods-nextline-nextlineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nextline-nextlineTests.release.xcconfig"; path = "Target Support Files/Pods-nextline-nextlineTests/Pods-nextline-nextlineTests.release.xcconfig"; sourceTree = "<group>"; };
 		575591996C183DE02424A807 /* Pods-nextline-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nextline-tvOS.release.xcconfig"; path = "Target Support Files/Pods-nextline-tvOS/Pods-nextline-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		71D90DE097B0326F87BEBA4F /* libPods-nextline-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nextline-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +185,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				454595BB24D8CFB000542967 /* Launch Screen.storyboard */,
 				4523572E24CCA01A004DA57C /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* nextline */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -353,6 +356,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				454595BC24D8CFB100542967 /* Launch Screen.storyboard in Resources */,
 				4523572F24CCA01A004DA57C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
