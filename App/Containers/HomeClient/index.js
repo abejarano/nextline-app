@@ -8,8 +8,9 @@ import SolidLogin from '../../assets/svg/SolidLogo';
 import {SpeedGroup} from '../../Components/speedGroup';
 import {Avatar} from '../../Components/avatar';
 import {Header} from '../../Components/header';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const HomeClientScreen = () => {
+const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const status = useSelector(
     (state) => state.servicio.status.data.solicitud_servicio,
@@ -72,7 +73,15 @@ const HomeClientScreen = () => {
         <View style={styles.statusContainer}>
           <Text style={styles.statusText}>{status && status.status}</Text>
           <View style={styles.redCircle} />
+
         </View>
+        <>
+          <TouchableOpacity onPress={() => {
+              navigation.push('TicketsClient');
+            }}>
+            <Text style={styles.statusLabel}>Tickets</Text>
+          </TouchableOpacity>
+        </>
       </ImageBackground>
     </View>
   );
