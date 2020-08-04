@@ -3,6 +3,7 @@ import {
   LOAD_PROFILE_SUCCESS,
   LOAD_PROFILE_FAILED,
 } from '../actions/profile';
+import {RESET_STORE} from '../actions/utils';
 
 const profileState = {
   data: null,
@@ -28,7 +29,8 @@ export const profileReducer = (state = profileState, {type, payload}) => {
         fetching: false,
         error: payload.error,
       };
-
+    case RESET_STORE:
+      return profileState;
     default:
       return state;
   }

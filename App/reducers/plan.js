@@ -4,6 +4,7 @@ import {
   PLAN_FETCHING_DATA,
   PLAN_FETCH_FAILED,
 } from '../actions/plan';
+import {RESET_STORE} from '../actions/utils';
 
 const planState = {
   data: [],
@@ -46,6 +47,8 @@ export const planReducer = (state = planState, {type, payload}) => {
         ...state,
         selected: payload,
       };
+    case RESET_STORE:
+      return planState;
     default:
       return state;
   }

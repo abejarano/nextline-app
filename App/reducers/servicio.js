@@ -7,6 +7,7 @@ import {
   SERVICIO_STATUS_FETCH_FAILED,
   SERVICIO_SELECTED,
 } from '../actions/servicio';
+import {RESET_STORE} from '../actions/utils';
 
 const servicioState = {
   data: [],
@@ -79,6 +80,9 @@ export const servicioReducer = (state = servicioState, {type, payload}) => {
           ...payload,
         },
       };
+
+    case RESET_STORE:
+      return servicioState;
     default:
       return state;
   }

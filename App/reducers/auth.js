@@ -12,6 +12,7 @@ import {
 import {PLAN_SELECTED} from '../actions/plan';
 import {SERVICIO_STATUS_FETCH_SUCCESS} from '../actions/servicio';
 import {LOAD_PROFILE_SUCCESS} from '../actions/profile';
+import {RESET_STORE} from '../actions/utils';
 
 const authState = {
   user: {
@@ -111,6 +112,8 @@ export const authReducer = (state = authState, {type, payload}) => {
           ...payload.solicitud_servicio,
         },
       };
+    case RESET_STORE:
+      return authState;
     default:
       return {...state};
   }
