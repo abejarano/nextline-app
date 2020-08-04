@@ -20,7 +20,7 @@ const PlanItem = ({item: plan, position, navigation}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        dispatch(planSelect({plan, position}));
+        dispatch(planSelect(plan));
         navigation.push('Register');
       }}
       style={styles.planItem}>

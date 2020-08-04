@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, ImageBackground} from 'react-native';
 
 import {Title} from '../../Components/title';
@@ -6,10 +6,20 @@ import {Header} from '../../Components/header';
 import globalStyles from '../../styles';
 import {Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {GeolocationModal} from '../../Components/geolocationModal';
 
 export const ActualLocation = ({navigation}) => {
+  const [hasLocationPermission, setHasLocationPermission] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   return (
     <View style={styles.view}>
+      <GeolocationModal
+        hasLocationPermission={hasLocationPermission}
+        setHasLocationPermission={setHasLocationPermission}
+        setShowModal={setShowModal}
+        showModal={showModal}
+        navigation={navigation}
+      />
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
@@ -23,7 +33,7 @@ export const ActualLocation = ({navigation}) => {
             <TouchableOpacity
               style={styles.option}
               onPress={() => {
-                navigation.push('LocationDetails');
+                setShowModal(true);
               }}>
               <Text style={styles.optionText}>Si</Text>
             </TouchableOpacity>

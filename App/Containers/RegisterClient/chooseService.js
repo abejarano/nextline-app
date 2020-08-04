@@ -22,7 +22,7 @@ const Service = ({id, servicio, activo, index, navigation}) => {
       <Text style={styles.serviceText}>{servicio}</Text>
       <TouchableOpacity
         onPress={() => {
-          dispatch(servicioSelect(id));
+          dispatch(servicioSelect({id, servicio, activo, index}));
           navigation.push('PlanSelect');
         }}
         style={{

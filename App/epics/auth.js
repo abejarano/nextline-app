@@ -90,20 +90,14 @@ const signupEpic = (action$, state$) =>
       from(
         axios.post(`${process.env.api}/admon/service-request`, {
           ...state$.value.auth.user,
-          plan: action.payload.plan.id,
-          latitud: action.payload.position.altitude,
-          longitud: action.payload.position.logitude,
+          plan: state$.value.plans.selected.id,
+          direccion: action.payload,
         }),
       ).pipe(
         map((response) => signupSuccess(response.data)),
         catchError((error) => {
           let errorMsg = '';
-          console.log({
-            ...state$.value.auth.user,
-            plan: action.payload.plan.id,
-            latitud: action.payload.position.altitude,
-            longitud: action.payload.position.logitude,
-          });
+
           console.log(error.response.data);
           if (
             error.response.data.email &&

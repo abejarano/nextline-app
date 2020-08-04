@@ -14,7 +14,6 @@ import {signup} from '../../actions/auth';
 import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {useDispatch} from 'react-redux';
 import {InputStyled} from '../../Components/input';
-
 export const LocationDetails = ({navigation}) => {
   const dispatch = useDispatch();
   const [direction, setDirection] = useState('');
@@ -55,7 +54,7 @@ export const LocationDetails = ({navigation}) => {
         <View style={styles.buttonContainer}>
           <ButtonStyled
             onPress={() => {
-              dispatch(signup());
+              dispatch(signup(direction + ' ' + refpoint));
             }}
             backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
             color={globalStyles.WHITE_COLOR}
