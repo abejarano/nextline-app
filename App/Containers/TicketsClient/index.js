@@ -1,11 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, StatusBar, StyleSheet, ImageBackground} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {servicioStatusFetch, contratoStatusFetch} from '../../actions/servicio';
-import LinearGradient from 'react-native-linear-gradient';
 import globalStyles from '../../styles';
-import SolidLogin from '../../assets/svg/SolidLogo';
-import {SpeedGroup} from '../../Components/speedGroup';
 import {Avatar} from '../../Components/avatar';
 import {Header} from '../../Components/header';
 import { TouchableOpacity, ScrollView, FlatList } from 'react-native-gesture-handler';
