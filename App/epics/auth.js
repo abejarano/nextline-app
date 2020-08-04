@@ -1,6 +1,6 @@
 import {ofType} from 'redux-observable';
 import {from, of} from 'rxjs';
-import {mergeMap, map, catchError} from 'rxjs/operators';
+import {mergeMap, map, catchError, switchMap} from 'rxjs/operators';
 import {
   LOGIN_SENDING_DATA,
   loginSuccess,
@@ -94,11 +94,11 @@ const signupEpic = (action$, state$) =>
           direccion: action.payload,
         }),
       ).pipe(
-        map((response) => signupSuccess(response.data)),
+        map((response) => signupSuccess(response)),
         catchError((error) => {
           let errorMsg = '';
 
-          console.log(error.response.data);
+          console.log(error.response);
           if (
             error.response.data.email &&
             !Array.isArray(error.response.data.email)
