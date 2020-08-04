@@ -9,6 +9,7 @@ export default {
   BACKGROUND_BOTOM: '#0071bf',
   GRAY_COLOR: '#edf6fb',
   GRAY_TEXT_COLOR: '#464545',
+  STATUS_BAR_COLOR: '#0070bd',
   LIST_COLORS: ['MUSTARD_COLOR', 'RED_COLOR', 'GREEN_COLOR'],
   BACKGROUNDIMAGE: {
     flex: 1,
