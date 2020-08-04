@@ -53,8 +53,8 @@ const onPress = async (setImage) => {
 
         // You can also display the image using data:
         const source = response;
+        // console.log()
         setImage(source);
-        console.log(source);
       }
     });
   }

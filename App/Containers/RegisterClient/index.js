@@ -5,6 +5,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   ImageBackground,
+  Text,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setSignupPartialData} from '../../actions/auth';
@@ -14,6 +15,7 @@ import {ButtonStyled} from '../../Components/button';
 import {Header} from '../../Components/header';
 import {Title} from '../../Components/title';
 import globalStyles from '../../styles';
+import {Avatar} from '../../Components/avatar';
 
 export function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ export function RegisterScreen({navigation}) {
   const [nombrerzb, setNombreRzb] = useState('');
   const [phone, setPhone] = useState('');
   const [repassword, setRepassword] = useState('');
-
+  const [image, setImage] = useState('');
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -31,6 +33,10 @@ export function RegisterScreen({navigation}) {
         style={globalStyles.BACKGROUNDIMAGE}>
         <Header navigation={navigation} />
         <Title text={'Formulario Personal'} />
+        <Avatar image={image} setImage={setImage} />
+        <Text style={styles.texDivision}>
+          Toque el icono de usuario para agregar su foto
+        </Text>
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}>
@@ -83,32 +89,33 @@ export function RegisterScreen({navigation}) {
               style={styles.button}
             />
           </KeyboardAvoidingView>
-
-          <View style={styles.buttonContainer}>
-            <ButtonStyled
-              onPress={() => {
-                if (repassword === password) {
-                  dispatch(
-                    setSignupPartialData({
-                      nombre_razsoc: nombrerzb,
-                      cedula_rif: cedularif,
-                      correo: email,
-                      celular: phone,
-                      clave: password,
-                    }),
-                  );
-                  navigation.push('ActualLocation');
-                }
-              }}
-              backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-              color={globalStyles.WHITE_COLOR}
-              text={'Continuar'}
-              styleText={styles.continueButton}
-              Icon={ArrowPointerSvg}
-              iconColor={globalStyles.WHITE_COLOR}
-            />
-          </View>
         </ScrollView>
+
+        <View style={styles.buttonContainer}>
+          <ButtonStyled
+            onPress={() => {
+              if (repassword === password) {
+                dispatch(
+                  setSignupPartialData({
+                    nombre_razsoc: nombrerzb,
+                    cedula_rif: cedularif,
+                    correo: email,
+                    celular: phone,
+                    clave: password,
+                    avatar: image.data,
+                  }),
+                );
+                navigation.push('ActualLocation');
+              }
+            }}
+            backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+            color={globalStyles.WHITE_COLOR}
+            text={'Continuar'}
+            styleText={styles.continueButton}
+            Icon={ArrowPointerSvg}
+            iconColor={globalStyles.WHITE_COLOR}
+          />
+        </View>
       </ImageBackground>
     </View>
   );
@@ -140,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttonContainer: {
-    marginTop: 50,
+    margin: 25,
   },
   title: {
     height: '10%',
@@ -157,5 +164,6 @@ const styles = StyleSheet.create({
   },
   texDivision: {
     color: globalStyles.WHITE_COLOR,
+    margin: 10,
   },
 });
