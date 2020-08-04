@@ -17,6 +17,8 @@ export const SIGNOUT = '@auth/signout';
 export const SIGNOUT_SUCCESS = '@auth/signout/success';
 export const SIGNOUT_FAILED = '@auth/signout/failed';
 
+export const RESET_AUTH_ERROR = '@auth/auth/reset-error';
+
 export const login = actionGenerator(LOGIN_SENDING_DATA);
 
 export const loginSuccess = actionGenerator(LOGIN_SUCCESS);
@@ -44,3 +46,5 @@ export const signout = actionGenerator(SIGNOUT);
 export const signoutSuccess = actionGenerator(SIGNOUT_SUCCESS);
 
 export const signoutFailed = actionGenerator(SIGNOUT_FAILED);
+
+export const resetErrorAuth = actionGenerator(RESET_AUTH_ERROR);

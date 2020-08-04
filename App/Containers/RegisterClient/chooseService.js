@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
@@ -13,18 +14,20 @@ import {useDispatch, useSelector} from 'react-redux';
 import {servicioFetch, servicioSelect} from '../../actions/servicio';
 import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {StyledStatusBar} from '../../Components/statusBar';
 
 const Service = ({id, servicio, activo, index, navigation}) => {
   const dispatch = useDispatch();
 
   return (
-    <View style={styles.serviceView}>
+    <TouchableOpacity
+      style={styles.serviceView}
+      onPress={() => {
+        dispatch(servicioSelect({id, servicio, activo, index}));
+        navigation.push('PlanSelect');
+      }}>
       <Text style={styles.serviceText}>{servicio}</Text>
-      <TouchableOpacity
-        onPress={() => {
-          dispatch(servicioSelect({id, servicio, activo, index}));
-          navigation.push('PlanSelect');
-        }}
+      <View
         style={{
           ...styles.serviceButton,
           backgroundColor:
@@ -33,14 +36,15 @@ const Service = ({id, servicio, activo, index, navigation}) => {
             ],
         }}>
         <Text style={styles.plus}>+</Text>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 export const ChooseService = ({navigation}) => {
   const dispatch = useDispatch();
   const services = useSelector((state) => state.servicio.data);
+  const loading = useSelector((state) => state.servicio.fetching);
 
   useEffect(() => {
     dispatch(servicioFetch());
@@ -51,6 +55,7 @@ export const ChooseService = ({navigation}) => {
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
+        <StyledStatusBar />
         <Header
           navigation={navigation}
           onPress={() => {
@@ -59,15 +64,19 @@ export const ChooseService = ({navigation}) => {
           }}
         />
         <Title text={'Selecciona        un Servicio'} />
-        <SafeAreaView style={styles.scroll}>
-          <FlatList
-            data={services}
-            renderItem={({item, index}) => (
-              <Service {...item} index={index} navigation={navigation} />
-            )}
-            keyExtractor={(service) => `serv-sign-${service.id}`}
-          />
-        </SafeAreaView>
+        {loading ? (
+          <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
+        ) : (
+          <SafeAreaView style={styles.scroll}>
+            <FlatList
+              data={services}
+              renderItem={({item, index}) => (
+                <Service {...item} index={index} navigation={navigation} />
+              )}
+              keyExtractor={(service) => `serv-sign-${service.id}`}
+            />
+          </SafeAreaView>
+        )}
       </ImageBackground>
     </View>
   );

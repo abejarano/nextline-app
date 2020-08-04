@@ -11,7 +11,7 @@ import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
 import globalStyles from '../../styles';
 import {ButtonStyled} from '../../Components/button';
-import {signup, setSignupPartialData} from '../../actions/auth';
+import {signup, setSignupPartialData, resetErrorAuth} from '../../actions/auth';
 import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {useDispatch, useSelector} from 'react-redux';
 import {InputStyled} from '../../Components/input';
@@ -22,6 +22,21 @@ export const LocationDetails = ({navigation}) => {
   const [refpoint, setRefpoint] = useState('');
   const loading = useSelector((state) => state.auth.sending);
   const message = useSelector((state) => state.auth.message);
+  const error = useSelector((state) => state.auth.error);
+
+  useEffect(() => {
+    if (error !== '') {
+      Alert.alert('Error al autenticarse :(', error, [
+        {
+          text: 'Continuar',
+          onPress: () => {
+            dispatch(resetErrorAuth());
+          },
+        },
+      ]);
+    }
+  }, [error, dispatch]);
+
   useEffect(() => {
     if (message !== '') {
       Alert.alert('Registro exitoso!', 'Por favor has loguin para continuar', [

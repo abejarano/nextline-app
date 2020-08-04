@@ -8,7 +8,7 @@ import {
   ImageBackground,
   SafeAreaView,
 } from 'react-native';
-import {login} from '../../actions/auth';
+import {login, resetErrorAuth} from '../../actions/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {ButtonStyled} from '../../Components/button';
 import {InputStyled} from '../../Components/input';
@@ -28,9 +28,16 @@ const LoginClient = ({navigation}) => {
 
   useEffect(() => {
     if (error !== '') {
-      Alert.alert('Error al autenticarse :(', error);
+      Alert.alert('Error al autenticarse :(', error, [
+        {
+          text: 'Continuar',
+          onPress: () => {
+            dispatch(resetErrorAuth());
+          },
+        },
+      ]);
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   return (
     <>

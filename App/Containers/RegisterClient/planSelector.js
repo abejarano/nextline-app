@@ -6,6 +6,7 @@ import {
   Text,
   FlatList,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {planFetch, planSelect} from '../../actions/plan';
@@ -41,6 +42,7 @@ const PlanItem = ({item: plan, position, navigation}) => {
 export function PlanSelectScreen({navigation}) {
   const dispatch = useDispatch();
   const plans = useSelector((state) => state.plans.data);
+  const loading = useSelector((state) => state.plans.fetching);
 
   useEffect(() => {
     dispatch(planFetch());
@@ -58,16 +60,20 @@ export function PlanSelectScreen({navigation}) {
           }}
         />
         <Title text={'Planes de Internet'} />
-        <View style={styles.scroll}>
-          <FlatList
-            horizontal
-            data={plans}
-            renderItem={(props) => (
-              <PlanItem {...props} navigation={navigation} />
-            )}
-            keyExtractor={(plan) => `plan-item-${plan.id}`}
-          />
-        </View>
+        {loading ? (
+          <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
+        ) : (
+          <View style={styles.scroll}>
+            <FlatList
+              horizontal
+              data={plans}
+              renderItem={(props) => (
+                <PlanItem {...props} navigation={navigation} />
+              )}
+              keyExtractor={(plan) => `plan-item-${plan.id}`}
+            />
+          </View>
+        )}
         <Text numberOfLines={2} style={styles.lowText}>
           Seleccione el plan de tu preferencia
         </Text>

@@ -5,9 +5,10 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
   SIGNUP_SET_DATA,
-  LOGIN_STORAGE_TOKEN_SUCCESS,
   SIGNOUT_SUCCESS,
   STORAGE_TOKEN_READED_SUCCESS,
+  SIGNUP_SENDING_DATA,
+  RESET_AUTH_ERROR,
 } from '../actions/auth';
 import {PLAN_SELECTED} from '../actions/plan';
 import {SERVICIO_STATUS_FETCH_SUCCESS} from '../actions/servicio';
@@ -42,6 +43,11 @@ export const authReducer = (state = authState, {type, payload}) => {
         loggedIn: true,
         sending: false,
         isClient: payload.es_cliente,
+      };
+    case SIGNUP_SENDING_DATA:
+      return {
+        ...state,
+        sending: true,
       };
     case LOGIN_SENDING_DATA:
       return {
@@ -111,6 +117,11 @@ export const authReducer = (state = authState, {type, payload}) => {
           ...state.user,
           ...payload.solicitud_servicio,
         },
+      };
+    case RESET_AUTH_ERROR:
+      return {
+        ...state,
+        error: '',
       };
     case RESET_STORE:
       return authState;
