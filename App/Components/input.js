@@ -10,11 +10,13 @@ export const InputStyled = ({
   style,
   Icon,
   iconColor,
+  isMultiline
 }) => {
   return (
     <View style={{...styles.input, ...style}}>
       {Icon && <Icon style={styles.icon} color={iconColor} />}
       <TextInput
+        multiline={isMultiline}
         clearTextOnFocus={true}
         placeholder={placeholder}
         onChangeText={(text) => {
