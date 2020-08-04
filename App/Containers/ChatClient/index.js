@@ -1,115 +1,244 @@
-import React, {Component} from 'react';
-import {StyleSheet, Dimensions, View, Text, Button} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Dimensions,
+  View,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+} from 'react-native';
 import database from '@react-native-firebase/database';
+import {
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
+import globalStyles from '../../styles';
 
 const screenSizeWidth = Dimensions.get('screen').width;
 
-class ChatClient extends Component {
-  constructor() {
-    super();
-    this.state = {
-      chats: [],
-      data: null,
-      chatId: 989,
-    };
-  }
+const ChatScreen = ({route, navigation}) => {
+  const [message, setMessage] = useState('');
+  const [isEditable, setIsEditable] = useState(true);
+  const [chats, setChats] = useState([]);
+  const [user, setUser] = useState({id:2});
+  const [userMode, setUserMode] = useState('');
+  const {ticketId} = route.params;
+  const dbRef = database().ref(`chatsCollections/${ticketId}`);
 
-  componentDidMount() {
-    let dbRef = database().ref(`chatsCollections${this.state.chatId}`);
-    this.listenerFirebase(dbRef);
-  }
+  useEffect(() => {
+    listenerFirebase();
+  }, []);
 
-  listenerFirebase(dbRef) {
-    console.log('listenerFirebase');
-    dbRef.on('value', (dataSnapshot) => {
-      var feedbacks = [];
+  const listenerFirebase = () => {
+    console.log('0 listenerFirebase');
+    const dbRef2 = database().ref(`chatsCollections/${ticketId}`);
+
+    dbRef2.on('value', (dataSnapshot) => {
+      console.log('1 listenerFirebase');
+      let messages = [];
 
       dataSnapshot.forEach((child) => {
-        feedbacks.push({
-          // mensagem: child.val().feedback.mensagem,
-          key: child.key,
+      console.log('3 listenerFirebase');
+
+      console.log('_ key: ', child.key);
+        console.log('_ val() chats', child.val().message);
+        messages.push({
+          id: child.key,
+          customId: child.val().customId,
+          dateMessage: child.val().dateMessage,
+          typeMessage: child.val().typeMessage,
+          message: child.val().message,
         });
       });
 
-      this.setState({
-        data: feedbacks.reverse(),
-      });
+      setChats(messages.reverse());
     });
-  }
+  };
 
-  insertChar = () => {
-    console.log('insertChar');
-    let feedback = {
-      customId: new Date() + 'asd',
-      mensagem: this.state.mensagem_feedback,
-    };
-    const dbRef = database().ref(`chatsCollections/${this.state.chatId}`);
+  const saveMessage = (message, typeMessage = 'text') => {
+    let msg = message;
+    setMessage('');
+    setIsEditable(false);
+
+    console.log('saveMessage', message, typeMessage);
 
     dbRef
       .push({
-        feedback,
-        otherData: 'ok baby',
+        customId: '2',
+        dateMessage: new Date(),
+        typeMessage,
+        message: msg,
       })
       .then((data) => {
-        this.setState({mensagem_feedback: 'hola oki'});
-        console.log('data ', data);
-				this.updateVisualizations();
-				this.savePushToken();
+        setIsEditable(true);
+        updateVisualizations();
       })
       .catch((error) => {
         console.log('error ', error);
       });
   };
 
-  updateVisualizations = () => {
-    console.warn('updateVisualizations');
-    dbRef = database()
-      .ref(`chatsCollections/${this.state.chatId}/visualizations`)
-      .set({
-        client: 0,
-        admin: 0,
-      });
+  const updateVisualizations = () => {
+    dbRef = database().ref(`chatsCollections/${ticketId}/visualizations`).set({
+      client: 99,
+      admin: 99,
+    });
   };
 
-  testFirebase() {
-    console.warn('test fire');
-    database()
-      .ref('/users/123')
-      .set({
-        name: 'Ada Lovelace',
-        age: 31,
-      })
-      .then(() => console.log('Data set.'))
-      .catch((e) => console.warn(e));
-	}
-	
-	savePushToken = () => {
-		dbRef = database()
-      .ref(`pushTokens/${this.state.chatId}/visualizations`)
-      .set({
-        client: 0,
-        admin: 0,
-      });
-	}
+  const myRenderItem = ({item, index}) => {
+    // return(
+    //   <View>
+    //     <Text>{user.id}</Text>
+    //     <Text>{item.message}</Text>
+    //   </View> 
+    // )
+    // if (item.customId == user.id) {
+    //   return (
+    //     <View style={{}}>
+    //       <Text style={styles.textItemRight}>@ {item.message} {item.customId} {user.id}</Text>
+    //     </View>
+    //   );
+    // } else {
+    //   return (
+    //     <View style={{}}>
+    //       <Text style={styles.textItemRight}>! {item.message} {item.customId} {user.id}</Text>
+    //     </View>
+    //   );
+    // }
+    if (item.customId == user.id) {
+      return (
+        <View style={styles.viewWrapItemRight}>
+          <Text style={styles.textItemRight}>@ {item.message}</Text>
+        </View>
+      );
+    } else {
+      return (
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          {(chats[index - 1] && chats[index - 1].customId === user.id) ||
+          index === 0 ? (
+            <Image style={styles.avatarItemLeft} source={{uri: item.avatar}} />
+          ) : (
+            <View style={{width: 30, height: 30, marginLeft: 10}} />
+          )}
+          <View style={styles.viewWrapItemLeft}>
+            <Text style={styles.textItemLeft}>{item.message}</Text>
+          </View>
+        </View>
+      );
+    }
+  };
 
-  render() {
-    return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Chats !</Text>
-        <Button
-          title="Go Home"
-          onPress={() => this.props.navigation.push('HomeUser')}
-        />
-        <Button title="test fire" onPress={() => this.insertChar()} />
-      </View>
-    );
-  }
-}
+  return (
+    <>
+      <SafeAreaView>
+        <KeyboardAvoidingView
+          behavior="padding"
+          style={styles.keyboardContainer}
+          keyboardVerticalOffset={8}>
+          <View style={styles.viewContainer}>
+            <FlatList
+              inverted={true}
+              data={chats}
+              renderItem={myRenderItem}
+              keyExtractor={(item) => (item.id.toString() + Math.random()) }
+              contentContainerStyle={{paddingTop: 10, paddingBottom: 10}}
+            />
 
-export default ChatClient;
+            <View style={styles.viewWrapInput}>
+              <TextInput
+                underlineColorAndroid="rgba(0,0,0,0)"
+                style={styles.viewTextInput}
+                placeholder="Escribe tu mensaje..."
+                onChangeText={(text) => setMessage(text)}
+                value={message}
+                multiline={true}
+                editable={isEditable}
+              />
+
+              <TouchableOpacity onPress={() => saveMessage(message, 'text')}>
+                <Image
+                  source={require('../../assets/images/send_plane.png')}
+                  style={styles.icSend}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </>
+  );
+};
+
+export default ChatScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
+  keyboardContainer: {
+    padding: 0,
+    width: '100%',
+  },
+  viewContainer: {
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'flex-start',
+  },
+  viewWrapInput: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 50,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    paddingLeft: 20,
+    paddingRight: 10,
+  },
+  viewTextInput: {
+    flex: 1,
+  },
+  icSend: {
+    width: 35,
+    height: 35,
+    marginLeft: 10,
+  },
+  viewWrapItemRight: {
+    alignSelf: 'flex-end',
+    marginRight: 20,
+    marginBottom: 6,
+    marginTop: 6,
+  },
+  textItemRight: {
+    borderRadius: 10,
+    width: 170,
+    backgroundColor: globalStyles.LIGTH_BLUE_COLOR,
+    color: 'black',
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 10,
+    paddingRight: 10,
+    overflow: 'hidden',
+  },
+  viewWrapItemLeft: {
+    marginLeft: 10,
+    marginBottom: 6,
+    marginTop: 6,
+  },
+  textItemLeft: {
+    borderRadius: 10,
+    width: 170,
+    backgroundColor: globalStyles.GRAY_COLOR,
+    color: 'black',
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 10,
+    paddingRight: 10,
+    overflow: 'hidden',
+  },
+  avatarItemLeft: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginLeft: 10,
   },
 });

@@ -4,12 +4,22 @@ import {
   PLAN_FETCHING_DATA,
   PLAN_FETCH_FAILED,
 } from '../actions/plan';
+import {RESET_STORE} from '../actions/utils';
 
 const planState = {
   data: [],
   fetching: false,
   error: '',
-  selected: null,
+  selected: {
+    activo: null,
+    id: null,
+    plan: '',
+    precio: '',
+    precio_bs: '',
+    precio_currency: '',
+    velocidad_baja: null,
+    velocidad_subida: null,
+  },
 };
 
 export const planReducer = (state = planState, {type, payload}) => {
@@ -37,6 +47,8 @@ export const planReducer = (state = planState, {type, payload}) => {
         ...state,
         selected: payload,
       };
+    case RESET_STORE:
+      return planState;
     default:
       return state;
   }

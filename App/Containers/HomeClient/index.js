@@ -1,32 +1,219 @@
-import React from 'react';
-import { ScrollView,  View,  Text,  StatusBar, Button,} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, StatusBar, StyleSheet, ImageBackground} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {servicioStatusFetch, contratoStatusFetch} from '../../actions/servicio';
+import LinearGradient from 'react-native-linear-gradient';
+import globalStyles from '../../styles';
+import SolidLogin from '../../assets/svg/SolidLogo';
+import {SpeedGroup} from '../../Components/speedGroup';
+import {Avatar} from '../../Components/avatar';
+import {Header} from '../../Components/header';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-function HomeClientScreen({ navigation }){
-	return(
-		<>
-			<StatusBar barStyle="dark-content" />
-			{/* <SafeAreaView> */}
-				<ScrollView
-					contentInsetAdjustmentBehavior="automatic">
-					<View >
-						<Text >Tabs nextline</Text>
-					</View>
-					<View>
-						<Button
-							title="Go to Profile"
-							onPress={() => navigation.navigate('Profile')}
-						/>
-					</View>
-					<View>
-						<Button
-							title="Go to Plans"
-							onPress={() => navigation.navigate('Plans')}
-						/>
-					</View>
-				</ScrollView>
-			{/* </SafeAreaView> */}
-		</>
-	)
-}
+const HomeClientScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const status = useSelector(
+    (state) => state.servicio.status.data.solicitud_servicio,
+  );
+  const user = useSelector((state) => state.auth.user);
+  const plan = useSelector((state) => state.plans.selected);
+  const service = useSelector((state) => state.servicio.selected);
+  const isClient = useSelector((state) => state.auth.isClient);
+  useEffect(() => {
+    if (isClient) {
+      dispatch(contratoStatusFetch());
+    } else {
+      dispatch(servicioStatusFetch());
+    }
+  }, [dispatch, isClient]);
+  return (
+    <View style={styles.view}>
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/home.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <Header backVisible={false} />
+        <View style={styles.userContainer}>
+          <Avatar />
+          <View style={styles.usernameContainer}>
+            <Text style={styles.usernameLabel}>Usuario</Text>
+            <Text style={styles.usernameText}>
+              {user && user.nombre_razsoc}
+            </Text>
+          </View>
+        </View>
+        <StatusBar barStyle="dark-content" />
+        <Text style={styles.serviceLabel}>tipo de servicio</Text>
+        <Text style={styles.serviceText}>{service.servicio}</Text>
+        <View style={styles.gradientContainer}>
+          <LinearGradient
+            colors={[
+              globalStyles.LIGTH_BLUE_COLOR,
+              globalStyles.PRIMARY_COLOR,
+              globalStyles.PRIMARY_COLOR_DARK,
+            ]}
+            angle={180}
+            style={styles.linearGradient}>
+            <View style={styles.whiteCircle}>
+              <SolidLogin
+                width={80}
+                height={80}
+                style={styles.logo}
+                color={globalStyles.GRAY_COLOR + '80'}
+              />
+              <Text style={styles.buttonText}>{plan.plan}</Text>
+              <Text style={styles.buttonLowerText}>PLAN</Text>
+            </View>
+          </LinearGradient>
+        </View>
+        <SpeedGroup
+          upSpeed={plan.velocidad_subida}
+          downSpeed={plan.velocidad_baja}
+        />
+        <Text style={styles.statusLabel}>Estatus de solicitud</Text>
+        <View style={styles.statusContainer}>
+          <Text style={styles.statusText}>{status && status.status}</Text>
+          <View style={styles.redCircle} />
+
+        </View>
+        <>
+          <TouchableOpacity onPress={() => {
+              navigation.push('TicketsClient');
+            }}>
+            <Text style={styles.statusLabel}>Tickets</Text>
+          </TouchableOpacity>
+        </>
+      </ImageBackground>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gradientContainer: {
+    width: 240,
+    height: 240,
+    marginBottom: 20,
+  },
+  linearGradient: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15,
+
+    borderRadius: 240,
+    shadowColor: globalStyles.PRIMARY_COLOR_DARK + '33',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+  },
+  buttonText: {
+    fontSize: 44,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: globalStyles.WHITE_COLOR,
+    backgroundColor: 'transparent',
+    textTransform: 'uppercase',
+  },
+  logo: {
+    marginTop: 10,
+    marginBottom: -30,
+  },
+  whiteCircle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+    overflow: 'hidden',
+    borderRadius: 240,
+    borderColor: globalStyles.WHITE_COLOR,
+    borderWidth: 15,
+  },
+  buttonLowerText: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: globalStyles.WHITE_COLOR,
+    backgroundColor: 'transparent',
+    textTransform: 'uppercase',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  serviceLabel: {
+    fontSize: 10,
+    opacity: 1,
+    color: globalStyles.LIGTH_BLUE_COLOR,
+    textTransform: 'uppercase',
+  },
+  serviceText: {
+    fontSize: 25,
+    color: globalStyles.WHITE_COLOR,
+    textTransform: 'uppercase',
+    marginBottom: 20,
+  },
+  statusLabel: {
+    fontSize: 10,
+    color: globalStyles.GRAY_TEXT_COLOR,
+    textTransform: 'uppercase',
+    marginTop: '10%',
+  },
+  statusText: {
+    color: globalStyles.PRIMARY_COLOR,
+    textTransform: 'uppercase',
+  },
+  statusContainer: {
+    display: 'flex',
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: globalStyles.GRAY_TEXT_COLOR + '15',
+    height: 36,
+    alignItems: 'center',
+    borderRadius: 18,
+  },
+  redCircle: {
+    width: 20,
+    height: 20,
+    borderRadius: 20,
+    backgroundColor: globalStyles.RED_COLOR,
+  },
+  userContainer: {
+    display: 'flex',
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginTop: -20,
+    marginBottom: 20,
+  },
+  usernameContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginLeft: 20,
+  },
+  usernameLabel: {
+    fontSize: 10,
+    opacity: 1,
+    color: globalStyles.LIGTH_BLUE_COLOR,
+    textTransform: 'uppercase',
+  },
+  usernameText: {
+    fontSize: 20,
+    color: globalStyles.WHITE_COLOR,
+    textTransform: 'capitalize',
+  },
+});
 
 export default HomeClientScreen;

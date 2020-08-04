@@ -15,7 +15,7 @@ const fetchPlansEpic = (action$) =>
     ofType(PLAN_FETCHING_DATA),
     mergeMap((action) =>
       ajax.getJSON(`${process.env.api}/config/planes/`).pipe(
-        map((response) => planFetchSucces(response)),
+        map(planFetchSucces),
         catchError((error) => of(planFetchFailed(error))),
       ),
     ),

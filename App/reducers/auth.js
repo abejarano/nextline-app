@@ -5,16 +5,33 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
   SIGNUP_SET_DATA,
+  SIGNOUT_SUCCESS,
+  STORAGE_TOKEN_READED_SUCCESS,
+  SIGNUP_SENDING_DATA,
+  RESET_AUTH_ERROR,
 } from '../actions/auth';
 import {PLAN_SELECTED} from '../actions/plan';
+import {SERVICIO_STATUS_FETCH_SUCCESS} from '../actions/servicio';
+import {LOAD_PROFILE_SUCCESS} from '../actions/profile';
+import {RESET_STORE} from '../actions/utils';
 
 const authState = {
-  user: {},
-  token: '',
+  user: {
+    avatar: '',
+    cedula_rif: '',
+    celular: '',
+    correo: '',
+    direccion: '',
+    latitud: '',
+    longitud: '',
+    nombre_razsoc: '',
+  },
+  token: null,
   sending: false,
   error: '',
   loggedIn: false,
   message: '',
+  isClient: false,
 };
 
 export const authReducer = (state = authState, {type, payload}) => {
@@ -22,9 +39,15 @@ export const authReducer = (state = authState, {type, payload}) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        user: payload.user,
         token: payload.token,
+        loggedIn: true,
         sending: false,
+        isClient: payload.es_cliente,
+      };
+    case SIGNUP_SENDING_DATA:
+      return {
+        ...state,
+        sending: true,
       };
     case LOGIN_SENDING_DATA:
       return {
@@ -64,10 +87,45 @@ export const authReducer = (state = authState, {type, payload}) => {
         ...state,
         user: {
           ...state.user,
-          location: payload.position,
         },
       };
+    case LOAD_PROFILE_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...payload,
+        },
+      };
+    case STORAGE_TOKEN_READED_SUCCESS:
+      return {
+        ...state,
+        token: payload[0][1],
+        loggedIn: payload[0][1] ? true : false,
+        isClient: payload[1][1] === 'true',
+      };
+    case SIGNOUT_SUCCESS:
+      console.log(state, 'test');
+      return {
+        ...state,
+        loggedIn: false,
+        token: null,
+      };
+    case SERVICIO_STATUS_FETCH_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...payload.solicitud_servicio,
+        },
+      };
+    case RESET_AUTH_ERROR:
+      return {
+        ...state,
+        error: '',
+      };
+    case RESET_STORE:
+      return authState;
     default:
-      return state;
+      return {...state};
   }
 };

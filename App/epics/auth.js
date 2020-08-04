@@ -1,25 +1,32 @@
 import {ofType} from 'redux-observable';
 import {from, of} from 'rxjs';
-import {mergeMap, map, catchError} from 'rxjs/operators';
-import {ajax} from 'rxjs/ajax';
+import {mergeMap, map, catchError, switchMap} from 'rxjs/operators';
 import {
   LOGIN_SENDING_DATA,
-  loginSucces,
+  loginSuccess,
   loginFailed,
-  SIGNUP_SENDING_DATA,
-  signupSucces,
+  signupSuccess,
   signupFailed,
+  LOGIN_SUCCESS,
+  tokenSaved,
+  tokenSaveFailed,
+  STORAGE_CHECK_TOKEN,
+  SIGNOUT,
+  signoutSuccess,
+  signoutFailed,
+  SIGNUP_SENDING_DATA,
+  tokenReaded,
 } from '../actions/auth';
 import {combineEpics} from 'redux-observable';
 import axios from 'axios';
-import {PLAN_SELECTED} from '../actions/plan';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const loginEpic = (action$) =>
   action$.pipe(
     ofType(LOGIN_SENDING_DATA),
     mergeMap((action) =>
       from(axios.post(`${process.env.api}/config/auth/`, action.payload)).pipe(
-        map((response) => loginSucces(response)),
+        map((response) => loginSuccess(response.data)),
         catchError((error) => {
           let errorMsg = '';
           if (
@@ -38,28 +45,60 @@ const loginEpic = (action$) =>
     ),
   );
 
+const loginStorageEpic = (action$) =>
+  action$.pipe(
+    ofType(LOGIN_SUCCESS),
+    mergeMap((action) =>
+      from(
+        AsyncStorage.multiSet([
+          ['nl-token', action.payload.token],
+          ['nl-isClient', action.payload.es_cliente + ''],
+        ]),
+      ).pipe(
+        map(() => tokenSaved(action.payload.token)),
+        catchError((error) => of(tokenSaveFailed(error))),
+      ),
+    ),
+  );
+
+const signoutEpic = (action$) =>
+  action$.pipe(
+    ofType(SIGNOUT),
+    mergeMap((action) =>
+      from(AsyncStorage.multiRemove(['nl-token', 'nl-isClient'])).pipe(
+        map(() => signoutSuccess()),
+        catchError((error) => of(signoutFailed(error))),
+      ),
+    ),
+  );
+
+const checkTokenStorageEpic = (action$) =>
+  action$.pipe(
+    ofType(STORAGE_CHECK_TOKEN),
+    mergeMap((action) =>
+      from(AsyncStorage.multiGet(['nl-token', 'nl-isClient'])).pipe(
+        map((data) => tokenReaded(data)),
+        catchError((error) => of(tokenSaveFailed(error))),
+      ),
+    ),
+  );
+
 const signupEpic = (action$, state$) =>
   action$.pipe(
-    ofType(PLAN_SELECTED),
+    ofType(SIGNUP_SENDING_DATA),
     mergeMap((action) =>
       from(
         axios.post(`${process.env.api}/admon/service-request`, {
           ...state$.value.auth.user,
-          plan: action.payload.plan.id,
-          latitud: action.payload.position.altitude,
-          longitud: action.payload.position.logitude,
+          plan: state$.value.plans.selected.id,
+          direccion: action.payload,
         }),
       ).pipe(
-        map((response) => signupSucces(response)),
+        map((response) => signupSuccess(response)),
         catchError((error) => {
           let errorMsg = '';
-          console.log({
-            ...state$.value.auth.user,
-            plan: action.payload.plan.id,
-            latitud: action.payload.position.altitude,
-            longitud: action.payload.position.logitude,
-          });
-          console.log(error.response.data);
+
+          console.log(error.response);
           if (
             error.response.data.email &&
             !Array.isArray(error.response.data.email)
@@ -76,4 +115,10 @@ const signupEpic = (action$, state$) =>
     ),
   );
 
-export const authEpics = combineEpics(loginEpic, signupEpic);
+export const authEpics = combineEpics(
+  loginEpic,
+  signupEpic,
+  loginStorageEpic,
+  checkTokenStorageEpic,
+  signoutEpic,
+);
