@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
 	containerSafe: {
 		width: '100%',
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginBottom: 10,
   },
 	scrollView: {
 		alignItems: 'center',
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   gradientContainer: {
     width: 240,
-    height: '26%',
+    height: '20%',
   },
   linearGradient: {
     flex: 1,
