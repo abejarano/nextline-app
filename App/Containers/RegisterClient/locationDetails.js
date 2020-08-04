@@ -11,7 +11,7 @@ import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
 import globalStyles from '../../styles';
 import {ButtonStyled} from '../../Components/button';
-import {signup} from '../../actions/auth';
+import {signup, setSignupPartialData} from '../../actions/auth';
 import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {useDispatch, useSelector} from 'react-redux';
 import {InputStyled} from '../../Components/input';
@@ -37,13 +37,24 @@ export const LocationDetails = ({navigation}) => {
         },
       ]);
     }
-  }, [message, navigation]);
+  }, [message, navigation, dispatch]);
   return (
     <View style={styles.view}>
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Header navigation={navigation} />
+        <Header
+          navigation={navigation}
+          onPress={() => {
+            navigation.goBack();
+            dispatch(
+              setSignupPartialData({
+                latitud: null,
+                longitud: null,
+              }),
+            );
+          }}
+        />
         <Title text={'Domicilio de Instalacion'} />
         <KeyboardAvoidingView
           behavior="padding"

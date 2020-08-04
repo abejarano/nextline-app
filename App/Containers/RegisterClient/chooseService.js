@@ -51,7 +51,13 @@ export const ChooseService = ({navigation}) => {
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Header navigation={navigation} />
+        <Header
+          navigation={navigation}
+          onPress={() => {
+            navigation.goBack();
+            dispatch(servicioSelect(null));
+          }}
+        />
         <Title text={'Selecciona        un Servicio'} />
         <SafeAreaView style={styles.scroll}>
           <FlatList

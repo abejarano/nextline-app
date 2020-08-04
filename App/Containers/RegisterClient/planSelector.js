@@ -50,7 +50,13 @@ export function PlanSelectScreen({navigation}) {
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Header navigation={navigation} />
+        <Header
+          navigation={navigation}
+          onPress={() => {
+            navigation.goBack();
+            dispatch(planSelect(null));
+          }}
+        />
         <Title text={'Planes de Internet'} />
         <View style={styles.scroll}>
           <FlatList

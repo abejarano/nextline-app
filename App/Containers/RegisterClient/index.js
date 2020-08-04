@@ -31,7 +31,22 @@ export function RegisterScreen({navigation}) {
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Header navigation={navigation} />
+        <Header
+          navigation={navigation}
+          onPress={() => {
+            navigation.goBack();
+            dispatch(
+              setSignupPartialData({
+                nombre_razsoc: '',
+                cedula_rif: '',
+                correo: '',
+                celular: '',
+                clave: '',
+                avatar: '',
+              }),
+            );
+          }}
+        />
         <Title text={'Formulario Personal'} />
         <Avatar image={image} setImage={setImage} />
         <Text style={styles.texDivision}>
