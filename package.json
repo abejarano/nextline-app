@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "android:build": "cd ./android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
@@ -21,6 +22,7 @@
     "axios": "^0.19.2",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-fs": "^2.16.6",
     "react-native-geolocation-service": "^5.0.0",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-image-picker": "^2.3.3",
@@ -35,6 +37,7 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-observable": "^1.2.0",
+    "rn-fetch-blob": "^0.12.0",
     "rxjs": "^6.6.0"
   },
   "devDependencies": {
@@ -46,12 +49,14 @@
     "@types/jest": "^26.0.7",
     "@types/react": "^16.9.43",
     "@types/react-native": "^0.63.2",
+    "@types/react-native-fs": "^2.13.0",
     "@types/react-native-linear-gradient": "^2.4.0",
     "@types/react-native-maps": "^0.24.0",
     "@types/react-redux": "^7.1.9",
     "@types/react-test-renderer": "^16.9.2",
     "@types/redux": "^3.6.0",
     "@types/redux-logger": "^3.0.8",
+    "@types/rn-fetch-blob": "^1.2.1",
     "babel-jest": "^25.1.0",
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
