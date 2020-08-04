@@ -1,11 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, StatusBar, StyleSheet, ImageBackground} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {servicioStatusFetch, contratoStatusFetch} from '../../actions/servicio';
-import LinearGradient from 'react-native-linear-gradient';
 import globalStyles from '../../styles';
-import SolidLogin from '../../assets/svg/SolidLogo';
-import {SpeedGroup} from '../../Components/speedGroup';
 import {Avatar} from '../../Components/avatar';
 import {Header} from '../../Components/header';
 import { TouchableOpacity, ScrollView, FlatList } from 'react-native-gesture-handler';
@@ -42,30 +38,39 @@ export const TicketsScreen = ({navigation}) => {
 			status: 'b'
 		},
 		{
-			id: '58694a0f-3da1-271f-bd96-145871e29d72',
-			title: 'Third Item',
+			id: '58694a0f-3da1-271f-bd96-145d71e29d72',
+			title: 'asd Item',
+			status: 'b'
+		},
+		{
+			id: '58694a0f-3da1-271f-bd96-141871e29d72',
+			title: 'last Item',
 			status: 'b'
 		},
 	];
-	
-	useEffect(() => {
-   
-	}, [dispatch, isClient]);
 
-	const Item = ({ item, onPress, style }) => (
+	const TickectItem = ({ item, onPress, style }) => (
 		<TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-			<Text style={styles.title}>{item.title}</Text>
+			<Text>{item.title}</Text>
+			<Text>{item.id.substring(0, 20)}</Text>
 		</TouchableOpacity>
 	);
 
 	const renderItem = ({ item }) => {
-    // const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+    const backgroundColor = item.id ? "#6e3b6e" : "#f9c2ff";
 
     return (
-      <Item
-				item={item}
-				style={styles.statusContainer}
-      />
+			<View style={styles.itemContainer}>
+				<TickectItem
+					item={item}
+					style={styles.textContainer}
+				/>
+				<View style={{
+						...styles.redCircle,
+						backgroundColor,
+				}} />
+			</View>
+      
     );
   };
 	
@@ -98,19 +103,25 @@ export const TicketsScreen = ({navigation}) => {
 					<Text style={styles.statusLabel}>Historial de Tickets</Text>
         </>
 				<SafeAreaView style={styles.containerSafe}>
+					<>
+						<View style={styles.tableContainer}>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableText}>titulo</Text>
+							</View>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableText}>Descripcion</Text>
+							</View>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableText}>Estatus</Text>
+							</View>
+						</View>
+					</>
 					<FlatList
 						data={DATA}
 						renderItem={renderItem}
 						keyExtractor={(item) => item.id}
 					/>
 				</SafeAreaView>
-				{/* <ScrollView >
-					<Text style={styles.statusLabel}>Estatus de solicitud</Text>
-					<View style={styles.statusContainer}>
-						<Text style={styles.statusText}>{status && status.status}</Text>
-						<View style={styles.redCircle} />
-					</View>
-				</ScrollView> */}
         
       </ImageBackground>
     </View>
@@ -124,6 +135,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 	},
 	containerSafe: {
+		width: '100%',
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
   },
@@ -134,8 +146,7 @@ const styles = StyleSheet.create({
   },
   gradientContainer: {
     width: 240,
-    height: 240,
-    marginBottom: 20,
+    height: '26%',
   },
   linearGradient: {
     flex: 1,
@@ -159,7 +170,17 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     backgroundColor: 'transparent',
     textTransform: 'uppercase',
-  },
+	},
+	tableContainer: {
+		flexDirection: 'row',
+		marginLeft: 10
+	},
+	tableRow: {
+		width: '33%'
+	},
+	tableText: {
+		marginLeft: 20
+	},
   logo: {
     marginTop: 10,
     marginBottom: -30,
@@ -205,24 +226,32 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: globalStyles.GRAY_TEXT_COLOR,
     textTransform: 'uppercase',
-    marginTop: '10%',
+    marginTop: '4%',
   },
   statusText: {
     color: globalStyles.PRIMARY_COLOR,
     textTransform: 'uppercase',
   },
-  statusContainer: {
+  textContainer: {
     display: 'flex',
-    width: '60%',
 		flexDirection: 'row',
 		marginLeft: 20,
     justifyContent: 'space-around',
     backgroundColor: globalStyles.GRAY_TEXT_COLOR + '15',
+    width: 250,
     height: 36,
     alignItems: 'center',
     borderRadius: 2,
-  },
+	},
+	itemContainer: {
+		margin: 5,
+		width: '90%',
+		flexDirection: 'row',
+    alignItems: 'center',
+
+	},
   redCircle: {
+		marginLeft: 10,
     width: 20,
     height: 20,
     borderRadius: 20,
@@ -253,7 +282,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: globalStyles.WHITE_COLOR,
     textTransform: 'capitalize',
-  },
+	},
 });
 
 export default TicketsScreen;
@@ -261,37 +290,5 @@ export default TicketsScreen;
 // export const TicketsScreen = ({navigation}) => {
 // 	const tickets = [{id:123, name:'low speed'}, {id:234, name:'too much speed'},  {id:1, name:'testing the chat and ticket'}];
 
-// 	return (
-// 		<SafeAreaView>
-// 			<View style={styles.view}>
-// 				<>
-// 					{tickets.map(ticket => (
-// 						<View key={ticket.id}>
-// 							<TouchableOpacity onPress={() => {
-// 							navigation.push('Chat',{ ticketId: ticket.id});
-// 						}}>
-// 								<Text>
-// 									{ticket.name}
-// 								</Text>
-// 							</TouchableOpacity>
-// 						</View>
-// 					))}
-// 				</>
-// 				<>
-// 					<View>
-// 						<ButtonStyled
-// 							onPress={() => {
-// 								navigation.push('TicketsCreateClient');
-// 							}}
-// 							backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-// 							color={globalStyles.GREEN_COLOR}
-// 							text={'Crear Ticket'}
-// 							style={styles.button}
-// 						/>
-// 					</View>
-// 				</>
-// 			</View>
-// 		</SafeAreaView>
-// 	);
-// };
+ 
  
