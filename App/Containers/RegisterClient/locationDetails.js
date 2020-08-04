@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
   KeyboardAvoidingView,
   Text,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
@@ -12,12 +13,31 @@ import globalStyles from '../../styles';
 import {ButtonStyled} from '../../Components/button';
 import {signup} from '../../actions/auth';
 import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {InputStyled} from '../../Components/input';
+import {resetStore} from '../../actions/utils';
 export const LocationDetails = ({navigation}) => {
   const dispatch = useDispatch();
   const [direction, setDirection] = useState('');
   const [refpoint, setRefpoint] = useState('');
+  const loading = useSelector((state) => state.auth.sending);
+  const message = useSelector((state) => state.auth.message);
+  useEffect(() => {
+    if (message !== '') {
+      Alert.alert('Registro exitoso!', 'Por favor has loguin para continuar', [
+        {
+          text: 'Continuar',
+          onPress: () => {
+            dispatch(resetStore());
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Login'}],
+            });
+          },
+        },
+      ]);
+    }
+  }, [message, navigation]);
   return (
     <View style={styles.view}>
       <ImageBackground
@@ -56,6 +76,8 @@ export const LocationDetails = ({navigation}) => {
             onPress={() => {
               dispatch(signup(direction + ' ' + refpoint));
             }}
+            loading={loading}
+            disabled={loading}
             backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
             color={globalStyles.WHITE_COLOR}
             text={'Finalizar solicitud'}

@@ -1,5 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import globalStyles from '../styles';
 
 export const ButtonStyled = ({
@@ -10,13 +15,22 @@ export const ButtonStyled = ({
   styleText,
   Icon,
   iconColor,
+  disabled,
+  loading,
 }) => {
   return (
     <TouchableOpacity
-      onPress={onPress}
+      disabled={disabled}
+      onPress={!disabled && onPress}
       style={{...styles.button, backgroundColor}}
       accessibilityLabel="Learn more about this purple button">
-      <Text style={{...styles.text, color, ...styleText}}>{text}</Text>
+      <Text style={{...styles.text, color, ...styleText}}>
+        {loading ? (
+          <ActivityIndicator color={globalStyles.WHITE_COLOR} />
+        ) : (
+          text
+        )}
+      </Text>
       {Icon && <Icon style={styles.icon} color={iconColor} />}
     </TouchableOpacity>
   );

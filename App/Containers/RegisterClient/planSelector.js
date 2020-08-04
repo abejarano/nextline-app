@@ -41,17 +41,10 @@ const PlanItem = ({item: plan, position, navigation}) => {
 export function PlanSelectScreen({navigation}) {
   const dispatch = useDispatch();
   const plans = useSelector((state) => state.plans.data);
-  const message = useSelector((state) => state.auth.message);
 
   useEffect(() => {
     dispatch(planFetch());
   }, [dispatch]);
-  useEffect(() => {
-    if (message !== '') {
-      Alert.alert('Registro', message);
-    }
-  }, [message]);
-
   return (
     <View style={styles.view}>
       <ImageBackground

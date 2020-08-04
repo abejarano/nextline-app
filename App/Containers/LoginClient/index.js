@@ -21,6 +21,7 @@ import {Header} from '../../Components/header';
 const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
+  const loading = useSelector((state) => state.auth.sending);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -72,6 +73,8 @@ const LoginClient = ({navigation}) => {
                 color={globalStyles.WHITE_COLOR}
                 text={'INGRESAR'}
                 style={styles.button}
+                disabled={loading}
+                loading={loading}
               />
 
               <>

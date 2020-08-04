@@ -88,34 +88,33 @@ export function RegisterScreen({navigation}) {
               }}
               style={styles.button}
             />
+            <View style={styles.buttonContainer}>
+              <ButtonStyled
+                onPress={() => {
+                  if (repassword === password) {
+                    dispatch(
+                      setSignupPartialData({
+                        nombre_razsoc: nombrerzb,
+                        cedula_rif: cedularif,
+                        correo: email,
+                        celular: phone,
+                        clave: password,
+                        avatar: image.data,
+                      }),
+                    );
+                    navigation.push('ActualLocation');
+                  }
+                }}
+                backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+                color={globalStyles.WHITE_COLOR}
+                text={'Continuar'}
+                styleText={styles.continueButton}
+                Icon={ArrowPointerSvg}
+                iconColor={globalStyles.WHITE_COLOR}
+              />
+            </View>
           </KeyboardAvoidingView>
         </ScrollView>
-
-        <View style={styles.buttonContainer}>
-          <ButtonStyled
-            onPress={() => {
-              if (repassword === password) {
-                dispatch(
-                  setSignupPartialData({
-                    nombre_razsoc: nombrerzb,
-                    cedula_rif: cedularif,
-                    correo: email,
-                    celular: phone,
-                    clave: password,
-                    avatar: image.data,
-                  }),
-                );
-                navigation.push('ActualLocation');
-              }
-            }}
-            backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-            color={globalStyles.WHITE_COLOR}
-            text={'Continuar'}
-            styleText={styles.continueButton}
-            Icon={ArrowPointerSvg}
-            iconColor={globalStyles.WHITE_COLOR}
-          />
-        </View>
       </ImageBackground>
     </View>
   );
