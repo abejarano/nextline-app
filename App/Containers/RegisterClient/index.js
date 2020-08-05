@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     padding: 0,
+    marginTop: '20%',
     width: '100%',
   },
   scrollViewContent: {

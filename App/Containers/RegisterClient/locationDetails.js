@@ -124,7 +124,9 @@ const styles = StyleSheet.create({
   },
   keyboardContainer: {
     width: '100%',
+    marginTop: '20%',
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: '10%',
   },
   continueButton: {

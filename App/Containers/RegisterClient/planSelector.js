@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     height: '20%',
   },
   scroll: {
+    marginTop: '20%',
     height: '45%',
   },
 });
