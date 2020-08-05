@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   gradientContainer: {
-    width: 240,
-    height: 240,
+    width: 200,
+    height: 200,
     marginBottom: 20,
   },
   linearGradient: {
