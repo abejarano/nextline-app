@@ -7,6 +7,7 @@ import globalStyles from '../../styles';
 import {Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {GeolocationModal} from '../../Components/geolocationModal';
+import {scale} from '../../utils/utils';
 
 export const ActualLocation = ({navigation}) => {
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
@@ -57,7 +58,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   questionGroup: {
-    height: '100%',
+    marginTop: '20%',
+    height: '60%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -69,21 +71,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   optionsGroup: {
-    flex: 1,
+    display: 'flex',
     flexDirection: 'row',
     width: '60%',
     justifyContent: 'space-evenly',
   },
   option: {
     backgroundColor: globalStyles.WHITE_COLOR,
-    padding: 15,
+    padding: scale(15),
     borderRadius: 24,
-    width: 90,
+    width: scale(90),
   },
   optionText: {
     color: globalStyles.PRIMARY_COLOR_DARK,
     textTransform: 'uppercase',
-    fontSize: 30,
+    fontSize: scale(30),
     textAlign: 'center',
   },
 });

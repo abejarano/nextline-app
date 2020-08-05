@@ -9,7 +9,7 @@ import ChatScreen from '../Containers/ChatClient';
 import ProfileSvg from '../assets/svg/Profile';
 import {TabBar} from '../Components/tabBar';
 import {TicketsScreen} from '../Containers/TicketsClient';
-import {CreateTicketsScreen} from '../Containers/TicketsClient/CreateTicket';
+import {CreateTicketsScreen} from '../Containers/TicketsClient/createTicket';
 const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 

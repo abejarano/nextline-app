@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
   title: {
     display: 'flex',
     width: '100%',
-    marginLeft: '15%',
-    marginBottom: '10%',
+    marginLeft: '5%',
+    marginBottom: '5%',
+    height: '10%',
   },
   titleText: {
     fontSize: scale(42),
