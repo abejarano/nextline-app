@@ -8,21 +8,24 @@ export const Header = ({navigation, backVisible = true, onPress}) => {
   return (
     <View style={styles.view}>
       {backVisible && (
-        <Pressable style={styles.back}
-          onPress={
-            onPress
-              ? onPress
-              : () => {
-                  navigation.goBack();
-                }
-          }
-        >
-          <ArrowPointerSvg
-            color={globalStyles.WHITE_COLOR}
-            direction="left"
-            bold
-          />
-        </Pressable>
+        <View style={styles.back}>
+          <Pressable 
+            style={styles.preesable}
+            onPress={
+              onPress
+                ? onPress
+                : () => {
+                    navigation.goBack();
+                  }
+            }
+          >
+            <ArrowPointerSvg
+              color={globalStyles.WHITE_COLOR}
+              direction="left"
+              bold
+            />
+          </Pressable>
+        </View>
       )}
       <Pressable style={styles.info} >
         <InfoSvg color={globalStyles.WHITE_COLOR} />
@@ -35,15 +38,16 @@ const styles = StyleSheet.create({
   view: {
     width: '100%',
     marginTop: 15,
-    marginBottom: 25,
+    marginBottom: '5%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
   },
+  preesable: {
+  },
   info: {
     alignSelf: 'flex-end',
-    // width: '50%',
     height: 33,
     marginLeft: 'auto',
     marginRight: '10%',
@@ -52,8 +56,6 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 45,
     display: 'flex',
-    width: '50%',
-    // justifyContent: 'flex-start',
-    // marginRight: 'auto',
+    width: '39%',
   },
 });
