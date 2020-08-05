@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     margin: 15,
     padding: 15,
     borderRadius: 15,
-    height: '80%',
+    height: 224,
     width: 233,
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -134,10 +134,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     overflow: 'hidden',
     width: 180,
-    margin: 'auto',
     textAlign: 'center',
+    height: '20%',
   },
   scroll: {
-    height: 280,
+    height: '45%',
   },
 });

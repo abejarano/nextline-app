@@ -48,7 +48,7 @@ const LoginClient = ({navigation}) => {
             style={globalStyles.BACKGROUNDIMAGE}>
             <Header backVisible={false} />
             <View style={styles.view}>
-              <SolidLogo color={globalStyles.WHITE_COLOR} />
+              <SolidLogo color={globalStyles.WHITE_COLOR} style={styles.logo} />
 
               <KeyboardAvoidingView
                 behavior="padding"
@@ -123,8 +123,12 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: globalStyles.WHITE_COLOR,
   },
+  logo: {
+    height: '40%',
+  },
   view: {
-    flex: 1,
+    height: '100%',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -159,9 +163,12 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   keyboardContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     padding: 0,
     width: '100%',
     marginBottom: '10%',
+    height: '50%',
   },
 });

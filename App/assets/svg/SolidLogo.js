@@ -7,7 +7,7 @@ function SolidLogin(props) {
       width={props.width ? props.width : 184.762}
       height={props.height ? props.height : 156.588}
       viewBox="0 0 184.762 156.588"
-      style={styles.logo}
+      style={{...styles.logo, ...props.style}}
       {...props}>
       <Defs />
 

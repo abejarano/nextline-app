@@ -47,10 +47,10 @@ export function RegisterScreen({navigation}) {
             );
           }}
         />
+        <Title text={'Formulario Personal'} />
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}>
-          <Title text={'Formulario Personal'} />
           <Avatar image={image} setImage={setImage} />
           <Text style={styles.texDivision}>
             Toque el icono de usuario para agregar su foto
