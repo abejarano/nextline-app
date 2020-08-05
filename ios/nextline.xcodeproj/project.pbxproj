@@ -18,10 +18,9 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* nextlineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nextlineTests.m */; };
-		4523572F24CCA01A004DA57C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4523572E24CCA01A004DA57C /* GoogleService-Info.plist */; };
 		45282A8224CFAA9400BCE420 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45282A8124CFAA9400BCE420 /* File.swift */; };
 		454595BC24D8CFB100542967 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 454595BB24D8CFB000542967 /* Launch Screen.storyboard */; };
-		45E7527E24DA414A00D86880 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45E7527D24DA414A00D86880 /* GoogleService-Info.plist */; };
+		45E89F0C24DA5A37007CF5B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45E89F0B24DA5A37007CF5B6 /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A939C18819AEC33FD6062D45 /* libPods-nextline.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E766D1446013670639B1FBD /* libPods-nextline.a */; };
 /* End PBXBuildFile section */
@@ -69,6 +68,7 @@
 		4532B2AD24D3856C008C4B6E /* nextline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = nextline.entitlements; path = nextline/nextline.entitlements; sourceTree = "<group>"; };
 		454595BB24D8CFB000542967 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		45E7527D24DA414A00D86880 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		45E89F0B24DA5A37007CF5B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ADF89EF79979BE4AF05905D /* Pods-nextline-nextlineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nextline-nextlineTests.release.xcconfig"; path = "Target Support Files/Pods-nextline-nextlineTests/Pods-nextline-nextlineTests.release.xcconfig"; sourceTree = "<group>"; };
 		575591996C183DE02424A807 /* Pods-nextline-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nextline-tvOS.release.xcconfig"; path = "Target Support Files/Pods-nextline-tvOS/Pods-nextline-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		71D90DE097B0326F87BEBA4F /* libPods-nextline-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nextline-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				45E7527D24DA414A00D86880 /* GoogleService-Info.plist */,
+				45E89F0B24DA5A37007CF5B6 /* GoogleService-Info.plist */,
 				454595BB24D8CFB000542967 /* Launch Screen.storyboard */,
 				4523572E24CCA01A004DA57C /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* nextline */,
@@ -358,10 +359,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				45E89F0C24DA5A37007CF5B6 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				45E7527E24DA414A00D86880 /* GoogleService-Info.plist in Resources */,
 				454595BC24D8CFB100542967 /* Launch Screen.storyboard in Resources */,
-				4523572F24CCA01A004DA57C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
