@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Pressable} from 'react-native';
 import InfoSvg from '../assets/svg/Info';
 import globalStyles from '../styles';
 import ArrowPointerSvg from '../assets/svg/ArrowPointer';
@@ -8,11 +8,7 @@ export const Header = ({navigation, backVisible = true, onPress}) => {
   return (
     <View style={styles.view}>
       {backVisible && (
-        <ArrowPointerSvg
-          color={globalStyles.WHITE_COLOR}
-          direction="left"
-          style={styles.back}
-          bold
+        <Pressable style={styles.back}
           onPress={
             onPress
               ? onPress
@@ -20,9 +16,17 @@ export const Header = ({navigation, backVisible = true, onPress}) => {
                   navigation.goBack();
                 }
           }
-        />
+        >
+          <ArrowPointerSvg
+            color={globalStyles.WHITE_COLOR}
+            direction="left"
+            bold
+          />
+        </Pressable>
       )}
-      <InfoSvg style={styles.info} color={globalStyles.WHITE_COLOR} />
+      <Pressable style={styles.info} >
+        <InfoSvg color={globalStyles.WHITE_COLOR} />
+      </Pressable>
     </View>
   );
 };
@@ -34,17 +38,22 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   info: {
     alignSelf: 'flex-end',
-    width: '50%',
+    // width: '50%',
+    height: 33,
     marginLeft: 'auto',
     marginRight: '10%',
   },
   back: {
+    padding: 10,
+    height: 45,
     display: 'flex',
     width: '50%',
-    justifyContent: 'flex-start',
+    // justifyContent: 'flex-start',
     // marginRight: 'auto',
   },
 });

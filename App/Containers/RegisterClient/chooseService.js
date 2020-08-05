@@ -51,37 +51,45 @@ export const ChooseService = ({navigation}) => {
   }, [dispatch]);
 
   return (
-    <View style={styles.view}>
-      <ImageBackground
-        source={require('../../assets/images/wallpapers/auth.png')}
-        style={globalStyles.BACKGROUNDIMAGE}>
-        <StyledStatusBar />
-        <Header
-          navigation={navigation}
-          onPress={() => {
-            navigation.goBack();
-            dispatch(servicioSelect(null));
-          }}
-        />
-        <Title text={'Selecciona\nun Servicio'} />
-        {loading ? (
-          <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
-        ) : (
-          <SafeAreaView style={styles.scroll}>
-            <FlatList
-              data={services}
-              renderItem={({item, index}) => (
-                <Service {...item} index={index} navigation={navigation} />
-              )}
-              keyExtractor={(service) => `serv-sign-${service.id}`}
-            />
-          </SafeAreaView>
-        )}
-      </ImageBackground>
-    </View>
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.view}>
+        <ImageBackground
+          source={require('../../assets/images/wallpapers/auth.png')}
+          style={globalStyles.BACKGROUNDIMAGE}>
+          <StyledStatusBar />
+          <Header
+            navigation={navigation}
+            onPress={() => {
+              console.log("go back");
+              navigation.goBack();
+              dispatch(servicioSelect(null));
+            }}
+          />
+          <Title text={'Selecciona\nun Servicio'} />
+          {loading ? (
+            <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
+          ) : (
+            
+            <View style={styles.scroll}>
+              <FlatList
+                data={services}
+                renderItem={({item, index}) => (
+                  <Service {...item} index={index} navigation={navigation} />
+                )}
+                keyExtractor={(service) => `serv-sign-${service.id}`}
+              />
+            </View>
+          )}
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+  },
   view: {
     backgroundColor: globalStyles.BACKGROUND_BOTOM,
     flex: 1,
@@ -120,8 +128,8 @@ const styles = StyleSheet.create({
     marginLeft: '10%',
   },
   scroll: {
-    marginTop: '20%',
-    width: '90%',
+    // marginTop: '20%',
+    // width: '100%',
     flex: 1,
   },
 });

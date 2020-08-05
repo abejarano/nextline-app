@@ -48,12 +48,12 @@ const LoginClient = ({navigation}) => {
             style={globalStyles.BACKGROUNDIMAGE}>
             <Header backVisible={false} />
             <View style={styles.view}>
-              <SolidLogo color={globalStyles.WHITE_COLOR} style={styles.logo} />
-
               <KeyboardAvoidingView
                 behavior="padding"
                 style={styles.keyboardContainer}
                 keyboardVerticalOffset={8}>
+                
+                <SolidLogo color={globalStyles.WHITE_COLOR} style={styles.logo} />
                 <InputStyled
                   placeholder="Email ..."
                   onChange={(text) => {
