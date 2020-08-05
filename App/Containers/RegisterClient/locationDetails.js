@@ -70,13 +70,13 @@ export const LocationDetails = ({navigation}) => {
             );
           }}
         />
-        <Title text={'Domicilio de Instalacion'} />
+        <Title text={'Domicilio de Instalación'} />
         <KeyboardAvoidingView
           behavior="padding"
           style={styles.keyboardContainer}
           keyboardVerticalOffset={8}>
           <InputStyled
-            placeholder="Direccion"
+            placeholder="Dirección"
             onChange={(text) => {
               setDirection(text);
             }}
@@ -95,7 +95,7 @@ export const LocationDetails = ({navigation}) => {
           />
         </KeyboardAvoidingView>
         <Text numberOfLines={2} style={styles.question}>
-          Antes de finalizar confirme si su ubicaciones es correcta
+          Antes de finalizar confirme si su ubicación es correcta
         </Text>
         <View style={styles.buttonContainer}>
           <ButtonStyled
@@ -132,12 +132,12 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   buttonContainer: {
-    marginTop: 50,
+    marginTop: '10%',
   },
   question: {
     color: globalStyles.WHITE_COLOR,
-    fontSize: 21,
-    width: 282,
+    fontSize: 20,
+    width: '80%',
     textAlign: 'center',
   },
 });

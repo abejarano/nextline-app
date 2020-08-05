@@ -47,14 +47,14 @@ export function RegisterScreen({navigation}) {
             );
           }}
         />
-        <Title text={'Formulario Personal'} />
-        <Avatar image={image} setImage={setImage} />
-        <Text style={styles.texDivision}>
-          Toque el icono de usuario para agregar su foto
-        </Text>
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}>
+          <Title text={'Formulario Personal'} />
+          <Avatar image={image} setImage={setImage} />
+          <Text style={styles.texDivision}>
+            Toque el icono de usuario para agregar su foto
+          </Text>
           <KeyboardAvoidingView
             behavior={'padding'}
             style={styles.keyboardContainer}
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttonContainer: {
-    margin: 25,
+    margin: '5%',
   },
   title: {
     height: '10%',
@@ -178,6 +178,6 @@ const styles = StyleSheet.create({
   },
   texDivision: {
     color: globalStyles.WHITE_COLOR,
-    margin: 10,
+    margin: '3%',
   },
 });

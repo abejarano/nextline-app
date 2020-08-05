@@ -26,8 +26,8 @@ export const ActualLocation = ({navigation}) => {
         <Header navigation={navigation} />
         <Title text={'Domicilio de Instalacion'} />
         <View style={styles.questionGroup}>
-          <Text numberOfLines={2} style={styles.question}>
-            ¿Esta usted en el sitio donde se va a instalar el servicios?
+          <Text style={styles.question}>
+            ¿Esta usted en el sitio donde se{'\n'} va a instalar el servicios?
           </Text>
           <View style={styles.optionsGroup}>
             <TouchableOpacity
@@ -57,7 +57,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   questionGroup: {
-    paddingTop: '20%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   question: {
     color: globalStyles.WHITE_COLOR,
@@ -70,14 +73,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '60%',
     justifyContent: 'space-evenly',
-    marginLeft: '20%',
   },
   option: {
     backgroundColor: globalStyles.WHITE_COLOR,
     padding: 15,
     borderRadius: 24,
     width: 90,
-    // margin: ,
   },
   optionText: {
     color: globalStyles.PRIMARY_COLOR_DARK,

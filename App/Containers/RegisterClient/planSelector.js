@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: globalStyles.PRIMARY_COLOR,
-    padding: 10,
+    padding: '2.5%',
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
   },
   lowText: {
     color: globalStyles.WHITE_COLOR,
-    marginTop: 50,
     fontSize: 20,
     fontWeight: 'bold',
     overflow: 'hidden',
@@ -139,6 +138,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   scroll: {
-    height: 300,
+    height: 280,
   },
 });

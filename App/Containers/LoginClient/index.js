@@ -73,7 +73,7 @@ const LoginClient = ({navigation}) => {
                   Icon={LockSvg}
                   iconColor={globalStyles.PRIMARY_COLOR}
                 />
-                <Text style={styles.forgetText}>Olvido su contraseña?</Text>
+                <Text style={styles.forgetText}>¿Olvidó su contraseña?</Text>
 
                 <ButtonStyled
                   onPress={() =>

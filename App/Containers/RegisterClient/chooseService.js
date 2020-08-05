@@ -63,7 +63,7 @@ export const ChooseService = ({navigation}) => {
             dispatch(servicioSelect(null));
           }}
         />
-        <Title text={'Selecciona        un Servicio'} />
+        <Title text={'Selecciona\nun Servicio'} />
         {loading ? (
           <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
         ) : (
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   serviceText: {
     color: globalStyles.PRIMARY_COLOR,
     fontSize: 25,
-    marginLeft: 5,
+    marginLeft: '1%',
   },
   plus: {
     color: globalStyles.WHITE_COLOR,
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
   serviceView: {
     display: 'flex',
     backgroundColor: globalStyles.GRAY_COLOR,
-    margin: 15,
-    padding: 15,
+    margin: '5%',
+    padding: '5%',
     borderRadius: 15,
     width: '80%',
     justifyContent: 'space-between',
@@ -122,6 +122,5 @@ const styles = StyleSheet.create({
   scroll: {
     width: '90%',
     flex: 1,
-    // paddingLeft: '10%',
   },
 });

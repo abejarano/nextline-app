@@ -40,17 +40,18 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: globalStyles.GRAY_COLOR,
     width: '80%',
-    padding: 15,
+    padding: '5%',
     borderRadius: 15,
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: '1%',
+    marginBottom: '1%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     textAlign: 'center',
-    width: '80%',
+    width: '100%',
     color: globalStyles.WHITE_COLOR,
   },
   icon: {
