@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>320564611786-90h5udibsut59840pd12i40jf6n6n748.apps.googleusercontent.com</string>
+	<string>320564611786-9i0pis16mdo6d0nrcf3bjpl974cetkva.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.320564611786-90h5udibsut59840pd12i40jf6n6n748</string>
+	<string>com.googleusercontent.apps.320564611786-9i0pis16mdo6d0nrcf3bjpl974cetkva</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDJq279edzVatMr3oEDtdIR0DIV00DwgZI</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.jaspersoft.nextline</string>
+	<string>nextline.jaspesoft.com</string>
 	<key>PROJECT_ID</key>
 	<string>nextline-2ac90</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:320564611786:ios:fce71e47547a2c134b8233</string>
+	<string>1:320564611786:ios:b12b4c98f0f4cc374b8233</string>
 	<key>DATABASE_URL</key>
 	<string>https://nextline-2ac90.firebaseio.com</string>
 </dict>
