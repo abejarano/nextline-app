@@ -12,7 +12,9 @@ export default {
   STATUS_BAR_COLOR: '#0070bd',
   LIST_COLORS: ['MUSTARD_COLOR', 'RED_COLOR', 'GREEN_COLOR'],
   BACKGROUNDIMAGE: {
+    heigth: '100%',
     flex: 1,
+    // display: 'flex',
     resizeMode: 'cover',
     width: '100%',
     alignItems: 'center',

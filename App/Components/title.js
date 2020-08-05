@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginLeft: '5%',
     marginBottom: '5%',
-    height: '10%',
+    // height: '10%',
   },
   titleText: {
     fontSize: scale(42),

@@ -15,6 +15,7 @@ import {servicioFetch, servicioSelect} from '../../actions/servicio';
 import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyledStatusBar} from '../../Components/statusBar';
+import SolidLogo from '../../assets/svg/SolidLogo';
 
 const Service = ({id, servicio, activo, index, navigation}) => {
   const dispatch = useDispatch();
@@ -35,7 +36,8 @@ const Service = ({id, servicio, activo, index, navigation}) => {
               globalStyles.LIST_COLORS[index % globalStyles.LIST_COLORS.length]
             ],
         }}>
-        <Text style={styles.plus}>+</Text>
+        {/* <Text style={styles.plus}>+</Text> */}
+        <SolidLogo color={globalStyles.WHITE_COLOR} style={styles.logo} />
       </View>
     </TouchableOpacity>
   );
@@ -105,6 +107,13 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     fontWeight: '100',
   },
+  logo: {
+    color: globalStyles.WHITE_COLOR,
+    fontSize: 2,
+    textAlignVertical: 'center',
+    height: '10%',
+    // fontWeight: '100',
+  },
   serviceButton: {
     display: 'flex',
     justifyContent: 'center',
@@ -127,7 +136,7 @@ const styles = StyleSheet.create({
     marginLeft: '10%',
   },
   scroll: {
-    marginTop: '20%',
+    marginTop: '10%',
     flex: 1,
   },
 });
