@@ -43,7 +43,7 @@ export default SolidLogin;
 
 const styles = StyleSheet.create({
   logo: {
-    marginTop: '10%',
-    marginBottom: '10%',
+    marginTop: '0%',
+    marginBottom: '0%',
   },
 });
