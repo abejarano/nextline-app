@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import globalStyles from '../styles';
-import {verticalScale, scale} from '../utils/utils';
+import {scale} from '../utils/utils';
 
 export const Title = ({text}) => {
   return (

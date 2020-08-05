@@ -60,7 +60,7 @@ export const ChooseService = ({navigation}) => {
           <Header
             navigation={navigation}
             onPress={() => {
-              console.log("go back");
+              console.log('go back');
               navigation.goBack();
               dispatch(servicioSelect(null));
             }}
@@ -69,7 +69,6 @@ export const ChooseService = ({navigation}) => {
           {loading ? (
             <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
           ) : (
-            
             <View style={styles.scroll}>
               <FlatList
                 data={services}
@@ -128,8 +127,7 @@ const styles = StyleSheet.create({
     marginLeft: '10%',
   },
   scroll: {
-    // marginTop: '20%',
-    // width: '100%',
+    marginTop: '20%',
     flex: 1,
   },
 });
