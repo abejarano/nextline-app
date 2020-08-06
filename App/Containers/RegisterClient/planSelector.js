@@ -15,7 +15,7 @@ import {Title} from '../../Components/title';
 import globalStyles from '../../styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SpeedGroup} from '../../Components/speedGroup';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const PlanItem = ({item: plan, position, navigation}) => {
   const dispatch = useDispatch();
@@ -64,7 +64,10 @@ export function PlanSelectScreen({navigation}) {
           <Title text={'Planes de Internet'} />
           <View style={styles.center}>
             {loading ? (
-              <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
+              <ActivityIndicator
+                size="large"
+                color={globalStyles.WHITE_COLOR}
+              />
             ) : (
               <View style={styles.scroll}>
                 <FlatList
@@ -92,11 +95,11 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
   },
   view: {
-    display: 'flex',
+    flex: 1,
     alignItems: 'center',
   },
   planItem: {
-    display: 'flex',
+    flex: 1,
     backgroundColor: globalStyles.GRAY_COLOR,
     margin: 15,
     padding: 15,
@@ -107,13 +110,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   pricing: {
-    display: 'flex',
+    flex: 1,
     flexDirection: 'row',
     backgroundColor: globalStyles.PRIMARY_COLOR,
     padding: '2.5%',
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    maxHeight: 60,
   },
   dollarPrice: {
     color: globalStyles.WHITE_COLOR,
@@ -145,14 +149,15 @@ const styles = StyleSheet.create({
     width: 180,
     textAlign: 'center',
     textAlignVertical: 'bottom',
+    marginBottom: '20%',
   },
   scroll: {
     maxHeight: 300,
-    flex: 3,
+    flex: 1,
+    marginTop: 'auto',
   },
   center: {
-    display: 'flex',
-    justifyContent: 'space-around',
+    flex: 1,
     alignItems: 'center',
   },
 });
