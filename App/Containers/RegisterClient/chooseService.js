@@ -37,7 +37,7 @@ const Service = ({id, servicio, activo, index, navigation}) => {
             ],
         }}>
         {/* <Text style={styles.plus}>+</Text> */}
-        <SolidLogo color={globalStyles.WHITE_COLOR} style={styles.logo} />
+        <SolidLogo icon color={globalStyles.WHITE_COLOR} style={styles.logo} />
       </View>
     </TouchableOpacity>
   );
@@ -108,10 +108,8 @@ const styles = StyleSheet.create({
     fontWeight: '100',
   },
   logo: {
-    color: globalStyles.WHITE_COLOR,
-    fontSize: 2,
-    textAlignVertical: 'center',
-    height: '10%',
+    // height: 10,
+    ...globalStyles.DEBUG,
     // fontWeight: '100',
   },
   serviceButton: {
