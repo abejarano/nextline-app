@@ -16,6 +16,7 @@ import {Header} from '../../Components/header';
 import {Title} from '../../Components/title';
 import globalStyles from '../../styles';
 import {Avatar} from '../../Components/avatar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
@@ -27,123 +28,130 @@ export function RegisterScreen({navigation}) {
   const [repassword, setRepassword] = useState('');
   const [image, setImage] = useState('');
   return (
-    <ImageBackground
-      source={require('../../assets/images/wallpapers/auth.png')}
-      style={globalStyles.BACKGROUNDIMAGE}>
-      <View style={styles.view}>
-        <Header
-          navigation={navigation}
-          onPress={() => {
-            navigation.goBack();
-            dispatch(
-              setSignupPartialData({
-                nombre_razsoc: '',
-                cedula_rif: '',
-                correo: '',
-                celular: '',
-                clave: '',
-                avatar: '',
-              }),
-            );
-          }}
-        />
-        <Title text={'Formulario Personal'} />
-        <KeyboardAvoidingView
-          behavior={'padding'}
-          style={styles.keyboardContainer}
-          keyboardVerticalOffset={8}>
-          <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollViewContent}>
-            <Avatar image={image} setImage={setImage} />
-            <Text style={styles.texDivision}>
-              Toque el icono de usuario para agregar su foto
-            </Text>
-            {/* <KeyboardAvoidingView
-              behavior={'padding'}
-              style={styles.keyboardContainer}
-              keyboardVerticalOffset={8}> */}
-            <InputStyled
-              placeholder="Nombre o razon social"
-              onChange={(text) => {
-                setNombreRzb(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Cedula o RIF"
-              onChange={(text) => {
-                setCedulaRif(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Email"
-              onChange={(text) => {
-                setEmail(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Telefono"
-              onChange={(text) => {
-                setPhone(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Clave"
-              secureTextEntry={true}
-              onChange={(text) => {
-                setPassword(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Confirmar clave"
-              secureTextEntry={true}
-              onChange={(text) => {
-                setRepassword(text);
-              }}
-              style={styles.button}
-            />
-            <View style={styles.buttonContainer}>
-              <ButtonStyled
-                onPress={() => {
-                  if (repassword === password) {
-                    dispatch(
-                      setSignupPartialData({
-                        nombre_razsoc: nombrerzb,
-                        cedula_rif: cedularif,
-                        correo: email,
-                        celular: phone,
-                        clave: password,
-                        avatar: image.data,
-                      }),
-                    );
-                    navigation.push('ActualLocation');
-                  }
+    <SafeAreaView style={styles.safe}>
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/auth.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <View style={styles.view}>
+          <Header
+            navigation={navigation}
+            onPress={() => {
+              navigation.goBack();
+              dispatch(
+                setSignupPartialData({
+                  nombre_razsoc: '',
+                  cedula_rif: '',
+                  correo: '',
+                  celular: '',
+                  clave: '',
+                  avatar: '',
+                }),
+              );
+            }}
+          />
+          <Title text={'Formulario Personal'} />
+          <KeyboardAvoidingView
+            behavior={'padding'}
+            style={styles.keyboardContainer}
+            keyboardVerticalOffset={8}>
+            <ScrollView
+              style={styles.scrollView}
+              contentContainerStyle={styles.scrollViewContent}>
+              <Avatar image={image} setImage={setImage} />
+              <Text style={styles.texDivision}>
+                Toque el icono de usuario para agregar su foto
+              </Text>
+              {/* <KeyboardAvoidingView
+                behavior={'padding'}
+                style={styles.keyboardContainer}
+                keyboardVerticalOffset={8}> */}
+              <InputStyled
+                placeholder="Nombre o razon social"
+                onChange={(text) => {
+                  setNombreRzb(text);
                 }}
-                backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-                color={globalStyles.WHITE_COLOR}
-                text={'Continuar'}
-                styleText={styles.continueButton}
-                Icon={ArrowPointerSvg}
-                iconColor={globalStyles.WHITE_COLOR}
+                style={styles.button}
               />
-            </View>
-            {/* </KeyboardAvoidingView> */}
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
-    </ImageBackground>
+              <InputStyled
+                placeholder="Cedula o RIF"
+                onChange={(text) => {
+                  setCedulaRif(text);
+                }}
+                style={styles.button}
+              />
+              <InputStyled
+                placeholder="Email"
+                onChange={(text) => {
+                  setEmail(text);
+                }}
+                style={styles.button}
+              />
+              <InputStyled
+                placeholder="Telefono"
+                onChange={(text) => {
+                  setPhone(text);
+                }}
+                style={styles.button}
+              />
+              <InputStyled
+                placeholder="Clave"
+                secureTextEntry={true}
+                onChange={(text) => {
+                  setPassword(text);
+                }}
+                style={styles.button}
+              />
+              <InputStyled
+                placeholder="Confirmar clave"
+                secureTextEntry={true}
+                onChange={(text) => {
+                  setRepassword(text);
+                }}
+                style={styles.button}
+              />
+              <View style={styles.buttonContainer}>
+                <ButtonStyled
+                  onPress={() => {
+                    if (repassword === password) {
+                      dispatch(
+                        setSignupPartialData({
+                          nombre_razsoc: nombrerzb,
+                          cedula_rif: cedularif,
+                          correo: email,
+                          celular: phone,
+                          clave: password,
+                          avatar: image.data,
+                        }),
+                      );
+                      navigation.push('ActualLocation');
+                    }
+                  }}
+                  backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+                  color={globalStyles.WHITE_COLOR}
+                  text={'Continuar'}
+                  styleText={styles.continueButton}
+                  Icon={ArrowPointerSvg}
+                  iconColor={globalStyles.WHITE_COLOR}
+                />
+              </View>
+              {/* </KeyboardAvoidingView> */}
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+  },
   view: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: '30%'
   },
   keyboardContainer: {
     alignItems: 'center',

@@ -117,6 +117,10 @@ export const LocationDetails = ({navigation}) => {
   );
 };
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+  },
   view: {
     flex: 1,
     alignItems: 'center',

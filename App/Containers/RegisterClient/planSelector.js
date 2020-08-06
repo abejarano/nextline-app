@@ -15,6 +15,7 @@ import {Title} from '../../Components/title';
 import globalStyles from '../../styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SpeedGroup} from '../../Components/speedGroup';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PlanItem = ({item: plan, position, navigation}) => {
   const dispatch = useDispatch();
@@ -48,42 +49,48 @@ export function PlanSelectScreen({navigation}) {
     dispatch(planFetch());
   }, [dispatch]);
   return (
-    <ImageBackground
-      source={require('../../assets/images/wallpapers/auth.png')}
-      style={globalStyles.BACKGROUNDIMAGE}>
-      <View style={styles.view}>
-        <Header
-          navigation={navigation}
-          onPress={() => {
-            navigation.goBack();
-            dispatch(planSelect(null));
-          }}
-        />
-        <Title text={'Planes de Internet'} />
-        <View style={styles.center}>
-          {loading ? (
-            <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
-          ) : (
-            <View style={styles.scroll}>
-              <FlatList
-                horizontal
-                data={plans}
-                renderItem={(props) => (
-                  <PlanItem {...props} navigation={navigation} />
-                )}
-                keyExtractor={(plan) => `plan-item-${plan.id}`}
-              />
-            </View>
-          )}
-          <Text numberOfLines={2} style={styles.lowText}>
-            Seleccione el plan de tu preferencia
-          </Text>
+    <SafeAreaView style={styles.safe}>
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/auth.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <View style={styles.view}>
+          <Header
+            navigation={navigation}
+            onPress={() => {
+              navigation.goBack();
+              dispatch(planSelect(null));
+            }}
+          />
+          <Title text={'Planes de Internet'} />
+          <View style={styles.center}>
+            {loading ? (
+              <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
+            ) : (
+              <View style={styles.scroll}>
+                <FlatList
+                  horizontal
+                  data={plans}
+                  renderItem={(props) => (
+                    <PlanItem {...props} navigation={navigation} />
+                  )}
+                  keyExtractor={(plan) => `plan-item-${plan.id}`}
+                />
+              </View>
+            )}
+            <Text numberOfLines={2} style={styles.lowText}>
+              Seleccione el plan de tu preferencia
+            </Text>
+          </View>
         </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+  },
   view: {
     display: 'flex',
     alignItems: 'center',
@@ -140,7 +147,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'bottom',
   },
   scroll: {
-    maxHeight: 280,
+    maxHeight: 300,
     flex: 3,
   },
   center: {
