@@ -48,88 +48,93 @@ export function RegisterScreen({navigation}) {
           }}
         />
         <Title text={'Formulario Personal'} />
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollViewContent}>
-          <Avatar image={image} setImage={setImage} />
-          <Text style={styles.texDivision}>
-            Toque el icono de usuario para agregar su foto
-          </Text>
-          <KeyboardAvoidingView
+        <KeyboardAvoidingView
             behavior={'padding'}
             style={styles.keyboardContainer}
             keyboardVerticalOffset={8}>
-            <InputStyled
-              placeholder="Nombre o razon social"
-              onChange={(text) => {
-                setNombreRzb(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Cedula o RIF"
-              onChange={(text) => {
-                setCedulaRif(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Email"
-              onChange={(text) => {
-                setEmail(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Telefono"
-              onChange={(text) => {
-                setPhone(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Clave"
-              secureTextEntry={true}
-              onChange={(text) => {
-                setPassword(text);
-              }}
-              style={styles.button}
-            />
-            <InputStyled
-              placeholder="Confirmar clave"
-              secureTextEntry={true}
-              onChange={(text) => {
-                setRepassword(text);
-              }}
-              style={styles.button}
-            />
-            <View style={styles.buttonContainer}>
-              <ButtonStyled
-                onPress={() => {
-                  if (repassword === password) {
-                    dispatch(
-                      setSignupPartialData({
-                        nombre_razsoc: nombrerzb,
-                        cedula_rif: cedularif,
-                        correo: email,
-                        celular: phone,
-                        clave: password,
-                        avatar: image.data,
-                      }),
-                    );
-                    navigation.push('ActualLocation');
-                  }
+          <ScrollView
+            style={styles.scrollView}
+            contentContainerStyle={styles.scrollViewContent}>
+            <Avatar image={image} setImage={setImage} />
+            <Text style={styles.texDivision}>
+              Toque el icono de usuario para agregar su foto
+            </Text>
+            {/* <KeyboardAvoidingView
+              behavior={'padding'}
+              style={styles.keyboardContainer}
+              keyboardVerticalOffset={8}> */}
+              <InputStyled
+                placeholder="Nombre o razon social"
+                onChange={(text) => {
+                  setNombreRzb(text);
                 }}
-                backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-                color={globalStyles.WHITE_COLOR}
-                text={'Continuar'}
-                styleText={styles.continueButton}
-                Icon={ArrowPointerSvg}
-                iconColor={globalStyles.WHITE_COLOR}
+                style={styles.button}
               />
-            </View>
-          </KeyboardAvoidingView>
-        </ScrollView>
+              <InputStyled
+                placeholder="Cedula o RIF"
+                onChange={(text) => {
+                  setCedulaRif(text);
+                }}
+                style={styles.button}
+              />
+              <InputStyled
+                placeholder="Email"
+                onChange={(text) => {
+                  setEmail(text);
+                }}
+                style={styles.button}
+              />
+              <InputStyled
+                placeholder="Telefono"
+                onChange={(text) => {
+                  setPhone(text);
+                }}
+                style={styles.button}
+              />
+              <InputStyled
+                placeholder="Clave"
+                secureTextEntry={true}
+                onChange={(text) => {
+                  setPassword(text);
+                }}
+                style={styles.button}
+              />
+              <InputStyled
+                placeholder="Confirmar clave"
+                secureTextEntry={true}
+                onChange={(text) => {
+                  setRepassword(text);
+                }}
+                style={styles.button}
+              />
+              <View style={styles.buttonContainer}>
+                <ButtonStyled
+                  onPress={() => {
+                    if (repassword === password) {
+                      dispatch(
+                        setSignupPartialData({
+                          nombre_razsoc: nombrerzb,
+                          cedula_rif: cedularif,
+                          correo: email,
+                          celular: phone,
+                          clave: password,
+                          avatar: image.data,
+                        }),
+                      );
+                      navigation.push('ActualLocation');
+                    }
+                  }}
+                  backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+                  color={globalStyles.WHITE_COLOR}
+                  text={'Continuar'}
+                  styleText={styles.continueButton}
+                  Icon={ArrowPointerSvg}
+                  iconColor={globalStyles.WHITE_COLOR}
+                />
+              </View>
+            {/* </KeyboardAvoidingView> */}
+          </ScrollView>
+        </KeyboardAvoidingView>
       </ImageBackground>
     </View>
   );
@@ -149,7 +154,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     padding: 0,
-    marginTop: '20%',
+    marginTop: '5%',
     width: '100%',
   },
   scrollViewContent: {
