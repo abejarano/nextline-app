@@ -40,76 +40,67 @@ const LoginClient = ({navigation}) => {
   }, [error, dispatch]);
 
   return (
-    <>
-      <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.safe}>
+      <ImageBackground
+        source={require('../../assets/images/login_wallpapers/60.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
         <View style={styles.view}>
-          <ImageBackground
-            source={require('../../assets/images/login_wallpapers/60.png')}
-            style={globalStyles.BACKGROUNDIMAGE}>
-            <Header backVisible={false} />
-            <View style={styles.view}>
-              <KeyboardAvoidingView
-                behavior="padding"
-                style={styles.keyboardContainer}
-                keyboardVerticalOffset={8}>
-                
-                <SolidLogo color={globalStyles.WHITE_COLOR} style={styles.logo} />
-                <InputStyled
-                  placeholder="Email ..."
-                  onChange={(text) => {
-                    setEmail(text);
-                  }}
-                  value={email}
-                  Icon={EmailSvg}
-                  iconColor={globalStyles.PRIMARY_COLOR}
-                />
-                <InputStyled
-                  placeholder="Clave ..."
-                  secureTextEntry={true}
-                  onChange={(text) => {
-                    setPassword(text);
-                  }}
-                  style={styles.button}
-                  Icon={LockSvg}
-                  iconColor={globalStyles.PRIMARY_COLOR}
-                />
-                <Text style={styles.forgetText}>¿Olvidó su contraseña?</Text>
-
-                <ButtonStyled
-                  onPress={() =>
-                    dispatch(login({email: email, clave: password}))
-                  }
-                  backgroundColor={globalStyles.GREEN_COLOR}
-                  color={globalStyles.WHITE_COLOR}
-                  text={'INGRESAR'}
-                  style={styles.button}
-                  disabled={loading}
-                  loading={loading}
-                />
-
-                <>
-                  <View style={styles.division}>
-                    <Text numberOfLines={1} style={styles.texDivision}>
-                      _______________________________________________
-                    </Text>
-                  </View>
-                </>
-
-                <ButtonStyled
-                  onPress={() => {
-                    navigation.push('ServiceSelect');
-                  }}
-                  backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-                  color={globalStyles.WHITE_COLOR}
-                  text={'SOLICITA TU SERVICIO'}
-                  style={styles.button}
-                />
-              </KeyboardAvoidingView>
+          <Header backVisible={false} />
+          <KeyboardAvoidingView
+            behavior="height"
+            style={styles.keyboardContainer}>
+            <SolidLogo color={globalStyles.WHITE_COLOR} style={styles.logo} />
+            <View style={styles.inputContainer}>
+              <InputStyled
+                placeholder="Email"
+                onChange={(text) => {
+                  setEmail(text);
+                }}
+                value={email}
+                Icon={EmailSvg}
+                iconColor={globalStyles.PRIMARY_COLOR}
+              />
+              <InputStyled
+                placeholder="Email"
+                // secureTextEntry={true}
+                onChange={(text) => {
+                  setPassword(text);
+                }}
+                Icon={LockSvg}
+                iconColor={globalStyles.PRIMARY_COLOR}
+              />
             </View>
-          </ImageBackground>
+            <Text style={styles.forgetText}>¿Olvidó su contraseña?</Text>
+          </KeyboardAvoidingView>
+          <ButtonStyled
+            onPress={() => dispatch(login({email: email, clave: password}))}
+            backgroundColor={globalStyles.GREEN_COLOR}
+            color={globalStyles.WHITE_COLOR}
+            text={'INGRESAR'}
+            disabled={loading}
+            loading={loading}
+          />
+
+          <>
+            <View style={styles.division}>
+              <Text numberOfLines={1} style={styles.texDivision}>
+                _______________________________________________
+              </Text>
+            </View>
+          </>
+
+          <ButtonStyled
+            onPress={() => {
+              navigation.push('ServiceSelect');
+            }}
+            backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+            color={globalStyles.WHITE_COLOR}
+            text={'SOLICITA TU SERVICIO'}
+            style={styles.button}
+          />
         </View>
-      </SafeAreaView>
-    </>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 
@@ -120,28 +111,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
   },
-  header: {
-    backgroundColor: globalStyles.WHITE_COLOR,
-  },
   logo: {
-    height: '40%',
+    flex: 1,
+    marginTop: 'auto',
+    marginBottom: 'auto',
   },
   view: {
-    height: '100%',
-    display: 'flex',
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
   input: {
     backgroundColor: globalStyles.WHITE_COLOR,
   },
   button: {
-    margin: '2.5%',
+    marginBottom: '10%',
   },
-  title: {
-    fontSize: 20,
-    margin: '2.5%',
-    color: globalStyles.WHITE_COLOR,
+  inputContainer: {
+    flex: 1,
+    width: '90%',
+    justifyContent: 'space-evenly',
+    maxHeight: 150,
   },
   forgetText: {
     color: globalStyles.WHITE_COLOR,
@@ -153,7 +142,7 @@ const styles = StyleSheet.create({
     margin: '2.5%',
   },
   division: {
-    margin: '5%',
+    padding: '5%',
   },
   texDivision: {
     color: globalStyles.WHITE_COLOR,
@@ -162,13 +151,7 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   keyboardContainer: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+    flex: 1,
     alignItems: 'center',
-    padding: 0,
-    width: '100%',
-    marginTop: '5%',
-    // marginBottom: '10%',
-    height: '50%',
   },
 });
