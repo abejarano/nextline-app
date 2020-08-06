@@ -54,10 +54,10 @@ export const ChooseService = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.view}>
-        <ImageBackground
-          source={require('../../assets/images/wallpapers/auth.png')}
-          style={globalStyles.BACKGROUNDIMAGE}>
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/auth.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <View style={styles.view}>
           <StyledStatusBar />
           <Header
             navigation={navigation}
@@ -81,8 +81,8 @@ export const ChooseService = ({navigation}) => {
               />
             </View>
           )}
-        </ImageBackground>
-      </View>
+        </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -92,9 +92,8 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
   },
   view: {
-    backgroundColor: globalStyles.BACKGROUND_BOTOM,
-    flex: 1,
-    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'center',
   },
   serviceText: {
     color: globalStyles.PRIMARY_COLOR,
@@ -135,8 +134,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: '10%',
   },
-  scroll: {
-    marginTop: '10%',
-    flex: 1,
-  },
+  scroll: {},
 });
