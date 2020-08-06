@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
   },
   view: {
-    display: 'flex',
+    flex: 1,
+    // display: 'flex',
     justifyContent: 'center',
   },
   serviceText: {
