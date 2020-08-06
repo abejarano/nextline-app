@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import globalStyles from '../styles';
+import {scale} from '../utils/utils';
 
 export const Title = ({text}) => {
   return (
@@ -18,13 +19,15 @@ const styles = StyleSheet.create({
   title: {
     display: 'flex',
     width: '100%',
-    marginLeft: '15%',
-    marginBottom: '10%',
+    marginLeft: '5%',
+    marginBottom: '5%',
+    // height: '10%',
   },
   titleText: {
-    fontSize: 45,
+    fontSize: scale(42),
     marginLeft: '2%',
     fontWeight: 'bold',
+    textAlign: 'left',
     color: globalStyles.WHITE_COLOR,
   },
   texDivision: {

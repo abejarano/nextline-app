@@ -15,6 +15,7 @@ import {servicioFetch, servicioSelect} from '../../actions/servicio';
 import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyledStatusBar} from '../../Components/statusBar';
+import SolidLogo from '../../assets/svg/SolidLogo';
 
 const Service = ({id, servicio, activo, index, navigation}) => {
   const dispatch = useDispatch();
@@ -35,7 +36,8 @@ const Service = ({id, servicio, activo, index, navigation}) => {
               globalStyles.LIST_COLORS[index % globalStyles.LIST_COLORS.length]
             ],
         }}>
-        <Text style={styles.plus}>+</Text>
+        {/* <Text style={styles.plus}>+</Text> */}
+        <SolidLogo icon color={globalStyles.WHITE_COLOR} style={styles.logo} />
       </View>
     </TouchableOpacity>
   );
@@ -51,52 +53,64 @@ export const ChooseService = ({navigation}) => {
   }, [dispatch]);
 
   return (
-    <View style={styles.view}>
+    <SafeAreaView style={styles.safe}>
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <StyledStatusBar />
-        <Header
-          navigation={navigation}
-          onPress={() => {
-            navigation.goBack();
-            dispatch(servicioSelect(null));
-          }}
-        />
-        <Title text={'Selecciona        un Servicio'} />
-        {loading ? (
-          <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
-        ) : (
-          <SafeAreaView style={styles.scroll}>
-            <FlatList
-              data={services}
-              renderItem={({item, index}) => (
-                <Service {...item} index={index} navigation={navigation} />
-              )}
-              keyExtractor={(service) => `serv-sign-${service.id}`}
-            />
-          </SafeAreaView>
-        )}
+        <View style={styles.view}>
+          <StyledStatusBar />
+          <Header
+            navigation={navigation}
+            onPress={() => {
+              console.log('go back');
+              navigation.goBack();
+              dispatch(servicioSelect(null));
+            }}
+          />
+          <Title text={'Selecciona\nun Servicio'} />
+          {loading ? (
+            <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
+          ) : (
+            <View style={styles.scroll}>
+              <FlatList
+                data={services}
+                renderItem={({item, index}) => (
+                  <Service {...item} index={index} navigation={navigation} />
+                )}
+                keyExtractor={(service) => `serv-sign-${service.id}`}
+              />
+            </View>
+          )}
+        </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
-  view: {
-    backgroundColor: globalStyles.BACKGROUND_BOTOM,
+  safe: {
     flex: 1,
-    alignItems: 'center',
+    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+  },
+  view: {
+    flex: 1,
+    // display: 'flex',
+    // justifyContent: 'center',
   },
   serviceText: {
     color: globalStyles.PRIMARY_COLOR,
     fontSize: 25,
-    marginLeft: 5,
+    marginLeft: '1%',
   },
   plus: {
     color: globalStyles.WHITE_COLOR,
     fontSize: 50,
     textAlignVertical: 'center',
     fontWeight: '100',
+  },
+  logo: {
+    // height: 10,
+    ...globalStyles.DEBUG,
+    // fontWeight: '100',
   },
   serviceButton: {
     display: 'flex',
@@ -110,8 +124,8 @@ const styles = StyleSheet.create({
   serviceView: {
     display: 'flex',
     backgroundColor: globalStyles.GRAY_COLOR,
-    margin: 15,
-    padding: 15,
+    margin: '5%',
+    padding: '5%',
     borderRadius: 15,
     width: '80%',
     justifyContent: 'space-between',
@@ -119,9 +133,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: '10%',
   },
-  scroll: {
-    width: '90%',
-    flex: 1,
-    // paddingLeft: '10%',
-  },
+  scroll: {},
 });

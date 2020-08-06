@@ -14,7 +14,10 @@ export default {
   BACKGROUNDIMAGE: {
     flex: 1,
     resizeMode: 'cover',
-    width: '100%',
-    alignItems: 'center',
+  },
+  DEBUG: {
+    borderStyle: 'solid',
+    borderColor: 'red',
+    borderWidth: 2,
   },
 };

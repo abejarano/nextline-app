@@ -15,6 +15,7 @@ import {Title} from '../../Components/title';
 import globalStyles from '../../styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SpeedGroup} from '../../Components/speedGroup';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const PlanItem = ({item: plan, position, navigation}) => {
   const dispatch = useDispatch();
@@ -48,64 +49,75 @@ export function PlanSelectScreen({navigation}) {
     dispatch(planFetch());
   }, [dispatch]);
   return (
-    <View style={styles.view}>
+    <SafeAreaView style={styles.safe}>
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Header
-          navigation={navigation}
-          onPress={() => {
-            navigation.goBack();
-            dispatch(planSelect(null));
-          }}
-        />
-        <Title text={'Planes de Internet'} />
-        {loading ? (
-          <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
-        ) : (
-          <View style={styles.scroll}>
-            <FlatList
-              horizontal
-              data={plans}
-              renderItem={(props) => (
-                <PlanItem {...props} navigation={navigation} />
-              )}
-              keyExtractor={(plan) => `plan-item-${plan.id}`}
-            />
+        <View style={styles.view}>
+          <Header
+            navigation={navigation}
+            onPress={() => {
+              navigation.goBack();
+              dispatch(planSelect(null));
+            }}
+          />
+          <Title text={'Planes de Internet'} />
+          <View style={styles.center}>
+            {loading ? (
+              <ActivityIndicator
+                size="large"
+                color={globalStyles.WHITE_COLOR}
+              />
+            ) : (
+              <View style={styles.scroll}>
+                <FlatList
+                  horizontal
+                  data={plans}
+                  renderItem={(props) => (
+                    <PlanItem {...props} navigation={navigation} />
+                  )}
+                  keyExtractor={(plan) => `plan-item-${plan.id}`}
+                />
+              </View>
+            )}
+            <Text numberOfLines={2} style={styles.lowText}>
+              Seleccione el plan de tu preferencia
+            </Text>
           </View>
-        )}
-        <Text numberOfLines={2} style={styles.lowText}>
-          Seleccione el plan de tu preferencia
-        </Text>
+        </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+  },
   view: {
-    backgroundColor: globalStyles.BACKGROUND_BOTOM,
     flex: 1,
     alignItems: 'center',
   },
   planItem: {
-    display: 'flex',
+    flex: 1,
     backgroundColor: globalStyles.GRAY_COLOR,
     margin: 15,
     padding: 15,
     borderRadius: 15,
-    height: '80%',
+    height: 284,
     width: 233,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   pricing: {
-    display: 'flex',
+    flex: 1,
     flexDirection: 'row',
     backgroundColor: globalStyles.PRIMARY_COLOR,
-    padding: 10,
+    padding: '2.5%',
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    maxHeight: 60,
   },
   dollarPrice: {
     color: globalStyles.WHITE_COLOR,
@@ -124,21 +136,28 @@ const styles = StyleSheet.create({
 
   plan: {
     color: globalStyles.PRIMARY_COLOR,
-    fontSize: 68,
+    fontSize: 60,
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },
   lowText: {
     color: globalStyles.WHITE_COLOR,
-    marginTop: 50,
     fontSize: 20,
     fontWeight: 'bold',
     overflow: 'hidden',
+    marginTop: 'auto',
     width: 180,
-    margin: 'auto',
     textAlign: 'center',
+    textAlignVertical: 'bottom',
+    marginBottom: '20%',
   },
   scroll: {
-    height: 300,
+    maxHeight: 300,
+    flex: 1,
+    marginTop: 'auto',
+  },
+  center: {
+    flex: 1,
+    alignItems: 'center',
   },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Pressable} from 'react-native';
 import InfoSvg from '../assets/svg/Info';
 import globalStyles from '../styles';
 import ArrowPointerSvg from '../assets/svg/ArrowPointer';
@@ -8,43 +8,52 @@ export const Header = ({navigation, backVisible = true, onPress}) => {
   return (
     <View style={styles.view}>
       {backVisible && (
-        <ArrowPointerSvg
-          color={globalStyles.WHITE_COLOR}
-          direction="left"
-          style={styles.back}
-          bold
-          onPress={
-            onPress
-              ? onPress
-              : () => {
-                  navigation.goBack();
-                }
-          }
-        />
+        <View style={styles.back}>
+          <Pressable
+            style={styles.pressable}
+            onPress={
+              onPress
+                ? onPress
+                : () => {
+                    navigation.goBack();
+                  }
+            }>
+            <ArrowPointerSvg
+              color={globalStyles.WHITE_COLOR}
+              direction="left"
+              bold
+            />
+          </Pressable>
+        </View>
       )}
-      <InfoSvg style={styles.info} color={globalStyles.WHITE_COLOR} />
+      <Pressable style={styles.info}>
+        <InfoSvg color={globalStyles.WHITE_COLOR} />
+      </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   view: {
+    flex: 1,
     width: '100%',
-    marginTop: 15,
-    marginBottom: 25,
-    display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    maxHeight: 45,
+    paddingTop: 10,
   },
+  pressable: {},
   info: {
-    alignSelf: 'flex-end',
-    width: '50%',
-    marginLeft: 'auto',
-    marginRight: '10%',
+    height: 33,
+    marginRight: '5%',
   },
   back: {
-    display: 'flex',
-    width: '50%',
-    justifyContent: 'flex-start',
-    // marginRight: 'auto',
+    padding: 10,
+    height: 45,
+    flex: 1,
+    maxWidth: 90,
+    marginLeft: '5%',
+    marginRight: 'auto',
   },
 });

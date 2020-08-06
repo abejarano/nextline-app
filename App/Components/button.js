@@ -17,12 +17,13 @@ export const ButtonStyled = ({
   iconColor,
   disabled,
   loading,
+  style,
 }) => {
   return (
     <TouchableOpacity
       disabled={disabled}
       onPress={!disabled && onPress}
-      style={{...styles.button, backgroundColor}}
+      style={[{...styles.button, backgroundColor}, style]}
       accessibilityLabel="Learn more about this purple button">
       <Text style={{...styles.text, color, ...styleText}}>
         {loading ? (
@@ -38,22 +39,24 @@ export const ButtonStyled = ({
 
 const styles = StyleSheet.create({
   button: {
+    flex: 1,
     backgroundColor: globalStyles.GRAY_COLOR,
     width: '80%',
-    padding: 15,
+    padding: '5%',
     borderRadius: 15,
-    marginTop: 5,
-    marginBottom: 5,
-    display: 'flex',
+    maxHeight: 60,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
+    flex: 1,
     textAlign: 'center',
-    width: '80%',
     color: globalStyles.WHITE_COLOR,
   },
   icon: {
-    width: '10%',
+    flex: 1,
+    width: 35,
+    height: 35,
   },
 });

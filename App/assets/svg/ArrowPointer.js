@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
+import {StyleSheet} from 'react-native';
+import globalStyles from '../../styles';
 const rotation = (direction) => {
   switch (direction) {
     case 'rigth':
@@ -14,7 +16,7 @@ const rotation = (direction) => {
 };
 function ArrowPointerSvg({bold, direction, color, style, onPress}) {
   return (
-    <Svg viewBox="0 0 172 172" style={style} onPress={onPress}>
+    <Svg styles={styles} viewBox="0 0 172 172" style={style} onPress={onPress}>
       {bold ? (
         <G>
           <Path
@@ -35,5 +37,9 @@ function ArrowPointerSvg({bold, direction, color, style, onPress}) {
     </Svg>
   );
 }
+
+const styles = StyleSheet.create({
+  logo: {},
+});
 
 export default ArrowPointerSvg;

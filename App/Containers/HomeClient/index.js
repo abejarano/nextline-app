@@ -8,7 +8,8 @@ import SolidLogin from '../../assets/svg/SolidLogo';
 import {SpeedGroup} from '../../Components/speedGroup';
 import {Avatar} from '../../Components/avatar';
 import {Header} from '../../Components/header';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -27,76 +28,83 @@ const HomeClientScreen = ({navigation}) => {
     }
   }, [dispatch, isClient]);
   return (
-    <View style={styles.view}>
+    <SafeAreaView style={styles.safe}>
       <ImageBackground
         source={require('../../assets/images/wallpapers/home.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Header backVisible={false} />
-        <View style={styles.userContainer}>
-          <Avatar />
-          <View style={styles.usernameContainer}>
-            <Text style={styles.usernameLabel}>Usuario</Text>
-            <Text style={styles.usernameText}>
-              {user && user.nombre_razsoc}
-            </Text>
-          </View>
-        </View>
-        <StatusBar barStyle="dark-content" />
-        <Text style={styles.serviceLabel}>tipo de servicio</Text>
-        <Text style={styles.serviceText}>{service.servicio}</Text>
-        <View style={styles.gradientContainer}>
-          <LinearGradient
-            colors={[
-              globalStyles.LIGTH_BLUE_COLOR,
-              globalStyles.PRIMARY_COLOR,
-              globalStyles.PRIMARY_COLOR_DARK,
-            ]}
-            angle={180}
-            style={styles.linearGradient}>
-            <View style={styles.whiteCircle}>
-              <SolidLogin
-                width={80}
-                height={80}
-                style={styles.logo}
-                color={globalStyles.GRAY_COLOR + '80'}
-              />
-              <Text style={styles.buttonText}>{plan.plan}</Text>
-              <Text style={styles.buttonLowerText}>PLAN</Text>
+        <View style={styles.view}>
+          <Header backVisible={false} />
+          <View style={styles.userContainer}>
+            <Avatar />
+            <View style={styles.usernameContainer}>
+              <Text style={styles.usernameLabel}>Usuario</Text>
+              <Text style={styles.usernameText}>
+                {user && user.nombre_razsoc}
+              </Text>
             </View>
-          </LinearGradient>
+          </View>
+          <StatusBar barStyle="dark-content" />
+          <Text style={styles.serviceLabel}>tipo de servicio</Text>
+          <Text style={styles.serviceText}>{service.servicio}</Text>
+          <View style={styles.gradientContainer}>
+            <LinearGradient
+              colors={[
+                globalStyles.LIGTH_BLUE_COLOR,
+                globalStyles.PRIMARY_COLOR,
+                globalStyles.PRIMARY_COLOR_DARK,
+              ]}
+              angle={180}
+              style={styles.linearGradient}>
+              <View style={styles.whiteCircle}>
+                <SolidLogin
+                  width={80}
+                  height={80}
+                  style={styles.logo}
+                  color={globalStyles.GRAY_COLOR + '80'}
+                />
+                <Text style={styles.buttonText}>{plan.plan}</Text>
+                <Text style={styles.buttonLowerText}>PLAN</Text>
+              </View>
+            </LinearGradient>
+          </View>
+          <SpeedGroup
+            upSpeed={plan.velocidad_subida}
+            downSpeed={plan.velocidad_baja}
+          />
+          <Text style={styles.statusLabel}>Estatus de solicitud</Text>
+          <View style={styles.statusContainer}>
+            <Text style={styles.statusText}>{status && status.status}</Text>
+            <View style={styles.redCircle} />
+          </View>
+          <>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.push('TicketsClient');
+              }}>
+              <Text>Tickets</Text>
+            </TouchableOpacity>
+          </>
         </View>
-        <SpeedGroup
-          upSpeed={plan.velocidad_subida}
-          downSpeed={plan.velocidad_baja}
-        />
-        <Text style={styles.statusLabel}>Estatus de solicitud</Text>
-        <View style={styles.statusContainer}>
-          <Text style={styles.statusText}>{status && status.status}</Text>
-          <View style={styles.redCircle} />
-
-        </View>
-        <>
-          <TouchableOpacity onPress={() => {
-              navigation.push('TicketsClient');
-            }}>
-            <Text style={styles.statusLabel}>Tickets</Text>
-          </TouchableOpacity>
-        </>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: '#085da2',
+  },
   view: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 10,
   },
   gradientContainer: {
     width: 200,
     height: 200,
-    marginBottom: 20,
+    marginBottom: '3%',
   },
   linearGradient: {
     flex: 1,
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
   },
   buttonText: {
-    fontSize: 44,
+    fontSize: 33,
     textAlign: 'center',
     fontWeight: 'bold',
     color: globalStyles.WHITE_COLOR,
@@ -160,27 +168,29 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: globalStyles.WHITE_COLOR,
     textTransform: 'uppercase',
-    marginBottom: 20,
+    marginBottom: '3%',
   },
   statusLabel: {
     fontSize: 10,
     color: globalStyles.GRAY_TEXT_COLOR,
     textTransform: 'uppercase',
-    marginTop: '10%',
+    marginTop: 'auto',
   },
   statusText: {
     color: globalStyles.PRIMARY_COLOR,
     textTransform: 'uppercase',
   },
   statusContainer: {
-    display: 'flex',
+    flex: 1,
     width: '80%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: globalStyles.GRAY_TEXT_COLOR + '15',
-    height: 36,
+    minHeight: 24,
+    maxHeight: 36,
     alignItems: 'center',
-    borderRadius: 18,
+    borderRadius: 60,
+    marginBottom: 'auto',
   },
   redCircle: {
     width: 20,
@@ -189,18 +199,19 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.RED_COLOR,
   },
   userContainer: {
-    display: 'flex',
+    flex: 1,
     width: '80%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    marginTop: -20,
-    marginBottom: 20,
+    alignItems: 'center',
+    marginBottom: '3%',
+    maxHeight: 100,
+    minHeight: 75,
   },
   usernameContainer: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     marginLeft: 20,
   },
   usernameLabel: {

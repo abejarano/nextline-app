@@ -16,6 +16,8 @@ import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {useDispatch, useSelector} from 'react-redux';
 import {InputStyled} from '../../Components/input';
 import {resetStore} from '../../actions/utils';
+import {StyledStatusBar} from '../../Components/statusBar';
+import {SafeAreaView} from 'react-native-safe-area-context';
 export const LocationDetails = ({navigation}) => {
   const dispatch = useDispatch();
   const [direction, setDirection] = useState('');
@@ -54,77 +56,85 @@ export const LocationDetails = ({navigation}) => {
     }
   }, [message, navigation, dispatch]);
   return (
-    <View style={styles.view}>
+    <SafeAreaView style={styles.safe}>
       <ImageBackground
         source={require('../../assets/images/wallpapers/auth.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Header
-          navigation={navigation}
-          onPress={() => {
-            navigation.goBack();
-            dispatch(
-              setSignupPartialData({
-                latitud: null,
-                longitud: null,
-              }),
-            );
-          }}
-        />
-        <Title text={'Domicilio de Instalacion'} />
-        <KeyboardAvoidingView
-          behavior="padding"
-          style={styles.keyboardContainer}
-          keyboardVerticalOffset={8}>
-          <InputStyled
-            placeholder="Direccion"
-            onChange={(text) => {
-              setDirection(text);
-            }}
-            value={direction}
-            // Icon={DirectionSvg}
-            iconColor={globalStyles.PRIMARY_COLOR}
-          />
-          <InputStyled
-            placeholder="Refpoint ..."
-            onChange={(text) => {
-              setRefpoint(text);
-            }}
-            value={refpoint}
-            // Icon={RefpointSvg}
-            iconColor={globalStyles.PRIMARY_COLOR}
-          />
-        </KeyboardAvoidingView>
-        <Text numberOfLines={2} style={styles.question}>
-          Antes de finalizar confirme si su ubicaciones es correcta
-        </Text>
-        <View style={styles.buttonContainer}>
-          <ButtonStyled
+        <View style={styles.view}>
+          <StyledStatusBar />
+          <Header
+            navigation={navigation}
             onPress={() => {
-              dispatch(signup(direction + ' ' + refpoint));
+              navigation.goBack();
+              dispatch(
+                setSignupPartialData({
+                  latitud: null,
+                  longitud: null,
+                }),
+              );
             }}
-            loading={loading}
-            disabled={loading}
-            backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
-            color={globalStyles.WHITE_COLOR}
-            text={'Finalizar solicitud'}
-            styleText={styles.continueButton}
-            Icon={ArrowPointerSvg}
-            iconColor={globalStyles.WHITE_COLOR}
           />
+          <Title text={'Domicilio de Instalación'} />
+          <KeyboardAvoidingView
+            behavior="padding"
+            style={styles.keyboardContainer}
+            keyboardVerticalOffset={8}>
+            <InputStyled
+              placeholder="Dirección"
+              onChange={(text) => {
+                setDirection(text);
+              }}
+              value={direction}
+              // Icon={DirectionSvg}
+              iconColor={globalStyles.PRIMARY_COLOR}
+            />
+            <InputStyled
+              placeholder="Refpoint ..."
+              onChange={(text) => {
+                setRefpoint(text);
+              }}
+              value={refpoint}
+              // Icon={RefpointSvg}
+              iconColor={globalStyles.PRIMARY_COLOR}
+            />
+          </KeyboardAvoidingView>
+          <Text numberOfLines={2} style={styles.question}>
+            Antes de finalizar confirme si su ubicación es correcta
+          </Text>
+          <View style={styles.buttonContainer}>
+            <ButtonStyled
+              onPress={() => {
+                dispatch(signup(direction + ' ' + refpoint));
+              }}
+              loading={loading}
+              disabled={loading}
+              backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
+              color={globalStyles.WHITE_COLOR}
+              text={'Finalizar solicitud'}
+              styleText={styles.continueButton}
+              Icon={ArrowPointerSvg}
+              iconColor={globalStyles.WHITE_COLOR}
+            />
+          </View>
         </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+  },
   view: {
-    backgroundColor: globalStyles.BACKGROUND_BOTOM,
     flex: 1,
     alignItems: 'center',
   },
   keyboardContainer: {
     width: '100%',
+    marginTop: '20%',
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: '10%',
   },
   continueButton: {
@@ -132,12 +142,12 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   buttonContainer: {
-    marginTop: 50,
+    marginTop: '10%',
   },
   question: {
     color: globalStyles.WHITE_COLOR,
-    fontSize: 21,
-    width: 282,
+    fontSize: 20,
+    width: '80%',
     textAlign: 'center',
   },
 });
