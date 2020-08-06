@@ -48,17 +48,21 @@ export function RegisterScreen({navigation}) {
           }}
         />
         <Title text={'Formulario Personal'} />
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollViewContent}>
-          <Avatar image={image} setImage={setImage} />
-          <Text style={styles.texDivision}>
-            Toque el icono de usuario para agregar su foto
-          </Text>
-          <KeyboardAvoidingView
-            behavior={'padding'}
-            style={styles.keyboardContainer}
-            keyboardVerticalOffset={8}>
+        <KeyboardAvoidingView
+          behavior={'padding'}
+          style={styles.keyboardContainer}
+          keyboardVerticalOffset={8}>
+          <ScrollView
+            style={styles.scrollView}
+            contentContainerStyle={styles.scrollViewContent}>
+            <Avatar image={image} setImage={setImage} />
+            <Text style={styles.texDivision}>
+              Toque el icono de usuario para agregar su foto
+            </Text>
+            {/* <KeyboardAvoidingView
+              behavior={'padding'}
+              style={styles.keyboardContainer}
+              keyboardVerticalOffset={8}> */}
             <InputStyled
               placeholder="Nombre o razon social"
               onChange={(text) => {
@@ -128,8 +132,9 @@ export function RegisterScreen({navigation}) {
                 iconColor={globalStyles.WHITE_COLOR}
               />
             </View>
-          </KeyboardAvoidingView>
-        </ScrollView>
+            {/* </KeyboardAvoidingView> */}
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     </ImageBackground>
   );
@@ -148,6 +153,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     padding: 0,
+    marginTop: '5%',
     width: '100%',
   },
   scrollViewContent: {

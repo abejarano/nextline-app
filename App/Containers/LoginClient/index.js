@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   input: {
     backgroundColor: globalStyles.WHITE_COLOR,
   },
@@ -168,7 +167,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 0,
     width: '100%',
-    marginBottom: '10%',
+    marginTop: '5%',
+    // marginBottom: '10%',
     height: '50%',
   },
 });
