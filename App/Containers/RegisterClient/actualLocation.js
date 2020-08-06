@@ -8,50 +8,57 @@ import {Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {GeolocationModal} from '../../Components/geolocationModal';
 import {scale} from '../../utils/utils';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ActualLocation = ({navigation}) => {
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
   const [showModal, setShowModal] = useState(false);
   return (
-    <View style={styles.view}>
-      <GeolocationModal
-        hasLocationPermission={hasLocationPermission}
-        setHasLocationPermission={setHasLocationPermission}
-        setShowModal={setShowModal}
-        showModal={showModal}
-        navigation={navigation}
-      />
-      <ImageBackground
-        source={require('../../assets/images/wallpapers/auth.png')}
-        style={globalStyles.BACKGROUNDIMAGE}>
-        <Header navigation={navigation} />
-        <Title text={'Domicilio de Instalacion'} />
-        <View style={styles.questionGroup}>
-          <Text style={styles.question}>
-            ¿Esta usted en el sitio donde se{'\n'} va a instalar el servicios?
-          </Text>
-          <View style={styles.optionsGroup}>
-            <TouchableOpacity
-              style={styles.option}
-              onPress={() => {
-                setShowModal(true);
-              }}>
-              <Text style={styles.optionText}>Si</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.option}
-              onPress={() => {
-                navigation.push('Map');
-              }}>
-              <Text style={styles.optionText}>No</Text>
-            </TouchableOpacity>
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.view}>
+        <GeolocationModal
+          hasLocationPermission={hasLocationPermission}
+          setHasLocationPermission={setHasLocationPermission}
+          setShowModal={setShowModal}
+          showModal={showModal}
+          navigation={navigation}
+        />
+        <ImageBackground
+          source={require('../../assets/images/wallpapers/auth.png')}
+          style={globalStyles.BACKGROUNDIMAGE}>
+          <Header navigation={navigation} />
+          <Title text={'Domicilio de Instalacion'} />
+          <View style={styles.questionGroup}>
+            <Text style={styles.question}>
+              ¿Esta usted en el sitio donde se{'\n'} va a instalar el servicios?
+            </Text>
+            <View style={styles.optionsGroup}>
+              <TouchableOpacity
+                style={styles.option}
+                onPress={() => {
+                  setShowModal(true);
+                }}>
+                <Text style={styles.optionText}>Si</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.option}
+                onPress={() => {
+                  navigation.push('Map');
+                }}>
+                <Text style={styles.optionText}>No</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+  },
   view: {
     flex: 1,
     alignItems: 'center',
