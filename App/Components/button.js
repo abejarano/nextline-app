@@ -50,10 +50,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
+    flex: 1,
     textAlign: 'center',
     color: globalStyles.WHITE_COLOR,
   },
   icon: {
-    width: '10%',
+    flex: 1,
+    width: 35,
+    height: 35,
   },
 });

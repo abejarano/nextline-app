@@ -170,8 +170,10 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     fontSize: 20,
+    textAlign: 'center',
   },
   buttonContainer: {
+    flex: 1,
     margin: '5%',
   },
   title: {

@@ -65,8 +65,8 @@ const LoginClient = ({navigation}) => {
                 iconColor={globalStyles.PRIMARY_COLOR}
               />
               <InputStyled
-                placeholder="Email"
-                // secureTextEntry={true}
+                placeholder="Clave"
+                secureTextEntry={true}
                 onChange={(text) => {
                   setPassword(text);
                 }}
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: '10%',
+    fontWeight: 'bold',
   },
   inputContainer: {
     flex: 1,
