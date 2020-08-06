@@ -57,10 +57,6 @@ export function RegisterScreen({navigation}) {
               }}
             />
             <Title text={'Formulario Personal'} />
-            {/* <KeyboardAvoidingView
-              behavior={'position'}
-              style={styles.keyboardContainer}
-              keyboardVerticalOffset={0}> */}
             <ScrollView
               style={styles.scrollView}
               contentContainerStyle={styles.scrollViewContent}>
@@ -138,7 +134,6 @@ export function RegisterScreen({navigation}) {
                 />
               </View>
             </ScrollView>
-            {/* </KeyboardAvoidingView> */}
           </View>
         </ImageBackground>
       </KeyboardAvoidingView>
@@ -151,13 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
   },
   view: {
-    // display: 'flex',
-    // justifyContent: 'center',
-
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // marginTop: '30%'
   },
   keyboardContainer: {
     flex: 1,

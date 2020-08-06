@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     // display: 'flex',
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   serviceText: {
     color: globalStyles.PRIMARY_COLOR,

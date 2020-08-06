@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     margin: 15,
     padding: 15,
     borderRadius: 15,
-    height: 224,
+    height: 284,
     width: 233,
     justifyContent: 'space-between',
     alignItems: 'center',
