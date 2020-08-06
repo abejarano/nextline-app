@@ -28,8 +28,8 @@ function SolidLogin(props) {
         </G>
       )}
       <Path
-        translateY={!props.withText && 30 && props.icon && 58}
         fill={props.color}
+        translateY={!props.withText && 30 && props.icon && 58}
         translateX={props.icon && 54}
         scaleY={props.icon && 0.4}
         scaleX={props.icon && 0.4}
@@ -37,8 +37,8 @@ function SolidLogin(props) {
       />
       <G>
         <Path
-          translateY={!props.withText && 30 && props.icon && 58}
           fill={props.color}
+          translateY={!props.withText && 30 && props.icon && 58}
           translateX={props.icon && 54}
           scaleY={props.icon && 0.4}
           scaleX={props.icon && 0.4}
