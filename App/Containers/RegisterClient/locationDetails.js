@@ -54,10 +54,10 @@ export const LocationDetails = ({navigation}) => {
     }
   }, [message, navigation, dispatch]);
   return (
-    <View style={styles.view}>
-      <ImageBackground
-        source={require('../../assets/images/wallpapers/auth.png')}
-        style={globalStyles.BACKGROUNDIMAGE}>
+    <ImageBackground
+      source={require('../../assets/images/wallpapers/auth.png')}
+      style={globalStyles.BACKGROUNDIMAGE}>
+      <View style={styles.view}>
         <Header
           navigation={navigation}
           onPress={() => {
@@ -112,13 +112,12 @@ export const LocationDetails = ({navigation}) => {
             iconColor={globalStyles.WHITE_COLOR}
           />
         </View>
-      </ImageBackground>
-    </View>
+      </View>
+    </ImageBackground>
   );
 };
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: globalStyles.BACKGROUND_BOTOM,
     flex: 1,
     alignItems: 'center',
   },

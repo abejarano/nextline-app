@@ -27,10 +27,10 @@ export function RegisterScreen({navigation}) {
   const [repassword, setRepassword] = useState('');
   const [image, setImage] = useState('');
   return (
-    <View style={styles.view}>
-      <ImageBackground
-        source={require('../../assets/images/wallpapers/auth.png')}
-        style={globalStyles.BACKGROUNDIMAGE}>
+    <ImageBackground
+      source={require('../../assets/images/wallpapers/auth.png')}
+      style={globalStyles.BACKGROUNDIMAGE}>
+      <View style={styles.view}>
         <Header
           navigation={navigation}
           onPress={() => {
@@ -130,13 +130,12 @@ export function RegisterScreen({navigation}) {
             </View>
           </KeyboardAvoidingView>
         </ScrollView>
-      </ImageBackground>
-    </View>
+      </View>
+    </ImageBackground>
   );
 }
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: globalStyles.BACKGROUND_BOTOM,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -149,7 +148,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     padding: 0,
-    marginTop: '20%',
     width: '100%',
   },
   scrollViewContent: {

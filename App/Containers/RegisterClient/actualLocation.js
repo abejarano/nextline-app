@@ -53,13 +53,10 @@ export const ActualLocation = ({navigation}) => {
 };
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: globalStyles.BACKGROUND_BOTOM,
     flex: 1,
     alignItems: 'center',
   },
   questionGroup: {
-    marginTop: '20%',
-    height: '60%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

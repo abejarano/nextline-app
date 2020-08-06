@@ -48,10 +48,10 @@ export function PlanSelectScreen({navigation}) {
     dispatch(planFetch());
   }, [dispatch]);
   return (
-    <View style={styles.view}>
-      <ImageBackground
-        source={require('../../assets/images/wallpapers/auth.png')}
-        style={globalStyles.BACKGROUNDIMAGE}>
+    <ImageBackground
+      source={require('../../assets/images/wallpapers/auth.png')}
+      style={globalStyles.BACKGROUNDIMAGE}>
+      <View style={styles.view}>
         <Header
           navigation={navigation}
           onPress={() => {
@@ -60,31 +60,32 @@ export function PlanSelectScreen({navigation}) {
           }}
         />
         <Title text={'Planes de Internet'} />
-        {loading ? (
-          <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
-        ) : (
-          <View style={styles.scroll}>
-            <FlatList
-              horizontal
-              data={plans}
-              renderItem={(props) => (
-                <PlanItem {...props} navigation={navigation} />
-              )}
-              keyExtractor={(plan) => `plan-item-${plan.id}`}
-            />
-          </View>
-        )}
-        <Text numberOfLines={2} style={styles.lowText}>
-          Seleccione el plan de tu preferencia
-        </Text>
-      </ImageBackground>
-    </View>
+        <View style={styles.center}>
+          {loading ? (
+            <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
+          ) : (
+            <View style={styles.scroll}>
+              <FlatList
+                horizontal
+                data={plans}
+                renderItem={(props) => (
+                  <PlanItem {...props} navigation={navigation} />
+                )}
+                keyExtractor={(plan) => `plan-item-${plan.id}`}
+              />
+            </View>
+          )}
+          <Text numberOfLines={2} style={styles.lowText}>
+            Seleccione el plan de tu preferencia
+          </Text>
+        </View>
+      </View>
+    </ImageBackground>
   );
 }
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: globalStyles.BACKGROUND_BOTOM,
-    flex: 1,
+    display: 'flex',
     alignItems: 'center',
   },
   planItem: {
@@ -133,12 +134,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     overflow: 'hidden',
+    marginTop: 'auto',
     width: 180,
     textAlign: 'center',
-    height: '20%',
+    textAlignVertical: 'bottom',
   },
   scroll: {
-    marginTop: '20%',
-    height: '45%',
+    maxHeight: 280,
+    flex: 3,
+  },
+  center: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
