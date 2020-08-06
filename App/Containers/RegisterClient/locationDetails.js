@@ -16,8 +16,8 @@ import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {useDispatch, useSelector} from 'react-redux';
 import {InputStyled} from '../../Components/input';
 import {resetStore} from '../../actions/utils';
-import { StyledStatusBar } from '../../Components/statusBar';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {StyledStatusBar} from '../../Components/statusBar';
+import {SafeAreaView} from 'react-native-safe-area-context';
 export const LocationDetails = ({navigation}) => {
   const dispatch = useDispatch();
   const [direction, setDirection] = useState('');

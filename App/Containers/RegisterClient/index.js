@@ -29,35 +29,35 @@ export function RegisterScreen({navigation}) {
   const [phone, setPhone] = useState('');
   const [repassword, setRepassword] = useState('');
   const [image, setImage] = useState('');
-  
+
   return (
     <SafeAreaView style={styles.safe}>
-      <KeyboardAvoidingView
-        behavior={'position'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -240}
-        style={styles.keyboardContainer}>
-        <ImageBackground
-          source={require('../../assets/images/wallpapers/auth.png')}
-          style={globalStyles.BACKGROUNDIMAGE}>
-          <View style={styles.view}>
-            <StyledStatusBar />
-            <Header
-              navigation={navigation}
-              onPress={() => {
-                navigation.goBack();
-                dispatch(
-                  setSignupPartialData({
-                    nombre_razsoc: '',
-                    cedula_rif: '',
-                    correo: '',
-                    celular: '',
-                    clave: '',
-                    avatar: '',
-                  }),
-                );
-              }}
-            />
-            <Title text={'Formulario Personal'} />
+      <ImageBackground
+        source={require('../../assets/images/wallpapers/auth.png')}
+        style={globalStyles.BACKGROUNDIMAGE}>
+        <View style={styles.view}>
+          <StyledStatusBar />
+          <Header
+            navigation={navigation}
+            onPress={() => {
+              navigation.goBack();
+              dispatch(
+                setSignupPartialData({
+                  nombre_razsoc: '',
+                  cedula_rif: '',
+                  correo: '',
+                  celular: '',
+                  clave: '',
+                  avatar: '',
+                }),
+              );
+            }}
+          />
+          <Title text={'Formulario Personal'} />
+          <KeyboardAvoidingView
+            behavior={'position'}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -240}
+            style={styles.keyboardContainer}>
             <ScrollView
               style={styles.scrollView}
               contentContainerStyle={styles.scrollViewContent}>
@@ -135,9 +135,9 @@ export function RegisterScreen({navigation}) {
                 />
               </View>
             </ScrollView>
-          </View>
-        </ImageBackground>
-      </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
+        </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
