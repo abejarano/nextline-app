@@ -64,7 +64,12 @@ export const Avatar = ({image, setImage}) => {
   return (
     <View style={{...styles.view}}>
       {image ? (
-        <Image source={image} style={styles.image} />
+        <TouchableOpacity
+          onPress={() => {
+            onPress(setImage);
+          }}>
+          <Image source={image} style={styles.image} />
+        </TouchableOpacity>
       ) : (
         <View style={styles.imageEmpty} title="Image">
           <TouchableOpacity

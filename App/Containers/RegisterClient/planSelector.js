@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
 
   plan: {
     color: globalStyles.PRIMARY_COLOR,
-    fontSize: 68,
+    fontSize: 60,
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },

@@ -29,6 +29,7 @@ export function RegisterScreen({navigation}) {
   const [phone, setPhone] = useState('');
   const [repassword, setRepassword] = useState('');
   const [image, setImage] = useState('');
+  
   return (
     <SafeAreaView style={styles.safe}>
       <KeyboardAvoidingView
