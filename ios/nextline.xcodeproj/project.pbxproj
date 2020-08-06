@@ -23,6 +23,8 @@
 		45E89F0C24DA5A37007CF5B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45E89F0B24DA5A37007CF5B6 /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A939C18819AEC33FD6062D45 /* libPods-nextline.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E766D1446013670639B1FBD /* libPods-nextline.a */; };
+		C81570B47B5A499D9BCE84D2 /* trebuc.woff in Resources */ = {isa = PBXBuildFile; fileRef = 6B41A7C55E9E4B61AEB30972 /* trebuc.woff */; };
+		E4F25538B6D349A89F33F292 /* Trebuchet-MS-Italic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 9950BF4E78A749058DCCA034 /* Trebuchet-MS-Italic.woff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		CBD6D45A8981C0EFC3D9D4FD /* Pods-nextline-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nextline-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-nextline-tvOSTests/Pods-nextline-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		6B41A7C55E9E4B61AEB30972 /* trebuc.woff */ = {isa = PBXFileReference; name = "trebuc.woff"; path = "../App/assets/fonts/trebuc.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9950BF4E78A749058DCCA034 /* Trebuchet-MS-Italic.woff */ = {isa = PBXFileReference; name = "Trebuchet-MS-Italic.woff"; path = "../App/assets/fonts/Trebuchet-MS-Italic.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +201,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				78A935F53121825F803FADDB /* Pods */,
+				98FB91303D724941B1EC06D9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -213,6 +218,16 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		98FB91303D724941B1EC06D9 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				6B41A7C55E9E4B61AEB30972 /* trebuc.woff */,
+				9950BF4E78A749058DCCA034 /* Trebuchet-MS-Italic.woff */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -362,6 +377,8 @@
 				45E89F0C24DA5A37007CF5B6 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				454595BC24D8CFB100542967 /* Launch Screen.storyboard in Resources */,
+				C81570B47B5A499D9BCE84D2 /* trebuc.woff in Resources */,
+				E4F25538B6D349A89F33F292 /* Trebuchet-MS-Italic.woff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,8 @@ import globalStyles from '../../styles';
 import {Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {GeolocationModal} from '../../Components/geolocationModal';
-import {scale} from '../../utils/utils';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {scale} from '../../utils';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const ActualLocation = ({navigation}) => {
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
