@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
     left: '10%',
     right: 0,
-    bottom: 24,
+    bottom: 12,
     elevation: 8,
     height: 60,
     paddingTop: 0,
