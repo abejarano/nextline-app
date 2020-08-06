@@ -49,7 +49,11 @@ const LoginClient = ({navigation}) => {
           <KeyboardAvoidingView
             behavior="height"
             style={styles.keyboardContainer}>
-            <SolidLogo color={globalStyles.WHITE_COLOR} style={styles.logo} />
+            <SolidLogo
+              color={globalStyles.WHITE_COLOR}
+              style={styles.logo}
+              withText={true}
+            />
             <View style={styles.inputContainer}>
               <InputStyled
                 placeholder="Email"
@@ -109,7 +113,7 @@ export default LoginClient;
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
+    backgroundColor: '#085da2',
   },
   logo: {
     flex: 1,
