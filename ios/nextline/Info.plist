@@ -23,7 +23,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>ITSEncryptionExportComplianceCode</key>
-	<string></string>
+	<string/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -73,5 +73,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>trebuc.otf</string>
+		<string>GreatVibes.otf</string>
+		<string>trebuc-bold.otf</string>
+		<string>Poppins-Bold.otf</string>
+		<string>Poppins-Light.otf</string>
+		<string>Poppins-Medium.otf</string>
+		<string>Poppins-Regular.otf</string>
+		<string>Poppins-SemiBold.otf</string>
+		<string>Poppins-Thin.otf</string>
+		<string>SegoeUI.otf</string>
+	</array>
 </dict>
 </plist>

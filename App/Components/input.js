@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import globalStyles from '../styles';
+import {scale} from '../utils';
 
 export const InputStyled = ({
   value,
@@ -52,5 +53,7 @@ const styles = StyleSheet.create({
   },
   innerInput: {
     width: '90%',
+    fontSize: scale(17),
+    fontFamily: globalStyles.SEGOE_FONT,
   },
 });

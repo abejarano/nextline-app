@@ -19,6 +19,7 @@ import globalStyles from '../../styles';
 import {Avatar} from '../../Components/avatar';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyledStatusBar} from '../../Components/statusBar';
+import {scale} from '../../utils';
 
 export function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
@@ -192,5 +193,7 @@ const styles = StyleSheet.create({
   texDivision: {
     color: globalStyles.WHITE_COLOR,
     margin: '3%',
+    fontSize: scale(14),
+    fontFamily: globalStyles.TREBUCHET_FONT,
   },
 });

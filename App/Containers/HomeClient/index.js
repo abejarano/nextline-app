@@ -10,6 +10,7 @@ import {Avatar} from '../../Components/avatar';
 import {Header} from '../../Components/header';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {scale} from '../../utils';
 
 const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -62,7 +63,9 @@ const HomeClientScreen = ({navigation}) => {
                   style={styles.logo}
                   color={globalStyles.GRAY_COLOR + '80'}
                 />
-                <Text style={styles.buttonText}>{plan.plan}</Text>
+                <Text style={styles.buttonText}>
+                  {plan?.plan.split(' ').join('')}
+                </Text>
                 <Text style={styles.buttonLowerText}>PLAN</Text>
               </View>
             </LinearGradient>
@@ -122,9 +125,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
   },
   buttonText: {
-    fontSize: 33,
+    fontSize: scale(33),
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontFamily: globalStyles.POPPINS_SEMIBOLD,
     color: globalStyles.WHITE_COLOR,
     backgroundColor: 'transparent',
     textTransform: 'uppercase',
@@ -150,6 +153,7 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     backgroundColor: 'transparent',
     textTransform: 'uppercase',
+    fontFamily: globalStyles.POPPINS_SEMIBOLD,
   },
   backgroundImage: {
     flex: 1,
@@ -159,24 +163,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   serviceLabel: {
-    fontSize: 10,
+    fontSize: scale(10),
+    fontFamily: globalStyles.TREBUCHET_FONT,
     opacity: 1,
     color: globalStyles.LIGTH_BLUE_COLOR,
     textTransform: 'uppercase',
   },
   serviceText: {
-    fontSize: 25,
+    fontSize: scale(25),
+    fontFamily: globalStyles.POPPINS_REGULAR,
     color: globalStyles.WHITE_COLOR,
     textTransform: 'uppercase',
     marginBottom: '3%',
   },
   statusLabel: {
-    fontSize: 10,
+    fontSize: scale(10),
+    fontFamily: globalStyles.TREBUCHET_FONT,
     color: globalStyles.GRAY_TEXT_COLOR,
     textTransform: 'uppercase',
     marginTop: 'auto',
   },
   statusText: {
+    fontSize: scale(16),
+    fontFamily: globalStyles.POPPINS_REGULAR,
     color: globalStyles.PRIMARY_COLOR,
     textTransform: 'uppercase',
   },
@@ -215,13 +224,15 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   usernameLabel: {
-    fontSize: 10,
+    fontSize: scale(10),
+    fontFamily: globalStyles.TREBUCHET_FONT,
     opacity: 1,
     color: globalStyles.LIGTH_BLUE_COLOR,
     textTransform: 'uppercase',
   },
   usernameText: {
-    fontSize: 20,
+    fontSize: scale(20),
+    fontFamily: globalStyles.SEGOE_FONT,
     color: globalStyles.WHITE_COLOR,
     textTransform: 'capitalize',
   },
