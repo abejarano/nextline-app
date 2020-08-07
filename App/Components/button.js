@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import globalStyles from '../styles';
+import {scale} from '../utils';
 
 export const ButtonStyled = ({
   onPress,
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     color: globalStyles.WHITE_COLOR,
+    fontSize: scale(20),
     fontFamily: globalStyles.TREBUCHET_BOLD_FONT,
   },
   icon: {
