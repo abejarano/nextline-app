@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 export default {
   PRIMARY_COLOR: '#0090DF',
   PRIMARY_COLOR_DARK: '#005FAB',
@@ -21,8 +23,8 @@ export default {
     borderWidth: 2,
   },
   // Fonts
-  TREBUCHET_BOLD_FONT: 'trebuc-bold',
-  TREBUCHET_FONT: 'trebuc',
+  TREBUCHET_BOLD_FONT: Platform.OS == 'ios' ? 'TrebuchetMS-Bold' : 'trebuc-bold' ,
+  TREBUCHET_FONT: Platform.OS == 'ios' ? 'TrebuchetMS' : 'trebuc',
   SEGOE_FONT: 'SegoeUI',
   DEBUG_FONT: 'GreatVibes',
   POPPINS_BOLD: 'Poppins-Bold',
