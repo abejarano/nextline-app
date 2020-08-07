@@ -18,6 +18,7 @@ import {InputStyled} from '../../Components/input';
 import {resetStore} from '../../actions/utils';
 import {StyledStatusBar} from '../../Components/statusBar';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {scale} from '../../utils';
 export const LocationDetails = ({navigation}) => {
   const dispatch = useDispatch();
   const [direction, setDirection] = useState('');
@@ -142,12 +143,15 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   buttonContainer: {
-    marginTop: '10%',
+    marginBottom: '10%',
   },
   question: {
     color: globalStyles.WHITE_COLOR,
-    fontSize: 20,
+    fontSize: scale(20),
     width: '80%',
     textAlign: 'center',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    fontFamily: globalStyles.TREBUCHET_BOLD_FONT,
   },
 });
