@@ -10,6 +10,7 @@ import {Avatar} from '../../Components/avatar';
 import {Header} from '../../Components/header';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {scale} from '../../utils';
 
 const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -62,7 +63,9 @@ const HomeClientScreen = ({navigation}) => {
                   style={styles.logo}
                   color={globalStyles.GRAY_COLOR + '80'}
                 />
-                <Text style={styles.buttonText}>{plan.plan}</Text>
+                <Text style={styles.buttonText}>
+                  {plan?.plan.split(' ').join('')}
+                </Text>
                 <Text style={styles.buttonLowerText}>PLAN</Text>
               </View>
             </LinearGradient>
@@ -122,9 +125,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
   },
   buttonText: {
-    fontSize: 33,
+    fontSize: scale(33),
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontFamily: globalStyles.POPPINS_BOLD,
     color: globalStyles.WHITE_COLOR,
     backgroundColor: 'transparent',
     textTransform: 'uppercase',
