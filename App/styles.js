@@ -26,7 +26,7 @@ export default {
   SEGOE_FONT: 'SegoeUI',
   DEBUG_FONT: 'GreatVibes',
   POPPINS_BOLD: 'Poppins-Bold',
-  POPPINS_LOGHT: 'Poppins-Loght',
+  POPPINS_LIGHT: 'Poppins-Light',
   POPPINS_MEDIUM: 'Poppins-Medium',
   POPPINS_REGULAR: 'Poppins-Regular',
   POPPINS_THIN: 'Poppins-Thin',
