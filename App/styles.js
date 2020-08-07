@@ -23,6 +23,7 @@ export default {
   // Fonts
   TREBUCHET_BOLD_FONT: 'trebuc-bold',
   TREBUCHET_FONT: 'trebuc',
+  SEGOE_FONT: 'SegoeUI',
   DEBUG_FONT: 'GreatVibes',
   POPPINS_BOLD: 'Poppins-Bold',
   POPPINS_LOGHT: 'Poppins-Loght',

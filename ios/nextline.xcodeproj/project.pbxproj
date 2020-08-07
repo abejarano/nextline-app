@@ -32,6 +32,7 @@
 		65D0384EA67A49BAB8179385 /* Poppins-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8AA31845D3F24BC38D5C33C1 /* Poppins-Regular.otf */; };
 		B8E60F3F6CE1419D9B9CC1F3 /* Poppins-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E91B1B6093F4455194367982 /* Poppins-SemiBold.otf */; };
 		7259CFBCFBB444D48D0133FA /* Poppins-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6AB567132D744681AEA5DF7E /* Poppins-Thin.otf */; };
+		51107CB275174A18AEB87567 /* SegoeUI.otf in Resources */ = {isa = PBXBuildFile; fileRef = 76970017BB9C47EDBFE795F6 /* SegoeUI.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		8AA31845D3F24BC38D5C33C1 /* Poppins-Regular.otf */ = {isa = PBXFileReference; name = "Poppins-Regular.otf"; path = "../App/assets/fonts/Poppins-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E91B1B6093F4455194367982 /* Poppins-SemiBold.otf */ = {isa = PBXFileReference; name = "Poppins-SemiBold.otf"; path = "../App/assets/fonts/Poppins-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		6AB567132D744681AEA5DF7E /* Poppins-Thin.otf */ = {isa = PBXFileReference; name = "Poppins-Thin.otf"; path = "../App/assets/fonts/Poppins-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		76970017BB9C47EDBFE795F6 /* SegoeUI.otf */ = {isa = PBXFileReference; name = "SegoeUI.otf"; path = "../App/assets/fonts/SegoeUI.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 				8AA31845D3F24BC38D5C33C1 /* Poppins-Regular.otf */,
 				E91B1B6093F4455194367982 /* Poppins-SemiBold.otf */,
 				6AB567132D744681AEA5DF7E /* Poppins-Thin.otf */,
+				76970017BB9C47EDBFE795F6 /* SegoeUI.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				65D0384EA67A49BAB8179385 /* Poppins-Regular.otf in Resources */,
 				B8E60F3F6CE1419D9B9CC1F3 /* Poppins-SemiBold.otf in Resources */,
 				7259CFBCFBB444D48D0133FA /* Poppins-Thin.otf in Resources */,
+				51107CB275174A18AEB87567 /* SegoeUI.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
