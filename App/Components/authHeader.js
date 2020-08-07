@@ -3,13 +3,13 @@ import {StyleSheet, View, Pressable, Text} from 'react-native';
 import InfoSvg from '../assets/svg/Info';
 import globalStyles from '../styles';
 import ArrowPointerSvg from '../assets/svg/ArrowPointer';
+import HamburguerSvg from '../assets/svg/Hamburguer';
 
 export const AuthHeader = ({navigation, onPress, title}) => {
   return (
     <View style={styles.view}>
       <View style={styles.back}>
 				<Pressable
-					style={styles.pressable, globalStyles.DEBUG}
 					onPress={
 						onPress
 							? onPress
@@ -25,12 +25,12 @@ export const AuthHeader = ({navigation, onPress, title}) => {
 				</Pressable>
 			</View>
 
-			<View style={styles.back}>
+			<View >
 				<Text style={styles.title}>{title}</Text>
 			</View>
 
-      <Pressable style={styles.info}>
-        <InfoSvg color={globalStyles.WHITE_COLOR} />
+      <Pressable style={styles.hamburguer} onPress={() => {console.log("_ _ menu")}}>
+        <HamburguerSvg color={globalStyles.WHITE_COLOR}  />
       </Pressable>
     </View>
   );
@@ -40,21 +40,37 @@ const styles = StyleSheet.create({
   view: {
 		flex: 1,
 		backgroundColor: globalStyles.PRIMARY_COLOR,
-    flexDirection: 'row',
+		flexDirection: 'row',
+		alignItems: 'center',
     justifyContent: 'space-between',
 		width: '100%',
-    maxHeight: 45,
-    paddingTop: 10,
+		maxHeight: 55,
 	},
 	back: {
-    marginLeft: '5%',
+		flex: 1,
+    height: 45,
+		maxWidth: 90,
+		alignItems: 'center',
+		justifyContent: 'center',
   },
-	pressable: {},
+	pressableBack: {
+    flex: 1,
+	},
 	title: {
 		marginTop: '2%',
-		color: globalStyles.WHITE_COLOR
+		color: globalStyles.WHITE_COLOR,
+		textAlign: 'center',
+		letterSpacing: 2,
+		textTransform: 'uppercase',
+		opacity: 1,
+		marginLeft: 'auto',
+		marginRight: 'auto'
 	},
-  info: {
-    marginRight: '5%',
+  hamburguer: {
+		flex: 1,
+		maxWidth: 90,
+		height: 38,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 });

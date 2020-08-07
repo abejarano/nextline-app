@@ -12,12 +12,14 @@ export const InputStyled = ({
   Icon,
   iconColor,
   isMultiline,
+  numberOfLines,
 }) => {
   return (
     <View style={{...styles.input, ...style}}>
       {Icon && <Icon style={styles.icon} color={iconColor} />}
       <TextInput
         multiline={isMultiline}
+        numberOfLines={numberOfLines}
         clearTextOnFocus={true}
         placeholder={placeholder}
         onChangeText={(text) => {

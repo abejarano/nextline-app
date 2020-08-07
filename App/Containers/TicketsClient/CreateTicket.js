@@ -10,6 +10,7 @@ import { ButtonStyled } from '../../Components/button';
 import { InputStyled } from '../../Components/input';
 import { StyledStatusBar } from '../../Components/statusBar';
 import SolidLogo from '../../assets/svg/SolidLogo';
+import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 
 export const CreateTicketsScreen = ({navigation}) => {
 	
@@ -36,39 +37,60 @@ export const CreateTicketsScreen = ({navigation}) => {
           behavior="height"
           style={styles.keyboardContainer}>
           
+          <View style={styles.textContainer}>
+            <Text style={styles.textTitle}>Nuevo Ticket</Text>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.textDate}>01/08/2020</Text>
+          </View>
+          
           <View style={styles.inputContainer}>
+            <View style={styles.viewSelect}>
+              <Text style={styles.textLabel}>Tipo de Avería</Text>
+
+              <ArrowPointerSvg
+                color={globalStyles.PRIMARY_COLOR}
+                direction="left"
+                bold
+              />
+            </View>
+            
+          </View>
+          
+          <View style={styles.inputContainer}>
+            <Text style={styles.textLabel}>Comentario</Text>
             <InputStyled
-              placeholder="Email"
-              onChange={(text) => { }}
-              iconColor={globalStyles.PRIMARY_COLOR}
-            />
-            <InputStyled
-              placeholder="Clave"
+              style={styles.textArea}
+              isMultiline={true}
+              numberOfLines={5}
+              placeholder="Explique en breves palabras el problema de su avería, y un técnico se pondrá en contacto con usted en un plazo de 24 horas."
               secureTextEntry={true}
               onChange={(text) => { }}
-              iconColor={globalStyles.PRIMARY_COLOR}
             />
           </View>
-          <Text style={styles.forgetText}>¿Olvidó su contraseña?</Text>
-        </KeyboardAvoidingView>
-        <ButtonStyled
-          onPress={() => {} }
-          backgroundColor={globalStyles.GREEN_COLOR}
-          color={globalStyles.WHITE_COLOR}
-          text={'INGRESAR'}
-        />
 
-        <>
-          <View style={styles.division}>
-            <Text numberOfLines={1} style={styles.texDivision}>
-              _______________________________________________
-            </Text>
-          </View>
-        </>
- 
+          <ButtonStyled
+            onPress={() => {} }
+            backgroundColor={globalStyles.GREEN_COLOR}
+            color={globalStyles.WHITE_COLOR}
+            text={'ENVIAR'}
+          />
+        </KeyboardAvoidingView>
+
       </View>
     </SafeAreaView>
   );
+};
+
+const boxShadow = {
+  shadowColor: "#005FAB",
+  shadowOffset: {
+    width: 0,
+    height: 12,
+  },
+  shadowOpacity: 0.58,
+  shadowRadius: 16.00,
+  elevation: 24,
 };
 
 const styles = StyleSheet.create({
@@ -85,8 +107,34 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  textContainer: {
+    paddingTop: 20,
+    alignItems: 'center',
+  },
+  textTitle: {
+    color: globalStyles.PRIMARY_COLOR,
+    fontSize: 17
+  },
+  textLabel: {
+    textTransform: 'uppercase',
+    color: globalStyles.PRIMARY_COLOR,
+    fontSize: 12,
+    marginLeft: '7%',
+  },
+  textDate: {
+    color: globalStyles.PRIMARY_COLOR_DARK
+  },
   input: {
     backgroundColor: globalStyles.WHITE_COLOR,
+  },
+  viewSelect:{
+    flexDirection: 'row',
+    ...boxShadow
+  },
+  textArea: {
+    maxHeight: 90,
+    borderRadius: 6,
+    ...boxShadow
   },
   button: {
     marginBottom: '10%',
@@ -98,27 +146,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     maxHeight: 150,
   },
-  forgetText: {
-    color: globalStyles.WHITE_COLOR,
-    margin: '2.5%',
-    textDecorationLine: 'underline',
-  },
-  text: {
-    color: globalStyles.WHITE_COLOR,
-    margin: '2.5%',
-  },
-  division: {
-    padding: '5%',
-  },
-  texDivision: {
-    color: globalStyles.WHITE_COLOR,
-  },
-  register: {
-    color: 'red',
-  },
+   
   keyboardContainer: {
     flex: 1,
-    alignItems: 'center',
   },
 });
 
