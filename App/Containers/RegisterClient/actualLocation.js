@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, ImageBackground} from 'react-native';
+import {StyleSheet, View, ImageBackground, Dimensions} from 'react-native';
 
 import {Title} from '../../Components/title';
 import {Header} from '../../Components/header';
@@ -7,8 +7,8 @@ import globalStyles from '../../styles';
 import {Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {GeolocationModal} from '../../Components/geolocationModal';
-import {scale} from '../../utils/utils';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {scale} from '../../utils';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const ActualLocation = ({navigation}) => {
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
@@ -30,7 +30,9 @@ export const ActualLocation = ({navigation}) => {
           <Title text={'Domicilio de Instalacion'} />
           <View style={styles.questionGroup}>
             <Text style={styles.question}>
-              ¿Esta usted en el sitio donde se{'\n'} va a instalar el servicios?
+              ¿Esta usted en el sitio donde se
+              {Dimensions.get('window').width > 370 ? '\n' : ''} va a instalar
+              el servicios?
             </Text>
             <View style={styles.optionsGroup}>
               <TouchableOpacity
@@ -70,7 +72,8 @@ const styles = StyleSheet.create({
   },
   question: {
     color: globalStyles.WHITE_COLOR,
-    fontSize: 21,
+    fontSize: scale(21),
+    fontFamily: globalStyles.TREBUCHET_BOLD_FONT,
     margin: '8%',
     textAlign: 'center',
   },
@@ -91,5 +94,6 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: scale(30),
     textAlign: 'center',
+    fontFamily: globalStyles.TREBUCHET_BOLD_FONT,
   },
 });

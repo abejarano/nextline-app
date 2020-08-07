@@ -16,6 +16,7 @@ import globalStyles from '../../styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SpeedGroup} from '../../Components/speedGroup';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {scale} from '../../utils';
 
 const PlanItem = ({item: plan, position, navigation}) => {
   const dispatch = useDispatch();
@@ -26,15 +27,22 @@ const PlanItem = ({item: plan, position, navigation}) => {
         navigation.push('Register');
       }}
       style={styles.planItem}>
-      <Text style={styles.plan}>{plan.plan}</Text>
+      <Text style={styles.plan}>{plan.plan.split(' ').join('')}</Text>
       <SpeedGroup
         upSpeed={plan.velocidad_subida}
         downSpeed={plan.velocidad_baja}
       />
       <Text style={styles.month}>Precio Mes</Text>
       <View style={styles.pricing}>
-        <Text style={styles.dollarPrice}>${plan.precio.split('USD')[0]}</Text>
-        <Text style={styles.bsPrice}>/ {plan.precio_bs}</Text>
+        <Text style={styles.dollarPrice}>
+          ${plan.precio.split('USD')[0].split('.')[0]} /
+        </Text>
+        <Text style={styles.bsPrice}>
+          {' '}
+          {plan.precio_bs.split('.')[0] +
+            ' ' +
+            plan.precio_bs.split('.')[1].split(',').join('.')}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -80,8 +88,8 @@ export function PlanSelectScreen({navigation}) {
                 />
               </View>
             )}
-            <Text numberOfLines={2} style={styles.lowText}>
-              Seleccione el plan de tu preferencia
+            <Text style={styles.lowText}>
+              Seleccione el plan{'\n'} de tu preferencia
             </Text>
           </View>
         </View>
@@ -121,35 +129,40 @@ const styles = StyleSheet.create({
   },
   dollarPrice: {
     color: globalStyles.WHITE_COLOR,
-    fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: scale(25),
+    marginLeft: 10,
+    fontFamily: globalStyles.TREBUCHET_FONT,
   },
   bsPrice: {
     color: globalStyles.WHITE_COLOR,
     textAlignVertical: 'center',
+    fontSize: scale(16),
+    fontFamily: globalStyles.TREBUCHET_FONT,
+    marginRight: 10,
   },
 
   month: {
     color: globalStyles.GRAY_TEXT_COLOR + '50',
     textTransform: 'uppercase',
+    fontSize: scale(10),
+    fontFamily: globalStyles.POPPINS_LIGHT,
   },
 
   plan: {
     color: globalStyles.PRIMARY_COLOR,
-    fontSize: 60,
-    fontWeight: 'bold',
+    fontSize: scale(64),
+    fontFamily: globalStyles.TREBUCHET_BOLD_FONT,
     textTransform: 'uppercase',
   },
   lowText: {
     color: globalStyles.WHITE_COLOR,
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: scale(21),
     overflow: 'hidden',
     marginTop: 'auto',
-    width: 180,
     textAlign: 'center',
     textAlignVertical: 'bottom',
     marginBottom: '20%',
+    fontFamily: globalStyles.TREBUCHET_BOLD_FONT,
   },
   scroll: {
     maxHeight: 300,

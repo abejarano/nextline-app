@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   speedItem: {},
   speed: {
     color: globalStyles.GRAY_TEXT_COLOR,
+    fontFamily: globalStyles.POPPINS_LIGHT,
   },
   arrow: {
     width: 45,

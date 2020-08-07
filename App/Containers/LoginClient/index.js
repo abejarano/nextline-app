@@ -17,6 +17,7 @@ import EmailSvg from '../../assets/svg/Email';
 import SolidLogo from '../../assets/svg/SolidLogo';
 import LockSvg from '../../assets/svg/Lock';
 import {Header} from '../../Components/header';
+import {scale} from '../../utils';
 
 const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ const LoginClient = ({navigation}) => {
             text={'INGRESAR'}
             disabled={loading}
             loading={loading}
+            styleText={styles.styleButtonText}
           />
 
           <>
@@ -101,6 +103,7 @@ const LoginClient = ({navigation}) => {
             color={globalStyles.WHITE_COLOR}
             text={'SOLICITA TU SERVICIO'}
             style={styles.button}
+            styleText={styles.styleButtonText}
           />
         </View>
       </ImageBackground>
@@ -124,12 +127,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  input: {
-    backgroundColor: globalStyles.WHITE_COLOR,
-  },
   button: {
     marginBottom: '10%',
-    fontWeight: 'bold',
   },
   inputContainer: {
     flex: 1,
@@ -141,6 +140,8 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     margin: '2.5%',
     textDecorationLine: 'underline',
+    fontFamily: globalStyles.TREBUCHET_FONT,
+    fontSize: scale(12),
   },
   text: {
     color: globalStyles.WHITE_COLOR,
@@ -152,11 +153,11 @@ const styles = StyleSheet.create({
   texDivision: {
     color: globalStyles.WHITE_COLOR,
   },
-  register: {
-    color: 'red',
-  },
   keyboardContainer: {
     flex: 1,
     alignItems: 'center',
+  },
+  styleButtonText: {
+    fontSize: scale(20),
   },
 });
