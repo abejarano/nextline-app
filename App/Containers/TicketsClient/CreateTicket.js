@@ -23,10 +23,10 @@ export const CreateTicketsScreen = ({navigation}) => {
 	
   return (
     <SafeAreaView style={styles.safe}>
-      
       <View style={styles.view}>
         <StyledStatusBar />
         <AuthHeader 
+          title="ASISTENCIA TÉCNICA"
           navigation={navigation}
           onPress={() => {
             navigation.goBack();
