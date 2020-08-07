@@ -50,5 +50,7 @@ const styles = StyleSheet.create({
   },
   innerInput: {
     width: '90%',
+    // fontFamily: globalStyles.TREBUCHET_FONT,
+    // fontWeight: 'bold',
   },
 });

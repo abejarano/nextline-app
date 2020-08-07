@@ -124,12 +124,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  input: {
-    backgroundColor: globalStyles.WHITE_COLOR,
-  },
   button: {
     marginBottom: '10%',
-    fontWeight: 'bold',
   },
   inputContainer: {
     flex: 1,
@@ -141,6 +137,7 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     margin: '2.5%',
     textDecorationLine: 'underline',
+    fontFamily: globalStyles.TREBUCHET_FONT,
   },
   text: {
     color: globalStyles.WHITE_COLOR,
@@ -151,9 +148,6 @@ const styles = StyleSheet.create({
   },
   texDivision: {
     color: globalStyles.WHITE_COLOR,
-  },
-  register: {
-    color: 'red',
   },
   keyboardContainer: {
     flex: 1,

@@ -20,4 +20,14 @@ export default {
     borderColor: 'red',
     borderWidth: 2,
   },
+  // Fonts
+  TREBUCHET_BOLD_FONT: 'trebuc-bold',
+  TREBUCHET_FONT: 'trebuc',
+  DEBUG_FONT: 'GreatVibes',
+  POPPINS_BOLD: 'Poppins-Bold',
+  POPPINS_LOGHT: 'Poppins-Loght',
+  POPPINS_MEDIUM: 'Poppins-Medium',
+  POPPINS_REGULAR: 'Poppins-Regular',
+  POPPINS_THIN: 'Poppins-Thin',
+  POPPINS_SEMIBOLD: 'Poppins-SemiBold',
 };
