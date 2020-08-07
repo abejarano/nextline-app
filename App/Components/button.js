@@ -25,7 +25,7 @@ export const ButtonStyled = ({
       onPress={!disabled && onPress}
       style={[{...styles.button, backgroundColor}, style]}
       accessibilityLabel="Learn more about this purple button">
-      <Text style={{...styles.text, color}}>
+      <Text style={{...styles.text, color, ...styleText}}>
         {loading ? (
           <ActivityIndicator color={globalStyles.WHITE_COLOR} />
         ) : (
@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     color: globalStyles.WHITE_COLOR,
-    // fontWeight: 'bold',
-    fontFamily: globalStyles.TREBUCHET_FONT,
+    fontFamily: globalStyles.TREBUCHET_BOLD_FONT,
   },
   icon: {
     flex: 1,
