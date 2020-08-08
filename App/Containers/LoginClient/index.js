@@ -49,7 +49,7 @@ const LoginClient = ({navigation}) => {
       }
       return errors;
     },
-    onSubmit: (values, {setSubmitting}) => {
+    onSubmit: ({email, password}, {setSubmitting}) => {
       dispatch(login({email: email, clave: password}));
     },
   });

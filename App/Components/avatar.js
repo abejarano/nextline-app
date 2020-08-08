@@ -63,23 +63,18 @@ const onPress = async (setImage) => {
 export const Avatar = ({image, setImage}) => {
   return (
     <View style={{...styles.view}}>
-      {image ? (
-        <TouchableOpacity
-          onPress={() => {
-            onPress(setImage);
-          }}>
+      <TouchableOpacity
+        onPress={() => {
+          onPress(setImage);
+        }}>
+        {image ? (
           <Image source={image} style={styles.image} />
-        </TouchableOpacity>
-      ) : (
-        <View style={styles.imageEmpty} title="Image">
-          <TouchableOpacity
-            onPress={() => {
-              onPress(setImage);
-            }}>
+        ) : (
+          <View style={styles.imageEmpty} title="Image">
             <ProfileSvg color={globalStyles.PRIMARY_COLOR} />
-          </TouchableOpacity>
-        </View>
-      )}
+          </View>
+        )}
+      </TouchableOpacity>
     </View>
   );
 };

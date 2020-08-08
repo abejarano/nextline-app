@@ -7,7 +7,7 @@ import HamburguerSvg from '../assets/svg/Hamburguer';
 
 export const AuthHeader = ({navigation, onPress, title, backVisble}) => {
   return (
-    <View style={styles.view}>
+    <View style={styles.view} pointerEvents="box-none">
       <View style={styles.back}>
         {backVisble && (
           <TouchableOpacity
