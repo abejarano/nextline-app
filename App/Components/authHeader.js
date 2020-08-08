@@ -1,54 +1,64 @@
 import React from 'react';
-import {StyleSheet, View, Pressable, Text} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import InfoSvg from '../assets/svg/Info';
 import globalStyles from '../styles';
 import ArrowPointerSvg from '../assets/svg/ArrowPointer';
 import HamburguerSvg from '../assets/svg/Hamburguer';
 
-export const AuthHeader = ({navigation, onPress, title}) => {
+export const AuthHeader = ({navigation, onPress, title, backVisble}) => {
   return (
     <View style={styles.view}>
       <View style={styles.back}>
-        <Pressable
-          onPress={
-            onPress
-              ? onPress
-              : () => {
-                  navigation.goBack();
-                }
-          }>
-          <ArrowPointerSvg
-            color={globalStyles.WHITE_COLOR}
-            direction="left"
-            bold
-          />
-        </Pressable>
+        {backVisble && (
+          <TouchableOpacity
+            onPress={
+              onPress
+                ? onPress
+                : () => {
+                    navigation.goBack();
+                  }
+            }>
+            <ArrowPointerSvg
+              color={globalStyles.WHITE_COLOR}
+              direction="left"
+              bold
+            />
+          </TouchableOpacity>
+        )}
       </View>
 
       <View>
         <Text style={styles.title}>{title}</Text>
       </View>
 
-      <Pressable
-        style={styles.hamburguer}
-        onPress={() => {
-          navigation.openDrawer();
-        }}>
-        <HamburguerSvg color={globalStyles.WHITE_COLOR} />
-      </Pressable>
+      <Hamburguer navigation={navigation} />
     </View>
+  );
+};
+const Hamburguer = ({navigation}) => {
+  return (
+    <TouchableOpacity
+      style={styles.hamburguer}
+      onPress={() => {
+        navigation.openDrawer();
+      }}>
+      <HamburguerSvg color={globalStyles.WHITE_COLOR} />
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    backgroundColor: globalStyles.PRIMARY_COLOR,
+    position: 'absolute',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    maxHeight: 55,
+    maxHeight: 45,
+    minHeight: 45,
+    top: 0,
+    zIndex: 100,
   },
   back: {
     flex: 1,
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  pressableBack: {
+  TouchableOpacityBack: {
     flex: 1,
   },
   title: {

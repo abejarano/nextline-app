@@ -37,7 +37,11 @@ const Sidebar = ({navigation}) => {
   const dispatch = useDispatch();
   return (
     <View style={styles.container}>
-      <CloseSvg style={styles.close} />
+      <TouchableOpacity
+        style={styles.close}
+        onPress={() => navigation.closeDrawer()}>
+        <CloseSvg />
+      </TouchableOpacity>
       <Image
         style={styles.logo}
         source={require('../assets/images/LogoMenu.png')}

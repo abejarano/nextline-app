@@ -77,13 +77,8 @@ const TabItem = ({route, navigation, options, isFocused}) => {
 };
 
 const styles = StyleSheet.create({
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   nav: {
-    position: null,
+    // position: null,
     backgroundColor: globalStyles.PRIMARY_COLOR_DARK,
     left: '10%',
     right: 0,

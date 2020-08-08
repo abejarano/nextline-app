@@ -1,12 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  StyleSheet,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StatusBar, StyleSheet, ImageBackground} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {servicioStatusFetch, contratoStatusFetch} from '../../actions/servicio';
 import LinearGradient from 'react-native-linear-gradient';
@@ -14,11 +7,12 @@ import globalStyles from '../../styles';
 import SolidLogin from '../../assets/svg/SolidLogo';
 import {SpeedGroup} from '../../Components/speedGroup';
 import {Avatar} from '../../Components/avatar';
-import {Header} from '../../Components/header';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {scale} from '../../utils';
+import {scale, verticalScale} from '../../utils';
 import {FacturaStatus} from './facturaStatus';
 import {StatusService} from './statusService';
+import {AuthHeader} from '../../Components/authHeader';
+import {ScrollView} from 'react-native';
 
 const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -42,55 +36,50 @@ const HomeClientScreen = ({navigation}) => {
         source={require('../../assets/images/wallpapers/home.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
         <View style={styles.view}>
-          <Header backVisible={false} />
-          <View style={styles.userContainer}>
-            <Avatar />
-            <View style={styles.usernameContainer}>
-              <Text style={styles.usernameLabel}>Usuario</Text>
-              <Text style={styles.usernameText}>
-                {user && user.nombre_razsoc}
-              </Text>
-            </View>
-          </View>
-          <StatusBar barStyle="dark-content" />
-          <Text style={styles.serviceLabel}>tipo de servicio</Text>
-          <Text style={styles.serviceText}>{service.servicio}</Text>
-          <View style={styles.gradientContainer}>
-            <LinearGradient
-              colors={[
-                globalStyles.LIGTH_BLUE_COLOR,
-                globalStyles.PRIMARY_COLOR,
-                globalStyles.PRIMARY_COLOR_DARK,
-              ]}
-              angle={180}
-              style={styles.linearGradient}>
-              <View style={styles.whiteCircle}>
-                <SolidLogin
-                  width={80}
-                  height={80}
-                  style={styles.logo}
-                  color={globalStyles.GRAY_COLOR + '80'}
-                />
-                <Text style={styles.buttonText}>
-                  {plan?.plan.split(' ').join('')}
-                </Text>
-                <Text style={styles.buttonLowerText}>PLAN</Text>
+          <AuthHeader navigation={navigation} title={''} backVisible={false} />
+          <ScrollView style={styles.scrollView}>
+            <View style={styles.view}>
+              <View style={styles.userContainer}>
+                <Avatar />
+                <View style={styles.usernameContainer}>
+                  <Text style={styles.usernameLabel}>Usuario</Text>
+                  <Text style={styles.usernameText}>
+                    {user && user.nombre_razsoc}
+                  </Text>
+                </View>
               </View>
-            </LinearGradient>
-          </View>
-          <SpeedGroup
-            upSpeed={plan.velocidad_subida}
-            downSpeed={plan.velocidad_baja}
-          />
-          {isClient ? <FacturaStatus /> : <StatusService status={status} />}
-          <>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.push('TicketsClient');
-              }}>
-              <Text>Tickets</Text>
-            </TouchableOpacity>
-          </>
+              <StatusBar barStyle="dark-content" />
+              <Text style={styles.serviceLabel}>tipo de servicio</Text>
+              <Text style={styles.serviceText}>{service.servicio}</Text>
+              <View style={styles.gradientContainer}>
+                <LinearGradient
+                  colors={[
+                    globalStyles.LIGTH_BLUE_COLOR,
+                    globalStyles.PRIMARY_COLOR,
+                    globalStyles.PRIMARY_COLOR_DARK,
+                  ]}
+                  angle={180}
+                  style={styles.linearGradient}>
+                  <View style={styles.whiteCircle}>
+                    <SolidLogin
+                      scale={0.35}
+                      style={styles.logo}
+                      color={globalStyles.GRAY_COLOR + '80'}
+                    />
+                    <Text style={styles.buttonText}>
+                      {plan?.plan.split(' ').join('')}
+                    </Text>
+                    <Text style={styles.buttonLowerText}>PLAN</Text>
+                  </View>
+                </LinearGradient>
+              </View>
+              <SpeedGroup
+                upSpeed={plan.velocidad_subida}
+                downSpeed={plan.velocidad_baja}
+              />
+              {isClient ? <FacturaStatus /> : <StatusService status={status} />}
+            </View>
+          </ScrollView>
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -100,17 +89,22 @@ const HomeClientScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: '#085da2',
+    backgroundColor: '#fff',
   },
   view: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
+    height: '100%',
+  },
+  scrollView: {
+    flex: 1,
+    width: '100%',
+    marginBottom: '3%',
   },
   gradientContainer: {
-    width: 200,
-    height: 200,
+    width: verticalScale(200),
+    height: verticalScale(200),
     marginBottom: '3%',
   },
   linearGradient: {
@@ -118,15 +112,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 15,
-
     borderRadius: 240,
-    shadowColor: globalStyles.PRIMARY_COLOR_DARK + '33',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
+    ...globalStyles.SHADOW,
   },
   buttonText: {
     fontSize: scale(33),
@@ -136,26 +123,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     textTransform: 'uppercase',
   },
-  logo: {
-    marginTop: 10,
-    marginBottom: -30,
-  },
+  logo: {},
   whiteCircle: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
     overflow: 'hidden',
     borderRadius: 240,
     borderColor: globalStyles.WHITE_COLOR,
     borderWidth: 15,
+    padding: verticalScale(7),
+    // ...globalStyles.DEBUG,
   },
   buttonLowerText: {
     fontSize: 12,
     textAlign: 'center',
     color: globalStyles.WHITE_COLOR,
-    backgroundColor: 'transparent',
     textTransform: 'uppercase',
     fontFamily: globalStyles.POPPINS_SEMIBOLD,
   },
@@ -217,7 +202,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginBottom: '3%',
+    marginVertical: '3%',
     maxHeight: 100,
     minHeight: 75,
   },
