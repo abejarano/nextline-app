@@ -12,6 +12,7 @@ import {login, resetErrorAuth} from '../../actions/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {ButtonStyled} from '../../Components/button';
 import {InputStyled} from '../../Components/input';
+import {StyledStatusBar} from '../../Components/statusBar';
 import globalStyles from '../../styles';
 import EmailSvg from '../../assets/svg/Email';
 import SolidLogo from '../../assets/svg/SolidLogo';
@@ -77,6 +78,8 @@ const LoginClient = ({navigation}) => {
       <ImageBackground
         source={require('../../assets/images/login_wallpapers/60.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
+        <StyledStatusBar />
+
         <View style={styles.view}>
           <Header backVisible={false} />
           <KeyboardAvoidingView

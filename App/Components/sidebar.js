@@ -17,6 +17,8 @@ import globalStyles from '../styles';
 import {scale} from '../utils';
 import {useDispatch} from 'react-redux';
 import {signout} from '../actions/auth';
+import {StyledStatusBar} from './statusBar';
+import {useIsDrawerOpen} from '@react-navigation/drawer';
 
 const items = [
   {
@@ -35,8 +37,11 @@ const items = [
 
 const Sidebar = ({navigation}) => {
   const dispatch = useDispatch();
+  const isDrawerOpen = useIsDrawerOpen();
   return (
     <View style={styles.container}>
+      {/* {isDrawerOpen && <StyledStatusBar color={globalStyles.WHITE_COLOR} />} */}
+
       <TouchableOpacity
         style={styles.close}
         onPress={() => navigation.closeDrawer()}>

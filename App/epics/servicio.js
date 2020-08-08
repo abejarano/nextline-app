@@ -18,6 +18,7 @@ import {
 } from '../actions/servicio';
 import {planSelect} from '../actions/plan';
 import {loadProfileSuccess} from '../actions/profile';
+import {signout} from '../actions/auth';
 
 const fetchServicioStatusEpic = (action$, state$) =>
   action$.pipe(
@@ -55,7 +56,9 @@ const fetchContratoStatusEpic = (action$, state$) =>
             servicioSelect(response.data.contratos[0].plan.tipo_servicio),
           );
         }),
-        catchError((error) => of(contratoStatusFetchFailed(error))),
+        catchError((error) =>
+          of(contratoStatusFetchFailed(error), signout(error)),
+        ),
       ),
     ),
   );

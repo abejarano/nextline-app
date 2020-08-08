@@ -14,6 +14,7 @@ import {StatusService} from './statusService';
 import {AuthHeader} from '../../Components/authHeader';
 import {ScrollView} from 'react-native';
 import {CentralHomeButton} from './centerButton';
+import {StyledStatusBar} from '../../Components/statusBar';
 
 const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const HomeClientScreen = ({navigation}) => {
   }, [dispatch, isClient]);
   return (
     <SafeAreaView style={styles.safe}>
+      <StyledStatusBar />
       <ImageBackground
         source={require('../../assets/images/wallpapers/home.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
