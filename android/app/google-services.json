@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:320564611786:android:6be7cb8d7b559eb84b8233",
+        "mobilesdk_app_id": "1:320564611786:android:2a45554f7e0546654b8233",
         "android_client_info": {
-          "package_name": "com.jaspersoft.nextline"
+          "package_name": "nextline.jaspesoft.com"
         }
       },
       "oauth_client": [
@@ -30,6 +30,13 @@
             {
               "client_id": "320564611786-a06i6odnntt0hdk6a0acgrada44ic5ll.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "320564611786-9i0pis16mdo6d0nrcf3bjpl974cetkva.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "nextline.jaspesoft.com"
+              }
             }
           ]
         }
