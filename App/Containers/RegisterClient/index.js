@@ -19,16 +19,59 @@ import globalStyles from '../../styles';
 import {Avatar} from '../../Components/avatar';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyledStatusBar} from '../../Components/statusBar';
-import {scale} from '../../utils';
+import {scale, validateEmail} from '../../utils';
+import {useFormik} from 'formik';
 
 export function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [cedularif, setCedulaRif] = useState('');
-  const [nombrerzb, setNombreRzb] = useState('');
-  const [phone, setPhone] = useState('');
-  const [repassword, setRepassword] = useState('');
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      cedularif: '',
+      nombrerzb: '',
+      phone: '',
+      repassword: '',
+    },
+
+    // Custom sync validation
+    validate: (values) => {
+      const errors = {};
+
+      for (const key in values) {
+        if (values.hasOwnProperty(key)) {
+          const element = values[key];
+          if (!element) {
+            errors[key] = key + ' es requerido';
+          }
+        }
+      }
+      if (values.password !== values.repassword) {
+        errors.repassword = 'Las claves no son iguales';
+      }
+
+      if (values.password.length < 8) {
+        errors.password = 'La clave debe de ser de 8 o mas digitos';
+      }
+      if (!validateEmail(values.email)) {
+        errors.email = 'Email invalido';
+      }
+      return errors;
+    },
+    onSubmit: (values, {setSubmitting}) => {
+      dispatch(
+        setSignupPartialData({
+          nombre_razsoc: values.nombrerzb,
+          cedula_rif: values.cedularif,
+          correo: values.email,
+          celular: values.phone,
+          clave: values.password,
+          avatar: image.data,
+        }),
+      );
+      navigation.push('ActualLocation');
+    },
+  });
   const [image, setImage] = useState('');
 
   return (
@@ -68,63 +111,62 @@ export function RegisterScreen({navigation}) {
               </Text>
               <InputStyled
                 placeholder="Nombre o razon social"
-                onChange={(text) => {
-                  setNombreRzb(text);
-                }}
-                style={styles.button}
+                value={formik.values.nombrerzb}
+                onBlur={formik.handleBlur('nombrerzb')}
+                onChange={formik.handleChange('nombrerzb')}
+                valid={!(formik.errors.nombrerzb && formik.touched.nombrerzb)}
+                style={styles.nombrerzb}
               />
               <InputStyled
                 placeholder="Cedula o RIF"
-                onChange={(text) => {
-                  setCedulaRif(text);
-                }}
+                value={formik.values.cedularif}
+                onBlur={formik.handleBlur('cedularif')}
+                onChange={formik.handleChange('cedularif')}
+                valid={!(formik.errors.cedularif && formik.touched.cedularif)}
                 style={styles.button}
               />
               <InputStyled
                 placeholder="Email"
-                onChange={(text) => {
-                  setEmail(text);
-                }}
+                value={formik.values.email}
+                onBlur={formik.handleBlur('email')}
+                onChange={formik.handleChange('email')}
+                valid={!(formik.errors.email && formik.touched.email)}
                 style={styles.button}
               />
               <InputStyled
                 placeholder="Telefono"
-                onChange={(text) => {
-                  setPhone(text);
-                }}
+                value={formik.values.phone}
+                onBlur={formik.handleBlur('phone')}
+                onChange={formik.handleChange('phone')}
+                valid={!(formik.errors.phone && formik.touched.phone)}
                 style={styles.button}
               />
               <InputStyled
                 placeholder="Clave"
                 secureTextEntry={true}
-                onChange={(text) => {
-                  setPassword(text);
-                }}
+                value={formik.values.password}
+                onBlur={formik.handleBlur('password')}
+                onChange={formik.handleChange('password')}
+                valid={!(formik.errors.password && formik.touched.password)}
                 style={styles.button}
               />
               <InputStyled
                 placeholder="Confirmar clave"
                 secureTextEntry={true}
-                onChange={(text) => {
-                  setRepassword(text);
-                }}
+                value={formik.values.repassword}
+                onBlur={formik.handleBlur('repassword')}
+                onChange={formik.handleChange('repassword')}
+                valid={!(formik.errors.repassword && formik.touched.repassword)}
                 style={styles.button}
               />
               <View style={styles.buttonContainer}>
                 <ButtonStyled
                   onPress={() => {
-                    if (repassword === password) {
-                      dispatch(
-                        setSignupPartialData({
-                          nombre_razsoc: nombrerzb,
-                          cedula_rif: cedularif,
-                          correo: email,
-                          celular: phone,
-                          clave: password,
-                          avatar: image.data,
-                        }),
-                      );
-                      navigation.push('ActualLocation');
+                    const errors = Object.keys(formik.errors);
+                    if (errors.length > 0) {
+                      alert(`${formik.errors[errors[0]]}`);
+                    } else {
+                      formik.handleSubmit();
                     }
                   }}
                   backgroundColor={globalStyles.LIGTH_BLUE_COLOR}
@@ -132,6 +174,7 @@ export function RegisterScreen({navigation}) {
                   text={'Continuar'}
                   styleText={styles.continueButton}
                   Icon={ArrowPointerSvg}
+                  // disabled={!!formik.errors}
                   iconColor={globalStyles.WHITE_COLOR}
                 />
               </View>

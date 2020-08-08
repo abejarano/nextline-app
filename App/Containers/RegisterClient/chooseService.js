@@ -15,12 +15,18 @@ import {servicioFetch, servicioSelect} from '../../actions/servicio';
 import {FlatList} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyledStatusBar} from '../../Components/statusBar';
-import SolidLogo from '../../assets/svg/SolidLogo';
+import {EmpresarialSvg} from '../../assets/svg/selectService/Empresarial';
+import {ResidencialSvg} from '../../assets/svg/selectService/Residencial';
+import {DedicadoSvg} from '../../assets/svg/selectService/Dedicado';
 import {scale} from '../../utils';
 
 const Service = ({id, servicio, activo, index, navigation}) => {
   const dispatch = useDispatch();
-
+  const Icons = [
+    <EmpresarialSvg color={globalStyles.WHITE_COLOR} style={styles.logo} />,
+    <ResidencialSvg color={globalStyles.WHITE_COLOR} style={styles.logo} />,
+    <DedicadoSvg color={globalStyles.WHITE_COLOR} style={styles.logo} />,
+  ];
   return (
     <TouchableOpacity
       style={styles.serviceView}
@@ -32,13 +38,8 @@ const Service = ({id, servicio, activo, index, navigation}) => {
       <View
         style={{
           ...styles.serviceButton,
-          backgroundColor:
-            globalStyles[
-              globalStyles.LIST_COLORS[index % globalStyles.LIST_COLORS.length]
-            ],
         }}>
-        {/* <Text style={styles.plus}>+</Text> */}
-        <SolidLogo icon color={globalStyles.WHITE_COLOR} style={styles.logo} />
+        {Icons[index % Icons.length]}
       </View>
     </TouchableOpacity>
   );
@@ -114,7 +115,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     height: 50,
     width: 50,
-    backgroundColor: globalStyles.MUSTARD_COLOR,
   },
   serviceView: {
     display: 'flex',
