@@ -1,4 +1,4 @@
-package com.jaspersoft.nextline;
+package nextline.jaspersoft.com;
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;

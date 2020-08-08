@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.jaspersoft.nextline"
+        applicationId "nextline.jaspersoft.com"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
