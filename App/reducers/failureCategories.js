@@ -1,8 +1,8 @@
 import {
   FAILURE_CATEGORIES_FETCH_SUCCESS,
-	FAILURE_CATEGORIES_FETCH_FAILED,
-	FAILURE_CATEGORIES_FETCHING_DATA,
-	FAILURE_CATEGORY_SELECTED,
+  FAILURE_CATEGORIES_FETCH_FAILED,
+  FAILURE_CATEGORIES_FETCHING_DATA,
+  FAILURE_CATEGORY_SELECTED,
 } from '../actions/failureCategories';
 import {RESET_STORE} from '../actions/utils';
 
@@ -16,12 +16,15 @@ const failureCategoriesState = {
   },
 };
 
-export const failureCategoriesReducer = (state = failureCategoriesState, {type, payload}) => {
+export const failureCategoriesReducer = (
+  state = failureCategoriesState,
+  {type, payload},
+) => {
   switch (type) {
     case FAILURE_CATEGORIES_FETCH_SUCCESS:
       return {
         ...state,
-        data: payload.results,
+        data: payload.data.results,
         fetching: false,
       };
     case FAILURE_CATEGORIES_FETCHING_DATA:

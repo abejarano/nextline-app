@@ -18,6 +18,7 @@ import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import {FailureTypeModal} from '../../Components/failureTypeModal';
 import {failureCategoriesFetch} from '../../actions/failureCategories';
 import moment from 'moment';
+import {useFormik} from 'formik';
 
 export const CreateTicketsScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -27,11 +28,36 @@ export const CreateTicketsScreen = ({navigation}) => {
   const [coment, setComent] = useState(null);
   const today = moment().format('DD/MM/YYYY');
   const loading = false;
+  const formik = useFormik({
+    initialValues: {
+      failureId: '',
+      coment: '',
+    },
 
-  const createTicket = () => {
+    // Custom sync validation
+    validate: (values) => {
+      const errors = {};
+
+      for (const key in values) {
+        if (values.hasOwnProperty(key)) {
+          const element = values[key];
+          if (!element) {
+            errors[key] = key + ' es requerido';
+          }
+        }
+      }
+
+      return errors;
+    },
+    onSubmit: (values, {setSubmitting}) => {
+      dispatch(
+        createTicket({failureId: values.failureId, coment: values.coment}),
+      );
+    },
+  });
+  const createTicket = (failureId, coment) => {
     console.log('createTicket');
   };
-
   useEffect(() => {
     dispatch(failureCategoriesFetch());
   }, [dispatch]);
@@ -42,7 +68,9 @@ export const CreateTicketsScreen = ({navigation}) => {
         <FailureTypeModal
           setShowModal={setShowModal}
           showModal={showModal}
-          setFailureId={setFailureId}
+          setFailureId={(failureId) =>
+            formik.setFieldValue('failureId', failureId)
+          }
           failures={failures}
         />
         <StyledStatusBar />
@@ -68,7 +96,7 @@ export const CreateTicketsScreen = ({navigation}) => {
               </View>
 
               <View style={styles.selectContainer}>
-                <Text style={styles.textLabel}>Tipo de Avería</Text>
+                <Text style={styles.textLabelFailure}>Tipo de Avería</Text>
                 <Pressable
                   style={styles.pressable}
                   onPress={() => {
@@ -76,7 +104,13 @@ export const CreateTicketsScreen = ({navigation}) => {
                     setShowModal(true);
                   }}>
                   <View style={styles.viewSelect}>
-                    <Text style={styles.textSelect}>Seleccione una avería</Text>
+                    <Text style={styles.textSelect}>
+                      {formik.values.failureId
+                        ? failures.find(
+                            (fail) => fail.id === formik.values.failureId,
+                          ).descripcion
+                        : 'Seleccione una avería'}
+                    </Text>
                     <ArrowPointerSvg
                       style={styles.arrowDown}
                       color={globalStyles.PRIMARY_COLOR}
@@ -90,19 +124,22 @@ export const CreateTicketsScreen = ({navigation}) => {
               <View style={styles.inputContainer}>
                 <Text style={styles.textLabel}>Comentario</Text>
                 <InputStyled
+                  value={formik.values.coment}
+                  onBlur={formik.handleBlur('coment')}
+                  onChange={formik.handleChange('coment')}
+                  valid={!formik.errors.coment && !formik.touched.coment}
                   style={styles.textArea}
                   isMultiline={true}
                   numberOfLines={5}
                   placeholder="Explique en breves palabras el problema de su avería, y un técnico se pondrá en contacto con usted en un plazo de 24 horas."
                   secureTextEntry={true}
-                  onChange={(text) => setComent(text)}
                 />
               </View>
 
               <View style={styles.containerButton}>
                 <ButtonStyled
                   style={styles.buttonSend}
-                  onPress={() => createTicket()}
+                  onPress={() => formik.handleSubmit()}
                   backgroundColor={globalStyles.GREEN_COLOR}
                   color={globalStyles.WHITE_COLOR}
                   text={'ENVIAR'}
@@ -149,6 +186,13 @@ const styles = StyleSheet.create({
     color: globalStyles.PRIMARY_COLOR,
     fontSize: 17,
   },
+  textLabelFailure: {
+    textTransform: 'uppercase',
+    alignSelf: 'flex-start',
+    color: globalStyles.PRIMARY_COLOR,
+    fontSize: 12,
+    marginLeft: '9%',
+  },
   textLabel: {
     textTransform: 'uppercase',
     color: globalStyles.PRIMARY_COLOR,
@@ -189,12 +233,20 @@ const styles = StyleSheet.create({
   },
   selectContainer: {
     flex: 1,
-    width: '90%',
+    width: '100%',
     justifyContent: 'space-evenly',
+    alignItems: 'center',
     maxHeight: 60,
-    ...boxShadow,
   },
-  pressable: {},
+  pressable: {
+    flex: 1,
+    width: '90%',
+    backgroundColor: '#fff',
+    borderRadius: 6,
+    ...boxShadow,
+    justifyContent: 'space-evenly',
+    maxHeight: 150,
+  },
   inputContainer: {
     flex: 1,
     width: '90%',
@@ -213,7 +265,6 @@ const styles = StyleSheet.create({
   },
   buttonSend: {
     alignItems: 'flex-end',
-    // alignSelf: 'flex-end'
   },
 });
 
