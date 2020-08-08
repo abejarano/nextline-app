@@ -55,7 +55,7 @@ const Sidebar = ({navigation}) => {
         onPress={() => {
           dispatch(signout());
         }}>
-        <Text style={styles.label}>CERRAR SESIÓN</Text>
+        <Text style={[styles.label, {fontSize: scale(14)}]}>CERRAR SESIÓN</Text>
         <LogoutSvg />
       </TouchableOpacity>
     </View>
@@ -103,7 +103,9 @@ const styles = StyleSheet.create({
   label: {
     color: '#005FAB',
     fontSize: scale(18),
+    fontFamily: globalStyles.POPPINS_REGULAR,
     textAlign: 'center',
+    textAlignVertical: 'bottom',
   },
   logoutContainer: {
     flex: 1,
