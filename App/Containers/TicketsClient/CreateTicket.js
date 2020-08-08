@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet,  KeyboardAvoidingView, Pressable} from 'react-native';
+import {View, Text, StyleSheet,  KeyboardAvoidingView, Pressable, ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import globalStyles from '../../styles';
 import {AuthHeader} from '../../Components/authHeader';
@@ -19,13 +19,14 @@ export const CreateTicketsScreen = ({navigation}) => {
   const [failureId, setFailureId] = useState(null);
   const [coment, setComent] = useState(null);
   const today = moment().format('DD/MM/YYYY');
+  const loading = false;
 
   const createTicket = () => {
     console.log('createTicket');
   };
 
   useEffect(() => {
-    // dispatch(failureCategoriesFetch());
+    dispatch(failureCategoriesFetch());
   }, [dispatch]);
 
   return (
@@ -48,59 +49,68 @@ export const CreateTicketsScreen = ({navigation}) => {
         <KeyboardAvoidingView
           behavior="height"
           style={styles.keyboardContainer}>
-          
-          <View style={styles.textContainer}>
-            <Text style={styles.textTitle}>Nuevo Ticket</Text>
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.textDate}>{today}</Text>
-          </View>
-          
-          <View style={styles.selectContainer}>
-            <Text style={styles.textLabel}>Tipo de Avería</Text>
-            <Pressable
-              style={styles.pressable}
-              onPress={() => {
-                console.log('pres'); 
-                setShowModal(true)
-              }}
-            >
-              <View style={styles.viewSelect}>
-                <Text style={styles.textSelect}>Seleccione una avería</Text>
-                <ArrowPointerSvg
-                  style={styles.arrowDown}
-                  color={globalStyles.PRIMARY_COLOR}
-                  direction="left"
-                  bold
-                />
-              </View>
-            </Pressable>
-          </View>
-          
-          <View style={styles.inputContainer}>
-            <Text style={styles.textLabel}>Comentario</Text>
-            <InputStyled
-              style={styles.textArea}
-              isMultiline={true}
-              numberOfLines={5}
-              placeholder="Explique en breves palabras el problema de su avería, y un técnico se pondrá en contacto con usted en un plazo de 24 horas."
-              secureTextEntry={true}
-              onChange={(text) => setComent(text)}
-            />
-          </View>
+            
+          {loading ? (
+              <ActivityIndicator
+                size="large"
+                color={globalStyles.WHITE_COLOR}
+              />
+            ) : (
+              <>
+                <View style={styles.textContainer}>
+                  <Text style={styles.textTitle}>Nuevo Ticket</Text>
+                </View>
+                <View style={styles.textContainer}>
+                  <Text style={styles.textDate}>{today}</Text>
+                </View>
+                
+                <View style={styles.selectContainer}>
+                  <Text style={styles.textLabel}>Tipo de Avería</Text>
+                  <Pressable
+                    style={styles.pressable}
+                    onPress={() => {
+                      console.log('pres'); 
+                      setShowModal(true)
+                    }}
+                  >
+                    <View style={styles.viewSelect}>
+                      <Text style={styles.textSelect}>Seleccione una avería</Text>
+                      <ArrowPointerSvg
+                        style={styles.arrowDown}
+                        color={globalStyles.PRIMARY_COLOR}
+                        direction="left"
+                        bold
+                      />
+                    </View>
+                  </Pressable>
+                </View>
+                
+                <View style={styles.inputContainer}>
+                  <Text style={styles.textLabel}>Comentario</Text>
+                  <InputStyled
+                    style={styles.textArea}
+                    isMultiline={true}
+                    numberOfLines={5}
+                    placeholder="Explique en breves palabras el problema de su avería, y un técnico se pondrá en contacto con usted en un plazo de 24 horas."
+                    secureTextEntry={true}
+                    onChange={(text) => setComent(text)}
+                  />
+                </View>
 
-          <View style={styles.containerButton}>
-            <ButtonStyled
-              style={styles.buttonSend}
-              onPress={() => createTicket() }
-              backgroundColor={globalStyles.GREEN_COLOR}
-              color={globalStyles.WHITE_COLOR}
-              text={'ENVIAR'}
-            />
-          </View>
-
+                <View style={styles.containerButton}>
+                  <ButtonStyled
+                    style={styles.buttonSend}
+                    onPress={() => createTicket() }
+                    backgroundColor={globalStyles.GREEN_COLOR}
+                    color={globalStyles.WHITE_COLOR}
+                    text={'ENVIAR'}
+                  />
+                </View>
+                
+              </>
+            )}
+          
         </KeyboardAvoidingView>
-
       </View>
     </SafeAreaView>
   );
