@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {View, Text, StatusBar, StyleSheet, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {servicioStatusFetch, contratoStatusFetch} from '../../actions/servicio';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,9 +15,10 @@ import SolidLogin from '../../assets/svg/SolidLogo';
 import {SpeedGroup} from '../../Components/speedGroup';
 import {Avatar} from '../../Components/avatar';
 import {Header} from '../../Components/header';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {scale} from '../../utils';
+import {FacturaStatus} from './facturaStatus';
+import {StatusService} from './statusService';
 
 const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -74,11 +82,7 @@ const HomeClientScreen = ({navigation}) => {
             upSpeed={plan.velocidad_subida}
             downSpeed={plan.velocidad_baja}
           />
-          <Text style={styles.statusLabel}>Estatus de solicitud</Text>
-          <View style={styles.statusContainer}>
-            <Text style={styles.statusText}>{status && status.status}</Text>
-            <View style={styles.redCircle} />
-          </View>
+          {isClient ? <FacturaStatus /> : <StatusService status={status} />}
           <>
             <TouchableOpacity
               onPress={() => {
