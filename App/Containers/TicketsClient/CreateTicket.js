@@ -9,30 +9,25 @@ import { InputStyled } from '../../Components/input';
 import { StyledStatusBar } from '../../Components/statusBar';
 import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
 import { FailureTypeModal } from '../../Components/failureTypeModal';
+import { failureCategoriesFetch } from '../../actions/failureCategories';
+import * as moment from 'moment';
 
 export const CreateTicketsScreen = ({navigation}) => {
-	
-  const status = useSelector(
-    (state) => state.servicio.status.data.solicitud_servicio,
-  );
-  const user = useSelector((state) => state.auth.user);
-  const plan = useSelector((state) => state.plans.selected);
-  const service = useSelector((state) => state.servicio.selected);
-	const isClient = useSelector((state) => state.auth.isClient);
+  const dispatch = useDispatch();
+  const failures = useSelector((state) => state.failureCategoriesState.data);
   const [showModal, setShowModal] = useState(false);
   const [failureId, setFailureId] = useState(null);
+  const [coment, setComent] = useState(null);
+  const today = moment().format('DD/MM/YYYY');
 
-  const failures = [
-    {
-      id: 1,
-      name: 'Sin inter'
-    },
-    {
-      id: 2,
-      name: 'inter lento '
-    }
-  ]
-	
+  const createTicket = () => {
+    console.log('createTicket');
+  };
+
+  useEffect(() => {
+    // dispatch(failureCategoriesFetch());
+  }, [dispatch]);
+
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.view}>
@@ -58,7 +53,7 @@ export const CreateTicketsScreen = ({navigation}) => {
             <Text style={styles.textTitle}>Nuevo Ticket</Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.textDate}>01/08/2020</Text>
+            <Text style={styles.textDate}>{today}</Text>
           </View>
           
           <View style={styles.selectContainer}>
@@ -90,14 +85,14 @@ export const CreateTicketsScreen = ({navigation}) => {
               numberOfLines={5}
               placeholder="Explique en breves palabras el problema de su avería, y un técnico se pondrá en contacto con usted en un plazo de 24 horas."
               secureTextEntry={true}
-              onChange={(text) => { }}
+              onChange={(text) => setComent(text)}
             />
           </View>
 
           <View style={styles.containerButton}>
             <ButtonStyled
               style={styles.buttonSend}
-              onPress={() => {} }
+              onPress={() => createTicket() }
               backgroundColor={globalStyles.GREEN_COLOR}
               color={globalStyles.WHITE_COLOR}
               text={'ENVIAR'}

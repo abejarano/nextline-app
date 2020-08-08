@@ -15,18 +15,15 @@ import globalStyles from '../styles';
 export const FailureTypeModal = ({ showModal, setShowModal, failures, setFailureId }) => {
 	
 	const FailItem = ({failure}) => {
-		console.log(failure)
-
 		return (
 			<TouchableOpacity
-				key={failure.id}
 				style={styles.openButton}
 				onPress={() => {
 						console.log('click modal');
 						setFailureId(failure.id)
 						setShowModal(false);
 				}}>
-						<Text style={styles.textStyle}>{failure.name}</Text>
+				<Text style={styles.textStyle}>{failure.descripcion}</Text>
 			</TouchableOpacity>
 		);
 	};
@@ -41,11 +38,9 @@ export const FailureTypeModal = ({ showModal, setShowModal, failures, setFailure
       }}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-
 					{failures.map(failure => (
-						<FailItem  failure={failure}/>
+						<FailItem key={failure.id}  failure={failure}/>
 					))}
-
         </View>
       </View>
     </Modal>
