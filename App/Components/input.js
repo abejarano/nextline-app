@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import globalStyles from '../styles';
@@ -12,24 +12,30 @@ export const InputStyled = ({
   style,
   Icon,
   iconColor,
+  valid,
   isMultiline,
   numberOfLines,
 }) => {
   return (
-    <View style={{...styles.input, ...style}}>
+    <View
+      style={
+        valid
+          ? {...styles.input, ...style}
+          : {...styles.input, ...style, ...styles.inValidInput}
+      }>
       {Icon && <Icon style={styles.icon} color={iconColor} />}
       <TextInput
         multiline={isMultiline}
         numberOfLines={numberOfLines}
         clearTextOnFocus={true}
         placeholder={placeholder}
+        value={value}
         onChangeText={(text) => {
           onChange(text);
         }}
-        style={styles.innerInput}
-        secureTextEntry={secureTextEntry}>
-        {value}
-      </TextInput>
+        style={valid ? styles.innerInput : styles.inValidText}
+        secureTextEntry={secureTextEntry}
+      />
     </View>
   );
 };
@@ -51,9 +57,20 @@ const styles = StyleSheet.create({
   icon: {
     flex: 1,
   },
+  inValidInput: {
+    borderBottomWidth: 2,
+    borderBottomColor: globalStyles.RED_COLOR,
+  },
+  inValidText: {
+    width: '90%',
+    fontSize: scale(17),
+    fontFamily: globalStyles.SEGOE_FONT,
+    color: globalStyles.RED_COLOR,
+  },
   innerInput: {
     width: '90%',
     fontSize: scale(17),
     fontFamily: globalStyles.SEGOE_FONT,
+    color: globalStyles.GRAY_TEXT_COLOR,
   },
 });

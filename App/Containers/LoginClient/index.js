@@ -17,10 +17,42 @@ import EmailSvg from '../../assets/svg/Email';
 import SolidLogo from '../../assets/svg/SolidLogo';
 import LockSvg from '../../assets/svg/Lock';
 import {Header} from '../../Components/header';
-import {scale} from '../../utils';
+import {scale, validateEmail} from '../../utils';
+import {useFormik} from 'formik';
 
 const LoginClient = ({navigation}) => {
   const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+
+    // Custom sync validation
+    validate: (values) => {
+      const errors = {};
+
+      for (const key in values) {
+        if (values.hasOwnProperty(key)) {
+          const element = values[key];
+          if (!element) {
+            errors[key] = key + ' es requerido';
+          }
+        }
+      }
+
+      if (values.password.length < 8) {
+        errors.password = 'La clave debe de ser de 8 o mas digitos';
+      }
+      if (!validateEmail(values.email)) {
+        errors.email = 'Email invalido';
+      }
+      return errors;
+    },
+    onSubmit: (values, {setSubmitting}) => {
+      dispatch(login({email: email, clave: password}));
+    },
+  });
   const error = useSelector((state) => state.auth.error);
   const loading = useSelector((state) => state.auth.sending);
 
@@ -58,19 +90,20 @@ const LoginClient = ({navigation}) => {
             <View style={styles.inputContainer}>
               <InputStyled
                 placeholder="Email"
-                onChange={(text) => {
-                  setEmail(text);
-                }}
-                value={email}
+                value={formik.values.email}
+                onBlur={formik.handleBlur('email')}
+                onChange={formik.handleChange('email')}
+                valid={!formik.errors.email && !formik.touched.email}
                 Icon={EmailSvg}
                 iconColor={globalStyles.PRIMARY_COLOR}
               />
               <InputStyled
                 placeholder="Clave"
                 secureTextEntry={true}
-                onChange={(text) => {
-                  setPassword(text);
-                }}
+                value={formik.values.password}
+                onBlur={formik.handleBlur('password')}
+                onChange={formik.handleChange('password')}
+                valid={!formik.errors.password && !formik.touched.password}
                 Icon={LockSvg}
                 iconColor={globalStyles.PRIMARY_COLOR}
               />
@@ -78,7 +111,7 @@ const LoginClient = ({navigation}) => {
             <Text style={styles.forgetText}>¿Olvidó su contraseña?</Text>
           </KeyboardAvoidingView>
           <ButtonStyled
-            onPress={() => dispatch(login({email: email, clave: password}))}
+            onPress={() => formik.handleSubmit()}
             backgroundColor={globalStyles.GREEN_COLOR}
             color={globalStyles.WHITE_COLOR}
             text={'INGRESAR'}
