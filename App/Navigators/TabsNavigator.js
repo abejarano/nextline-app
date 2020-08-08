@@ -12,7 +12,8 @@ import ProfileSvg from '../assets/svg/Profile';
 import {TabBar} from '../Components/tabBar';
 import {TicketsScreen} from '../Containers/TicketsClient';
 import {CreateTicketsScreen} from '../Containers/TicketsClient/CreateTicket';
-import {Text, StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+import Sidebar from '../Components/sidebar';
 const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -64,8 +65,7 @@ const StackContainer = () => {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
-      drawerContent={(props) => <Text style={styles.text}>Prueba</Text>}
-      // drawerContent={(props) => <SideMenu {...props} />}
+      drawerContent={(props) => <Sidebar {...props} />}
       drawerStyle={styles.drawer}
       drawerPosition="right">
       <Drawer.Screen name="Screens" component={TabsNavigator} />
@@ -78,10 +78,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
     marginLeft: Dimensions.get('window').width,
-  },
-  text: {
-    ...globalStyles.DEBUG,
-    textAlign: 'right',
   },
 });
 
