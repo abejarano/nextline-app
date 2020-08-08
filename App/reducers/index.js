@@ -4,6 +4,7 @@ import {planReducer as plans} from './plan';
 import {failureCategoriesReducer as failureCategories} from './failureCategories';
 import {servicioReducer as servicio} from './servicio';
 import {profileReducer as profile} from './profile';
+import {ticketClientReducer} from './ticketClient';
 
 export const rootReducer = combineReducers({
   auth,
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   failureCategories,
   servicio,
   profile,
+  ticketClientReducer,
 });
