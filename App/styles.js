@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import {Platform} from 'react-native';
 
 export default {
   PRIMARY_COLOR: '#0090DF',
@@ -23,8 +23,9 @@ export default {
     borderWidth: 2,
   },
   // Fonts
-  TREBUCHET_BOLD_FONT: Platform.OS == 'ios' ? 'TrebuchetMS-Bold' : 'trebuc-bold' ,
-  TREBUCHET_FONT: Platform.OS == 'ios' ? 'TrebuchetMS' : 'trebuc',
+  TREBUCHET_BOLD_FONT:
+    Platform.OS === 'ios' ? 'TrebuchetMS-Bold' : 'trebuc-bold',
+  TREBUCHET_FONT: Platform.OS === 'ios' ? 'TrebuchetMS' : 'trebuc',
   SEGOE_FONT: 'SegoeUI',
   DEBUG_FONT: 'GreatVibes',
   POPPINS_BOLD: 'Poppins-Bold',
@@ -33,4 +34,17 @@ export default {
   POPPINS_REGULAR: 'Poppins-Regular',
   POPPINS_THIN: 'Poppins-Thin',
   POPPINS_SEMIBOLD: 'Poppins-SemiBold',
+
+  //
+  SHADOW: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    borderRadius: 24,
+    elevation: 4,
+  },
 };

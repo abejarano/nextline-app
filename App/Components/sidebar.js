@@ -1,14 +1,15 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Dimensions, Image} from 'react-native';
 import ChangePlanSvg from '../assets/svg/ChangePlan';
 import FacturacionSvg from '../assets/svg/Facturacion';
 import CustomerServiceSvg from '../assets/svg/CustomerService';
 import CloseSvg from '../assets/svg/Close';
 import LogoutSvg from '../assets/svg/Logout';
-import LogoMenu from '../assets/svg/LogoMenu';
-import {TouchableHighlight} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import globalStyles from '../styles';
 import {scale} from '../utils';
+import {useDispatch} from 'react-redux';
+import {signout} from '../actions/auth';
 
 const items = [
   {
@@ -26,70 +27,87 @@ const items = [
 ];
 
 const Sidebar = ({navigation}) => {
+  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
-      <LogoMenu />
+      <Image
+        style={styles.logo}
+        source={require('../assets/images/LogoMenu.png')}
+      />
       {items.map((item) => (
         <MenuItem item={item} key={item.label} />
       ))}
-      <TouchableHighlight style={styles.high}>
-        <View style={styles.logout}>
+
+      <View style={styles.logout}>
+        <TouchableOpacity
+          style={styles.logoutContainer}
+          onPress={() => {
+            dispatch(signout());
+          }}>
           <Text style={styles.label}>CERRAR SESIÓN</Text>
           <LogoutSvg />
-        </View>
-      </TouchableHighlight>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const MenuItem = ({item, style}) => {
   return (
-    <TouchableHighlight style={styles.high}>
-      <View style={styles.itemContainer}>
+    <View style={styles.itemContainer}>
+      <TouchableOpacity style={styles.itemTouch}>
         {item.icon}
         <Text style={styles.label}>{item.label}</Text>
-      </View>
-    </TouchableHighlight>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
-    height: '100%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
-  high: {
-    width: '100%',
-    ...globalStyles.DEBUG,
-    borderRadius: 25,
-    // shadowColor: '#005FAB33',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 5,
-    // },
-    // shadowRadius: 15,
-    // elevation: 10,
-  },
   itemContainer: {
-    width: '100%',
-    padding: '5%',
-    justifyContent: 'flex-end',
+    flex: 1,
+    maxHeight: 120,
+    width: '90%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    ...globalStyles.SHADOW,
+  },
+  itemTouch: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   label: {
     color: '#005FAB',
     fontSize: scale(18),
-    width: '100%',
     textAlign: 'center',
   },
   logout: {
-    flexDirection: 'row',
-    width: '70%',
-    display: 'flex',
-    alignItems: 'center',
+    flex: 1,
+    width: '90%',
+    maxHeight: 60,
     justifyContent: 'center',
+  },
+  logoutContainer: {
+    marginVertical: 15,
+    borderRadius: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#fff',
+    ...globalStyles.SHADOW,
+  },
+  logo: {
+    width: 194,
+    height: 62,
+    marginVertical: 15,
   },
 });
 

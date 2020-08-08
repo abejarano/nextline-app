@@ -5,7 +5,6 @@ import Svg, {Defs, Path} from 'react-native-svg';
 const LogoutSvg = (props) => {
   return (
     <Svg width={23.561} height={23.56} viewBox="0 0 23.561 23.56" {...props}>
-      <Defs></Defs>
       <Path
         className="prefix__a"
         d="M22.824 11.044h-9.326a.736.736 0 110-1.473h9.326a.736.736 0 010 1.473zm0 0"
