@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
     marginLeft: Dimensions.get('window').width,
+
+    ...globalStyles.SHADOW,
   },
 });
 

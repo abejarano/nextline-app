@@ -44,7 +44,6 @@ export default {
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-    borderRadius: 24,
     elevation: 4,
   },
 };
