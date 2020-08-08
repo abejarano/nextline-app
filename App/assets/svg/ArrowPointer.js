@@ -14,12 +14,16 @@ const rotation = (direction) => {
       return 'scale(-1,1)';
   }
 };
-function ArrowPointerSvg({bold, direction, color, style, onPress}) {
+
+function ArrowPointerSvg({bold, direction, color,  onPress}) {
   return (
-    <Svg styles={styles} viewBox="0 0 172 172" style={style} onPress={onPress}>
+    <Svg viewBox="0 0 172 86" width={30} height={30} onPress={onPress}>
       {bold ? (
-        <G>
+        <G >
           <Path
+            scale={0.75}
+            translateX={150}
+            translateY={-20}
             d="M51.858 17.11a11.468 11.468 0 00-6.92 20.885L112.147 86l-67.21 48.005a11.468 11.468 0 1013.325 18.656l80.266-57.333a11.468 11.468 0 000-18.656L58.263 19.34a11.468 11.468 0 00-6.405-2.229z"
             fill={color}
             transform={rotation(direction ? direction : '')}
