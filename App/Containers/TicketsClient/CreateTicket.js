@@ -59,7 +59,7 @@ export const CreateTicketsScreen = ({navigation}) => {
           {loading ? (
             <ActivityIndicator size="large" color={globalStyles.WHITE_COLOR} />
           ) : (
-            <>
+            <View style={styles.view}>
               <View style={styles.textContainer}>
                 <Text style={styles.textTitle}>Nuevo Ticket</Text>
               </View>
@@ -108,7 +108,7 @@ export const CreateTicketsScreen = ({navigation}) => {
                   text={'ENVIAR'}
                 />
               </View>
-            </>
+            </View>
           )}
         </KeyboardAvoidingView>
       </View>
@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
     alignContent: 'space-around',
     height: 20,
     borderColor: 'red',
-    borderRadius: 4,
     maxHeight: 90,
     borderRadius: 6,
   },
@@ -194,7 +193,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     maxHeight: 60,
     ...boxShadow,
-    ...globalStyles.DEBUG,
   },
   pressable: {},
   inputContainer: {
@@ -211,7 +209,7 @@ const styles = StyleSheet.create({
   },
   keyboardContainer: {
     flex: 1,
-    ...globalStyles.DEBUG,
+    width: '100%',
   },
   buttonSend: {
     alignItems: 'flex-end',
