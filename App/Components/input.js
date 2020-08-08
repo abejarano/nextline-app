@@ -15,6 +15,7 @@ export const InputStyled = ({
   iconColor,
   valid,
   isMultiline,
+  numberOfLines,
 }) => {
   return (
     <View
@@ -26,6 +27,7 @@ export const InputStyled = ({
       {Icon && <Icon style={styles.icon} color={iconColor} />}
       <TextInput
         multiline={isMultiline}
+        numberOfLines={numberOfLines}
         clearTextOnFocus={true}
         placeholder={placeholder}
         value={value}

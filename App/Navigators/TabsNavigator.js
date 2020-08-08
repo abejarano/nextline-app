@@ -1,6 +1,8 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import globalStyles from '../styles';
 
 import HomeClientScreen from '../Containers/HomeClient';
 import {ProfileScreen} from '../Containers/Profile';
@@ -10,8 +12,11 @@ import ProfileSvg from '../assets/svg/Profile';
 import {TabBar} from '../Components/tabBar';
 import {TicketsScreen} from '../Containers/TicketsClient';
 import {CreateTicketsScreen} from '../Containers/TicketsClient/CreateTicket';
+import {StyleSheet, Dimensions} from 'react-native';
+import Sidebar from '../Components/sidebar';
 const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const HomeStackScreen = () => {
   return (
@@ -56,4 +61,26 @@ const TabsNavigator = () => {
   );
 };
 
-export default TabsNavigator;
+const StackContainer = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerContent={(props) => <Sidebar {...props} />}
+      drawerStyle={styles.drawer}
+      drawerPosition="right">
+      <Drawer.Screen name="Screens" component={TabsNavigator} />
+    </Drawer.Navigator>
+  );
+};
+
+const styles = StyleSheet.create({
+  drawer: {
+    flex: 1,
+    alignItems: 'flex-end',
+    marginLeft: Dimensions.get('window').width,
+
+    ...globalStyles.SHADOW,
+  },
+});
+
+export default StackContainer;
