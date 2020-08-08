@@ -19,7 +19,7 @@ import globalStyles from '../../styles';
 import {Avatar} from '../../Components/avatar';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyledStatusBar} from '../../Components/statusBar';
-import {scale} from '../../utils';
+import {scale, validateEmail} from '../../utils';
 import {useFormik} from 'formik';
 
 export function RegisterScreen({navigation}) {
@@ -42,24 +42,20 @@ export function RegisterScreen({navigation}) {
         if (values.hasOwnProperty(key)) {
           const element = values[key];
           if (!element) {
-            errors[key] = 'Requerido';
+            errors[key] = key + ' es requerido';
           }
         }
       }
       if (values.password !== values.repassword) {
-        errors.repassword = 'No es igual a la password';
+        errors.repassword = 'Las claves no son iguales';
       }
 
       if (values.password.length < 8) {
-        errors.password = 'La contrase;a debe de ser de 8 o mas digitos';
+        errors.password = 'La clave debe de ser de 8 o mas digitos';
       }
-      // if (
-      //   /^([a-zA-Z0-9_\-\\.]+)@([a-zA-Z0-9_\-\\.]+)\.([a-zA-Z]{2,5})$/.test(
-      //     values.email,
-      //   )
-      // ) {
-      //   errors.email = 'Email invalido';
-      // }
+      if (!validateEmail(values.email)) {
+        errors.email = 'Email invalido';
+      }
       return errors;
     },
     onSubmit: (values, {setSubmitting}) => {
@@ -166,8 +162,9 @@ export function RegisterScreen({navigation}) {
               <View style={styles.buttonContainer}>
                 <ButtonStyled
                   onPress={() => {
-                    if (Object.keys(formik.errors).length > 0) {
-                      alert(JSON.stringify(formik.errors));
+                    const errors = Object.keys(formik.errors);
+                    if (errors.length > 0) {
+                      alert(`${formik.errors[errors[0]]}`);
                     } else {
                       formik.handleSubmit();
                     }
