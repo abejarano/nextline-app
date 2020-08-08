@@ -9,6 +9,7 @@ export const InputStyled = ({
   secureTextEntry,
   placeholder,
   onChange,
+  onBlur,
   style,
   Icon,
   iconColor,
@@ -28,6 +29,7 @@ export const InputStyled = ({
         clearTextOnFocus={true}
         placeholder={placeholder}
         value={value}
+        onBlur={onBlur}
         onChangeText={(text) => {
           onChange(text);
         }}

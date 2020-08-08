@@ -111,7 +111,7 @@ export const LocationDetails = ({navigation}) => {
               value={formik.values.direction}
               onBlur={formik.handleBlur('direction')}
               onChange={formik.handleChange('direction')}
-              valid={!formik.errors.direction && !formik.touched.direction}
+              valid={!(formik.errors.direction && formik.touched.direction)}
               // Icon={DirectionSvg}
               iconColor={globalStyles.PRIMARY_COLOR}
             />
@@ -120,7 +120,7 @@ export const LocationDetails = ({navigation}) => {
               value={formik.values.refpoint}
               onBlur={formik.handleBlur('refpoint')}
               onChange={formik.handleChange('refpoint')}
-              valid={!formik.errors.refpoint && !formik.touched.refpoint}
+              valid={!(formik.errors.refpoint && formik.touched.refpoint)}
               // Icon={RefpointSvg}
               iconColor={globalStyles.PRIMARY_COLOR}
             />
