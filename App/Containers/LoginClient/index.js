@@ -93,7 +93,7 @@ const LoginClient = ({navigation}) => {
                 value={formik.values.email}
                 onBlur={formik.handleBlur('email')}
                 onChange={formik.handleChange('email')}
-                valid={!formik.errors.email && !formik.touched.email}
+                valid={!(formik.touched.email && formik.errors.email)}
                 Icon={EmailSvg}
                 iconColor={globalStyles.PRIMARY_COLOR}
               />
@@ -103,7 +103,7 @@ const LoginClient = ({navigation}) => {
                 value={formik.values.password}
                 onBlur={formik.handleBlur('password')}
                 onChange={formik.handleChange('password')}
-                valid={!formik.errors.password && !formik.touched.password}
+                valid={!(formik.touched.password && formik.errors.password)}
                 Icon={LockSvg}
                 iconColor={globalStyles.PRIMARY_COLOR}
               />

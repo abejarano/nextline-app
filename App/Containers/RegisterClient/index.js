@@ -114,7 +114,7 @@ export function RegisterScreen({navigation}) {
                 value={formik.values.nombrerzb}
                 onBlur={formik.handleBlur('nombrerzb')}
                 onChange={formik.handleChange('nombrerzb')}
-                valid={!formik.errors.nombrerzb}
+                valid={!(formik.errors.nombrerzb && formik.touched.nombrerzb)}
                 style={styles.nombrerzb}
               />
               <InputStyled
@@ -122,7 +122,7 @@ export function RegisterScreen({navigation}) {
                 value={formik.values.cedularif}
                 onBlur={formik.handleBlur('cedularif')}
                 onChange={formik.handleChange('cedularif')}
-                valid={!formik.errors.cedularif}
+                valid={!(formik.errors.cedularif && formik.touched.cedularif)}
                 style={styles.button}
               />
               <InputStyled
@@ -130,7 +130,7 @@ export function RegisterScreen({navigation}) {
                 value={formik.values.email}
                 onBlur={formik.handleBlur('email')}
                 onChange={formik.handleChange('email')}
-                valid={!formik.errors.email}
+                valid={!(formik.errors.email && formik.touched.email)}
                 style={styles.button}
               />
               <InputStyled
@@ -138,7 +138,7 @@ export function RegisterScreen({navigation}) {
                 value={formik.values.phone}
                 onBlur={formik.handleBlur('phone')}
                 onChange={formik.handleChange('phone')}
-                valid={!formik.errors.phone}
+                valid={!(formik.errors.phone && formik.touched.phone)}
                 style={styles.button}
               />
               <InputStyled
@@ -147,7 +147,7 @@ export function RegisterScreen({navigation}) {
                 value={formik.values.password}
                 onBlur={formik.handleBlur('password')}
                 onChange={formik.handleChange('password')}
-                valid={!formik.errors.password}
+                valid={!(formik.errors.password && formik.touched.password)}
                 style={styles.button}
               />
               <InputStyled
@@ -156,7 +156,7 @@ export function RegisterScreen({navigation}) {
                 value={formik.values.repassword}
                 onBlur={formik.handleBlur('repassword')}
                 onChange={formik.handleChange('repassword')}
-                valid={!formik.errors.repassword}
+                valid={!(formik.errors.repassword && formik.touched.repassword)}
                 style={styles.button}
               />
               <View style={styles.buttonContainer}>
