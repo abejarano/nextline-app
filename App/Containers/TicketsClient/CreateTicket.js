@@ -57,6 +57,7 @@ export const CreateTicketsScreen = ({navigation}) => {
   });
   const createTicket = (failureId, coment) => {
     console.log('createTicket');
+    // dispatch(clientTicketCreate());
   };
   useEffect(() => {
     dispatch(failureCategoriesFetch());
@@ -104,19 +105,23 @@ export const CreateTicketsScreen = ({navigation}) => {
                     setShowModal(true);
                   }}>
                   <View style={styles.viewSelect}>
-                    <Text style={styles.textSelect}>
-                      {formik.values.failureId
-                        ? failures.find(
-                            (fail) => fail.id === formik.values.failureId,
-                          ).descripcion
-                        : 'Seleccione una avería'}
-                    </Text>
-                    <ArrowPointerSvg
-                      style={styles.arrowDown}
-                      color={globalStyles.PRIMARY_COLOR}
-                      direction="left"
-                      bold
-                    />
+                    <View style={styles.viewTextSelect}>
+                      <Text style={styles.textSelect}>
+                        {formik.values.failureId
+                          ? failures.find(
+                              (fail) => fail.id === formik.values.failureId,
+                            ).descripcion
+                          : 'Seleccione una avería'}
+                      </Text>
+                    </View>
+                    <View style={styles.viewArrowDown}>
+                      <ArrowPointerSvg
+                        style={styles.arrowDown}
+                        color={globalStyles.PRIMARY_COLOR}
+                        direction="left"
+                        bold
+                      />
+                    </View>
                   </View>
                 </Pressable>
               </View>
@@ -186,43 +191,21 @@ const styles = StyleSheet.create({
     color: globalStyles.PRIMARY_COLOR,
     fontSize: 17,
   },
-  textLabelFailure: {
-    textTransform: 'uppercase',
-    alignSelf: 'flex-start',
-    color: globalStyles.PRIMARY_COLOR,
-    fontSize: 12,
-    marginLeft: '9%',
+  textDate: {
+    color: globalStyles.PRIMARY_COLOR_DARK,
+  },
+  input: {
+    backgroundColor: globalStyles.WHITE_COLOR,
   },
   textLabel: {
     textTransform: 'uppercase',
     color: globalStyles.PRIMARY_COLOR,
     fontSize: 12,
     marginLeft: '7%',
-  },
-  textDate: {
-    color: globalStyles.PRIMARY_COLOR_DARK,
-  },
-  textSelect: {
-    alignItems: 'flex-start',
-    color: globalStyles.PRIMARY_COLOR_DARK,
-  },
-  arrowDown: {
-    alignItems: 'flex-end',
-    marginLeft: 60,
-  },
-  input: {
-    backgroundColor: globalStyles.WHITE_COLOR,
-  },
-  viewSelect: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignContent: 'space-around',
-    height: 20,
-    borderColor: 'red',
-    maxHeight: 90,
-    borderRadius: 6,
+    marginBottom: '1%',
   },
   textArea: {
+    marginTop: '-3%',
     maxHeight: 90,
     borderRadius: 6,
     ...boxShadow,
@@ -236,7 +219,41 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    maxHeight: 60,
+    maxHeight: 80,
+    marginTop: 40,
+    marginBottom: 20,
+  },
+  viewSelect: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignContent: 'space-around',
+    height: 20,
+    borderColor: 'red',
+    maxHeight: 90,
+    borderRadius: 6,
+  },
+  viewTextSelect: {
+    flex: 1,
+  },
+  textLabelFailure: {
+    textTransform: 'uppercase',
+    alignSelf: 'flex-start',
+    color: globalStyles.PRIMARY_COLOR,
+    fontSize: 12,
+    marginLeft: '11%',
+    marginBottom: '1%',
+  },
+  textSelect: {
+    marginLeft: '8%',
+    color: globalStyles.PRIMARY_COLOR_DARK,
+  },
+  viewArrowDown: {
+    marginTop: '-1%',
+    marginRight: 15,
+  },
+  arrowDown: {
+    alignItems: 'flex-end',
+    marginTop: '-2%',
   },
   pressable: {
     flex: 1,
