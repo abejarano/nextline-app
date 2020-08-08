@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StatusBar, StyleSheet, ImageBackground, KeyboardAvoidingView} from 'react-native';
+import {View, Text, StyleSheet,  KeyboardAvoidingView, Pressable} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import globalStyles from '../../styles';
-import {Avatar} from '../../Components/avatar';
 import {AuthHeader} from '../../Components/authHeader';
-import { TouchableOpacity, ScrollView, FlatList } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonStyled } from '../../Components/button';
 import { InputStyled } from '../../Components/input';
 import { StyledStatusBar } from '../../Components/statusBar';
-import SolidLogo from '../../assets/svg/SolidLogo';
 import ArrowPointerSvg from '../../assets/svg/ArrowPointer';
+import { FailureTypeModal } from '../../Components/failureTypeModal';
 
 export const CreateTicketsScreen = ({navigation}) => {
 	
@@ -21,10 +19,29 @@ export const CreateTicketsScreen = ({navigation}) => {
   const plan = useSelector((state) => state.plans.selected);
   const service = useSelector((state) => state.servicio.selected);
 	const isClient = useSelector((state) => state.auth.isClient);
+  const [showModal, setShowModal] = useState(false);
+  const [failureId, setFailureId] = useState(null);
+
+  const failures = [
+    {
+      id: 1,
+      name: 'Sin inter'
+    },
+    {
+      id: 2,
+      name: 'inter lento '
+    }
+  ]
 	
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.view}>
+        <FailureTypeModal 
+          setShowModal={setShowModal}
+          showModal={showModal}
+          setFailureId={setFailureId}
+          failures={failures}
+        />
         <StyledStatusBar />
         <AuthHeader 
           title="ASISTENCIA TÉCNICA"
@@ -44,17 +61,25 @@ export const CreateTicketsScreen = ({navigation}) => {
             <Text style={styles.textDate}>01/08/2020</Text>
           </View>
           
-          <View style={styles.inputContainer}>
-            <View style={styles.viewSelect}>
-              <Text style={styles.textLabel}>Tipo de Avería</Text>
-
-              <ArrowPointerSvg
-                color={globalStyles.PRIMARY_COLOR}
-                direction="left"
-                bold
-              />
-            </View>
-            
+          <View style={styles.selectContainer}>
+            <Text style={styles.textLabel}>Tipo de Avería</Text>
+            <Pressable
+              style={styles.pressable}
+              onPress={() => {
+                console.log('pres'); 
+                setShowModal(true)
+              }}
+            >
+              <View style={styles.viewSelect}>
+                <Text style={styles.textSelect}>Seleccione una avería</Text>
+                <ArrowPointerSvg
+                  style={styles.arrowDown}
+                  color={globalStyles.PRIMARY_COLOR}
+                  direction="left"
+                  bold
+                />
+              </View>
+            </Pressable>
           </View>
           
           <View style={styles.inputContainer}>
@@ -69,12 +94,16 @@ export const CreateTicketsScreen = ({navigation}) => {
             />
           </View>
 
-          <ButtonStyled
-            onPress={() => {} }
-            backgroundColor={globalStyles.GREEN_COLOR}
-            color={globalStyles.WHITE_COLOR}
-            text={'ENVIAR'}
-          />
+          <View style={styles.containerButton}>
+            <ButtonStyled
+              style={styles.buttonSend}
+              onPress={() => {} }
+              backgroundColor={globalStyles.GREEN_COLOR}
+              color={globalStyles.WHITE_COLOR}
+              text={'ENVIAR'}
+            />
+          </View>
+
         </KeyboardAvoidingView>
 
       </View>
@@ -124,12 +153,26 @@ const styles = StyleSheet.create({
   textDate: {
     color: globalStyles.PRIMARY_COLOR_DARK
   },
+  textSelect: {
+    alignItems: 'flex-start',
+    color: globalStyles.PRIMARY_COLOR_DARK
+  },
+  arrowDown: {
+    alignItems: 'flex-end',
+    marginLeft: 60
+  },
   input: {
     backgroundColor: globalStyles.WHITE_COLOR,
   },
   viewSelect:{
     flexDirection: 'row',
-    ...boxShadow
+    justifyContent: 'space-around',
+    alignContent: 'space-around',
+    height: 20,
+    borderColor: 'red',
+    borderRadius: 4,
+    maxHeight: 90,
+    borderRadius: 6,
   },
   textArea: {
     maxHeight: 90,
@@ -140,15 +183,35 @@ const styles = StyleSheet.create({
     marginBottom: '10%',
     fontWeight: 'bold',
   },
+  selectContainer: {
+    flex: 1,
+    width: '90%',
+    justifyContent: 'space-evenly',
+    maxHeight: 60,
+    ...boxShadow,
+    ...globalStyles.DEBUG
+  },
+  pressable: {
+  },
   inputContainer: {
     flex: 1,
     width: '90%',
     justifyContent: 'space-evenly',
     maxHeight: 150,
   },
-   
+  containerButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginBottom: 20,
+  },
   keyboardContainer: {
     flex: 1,
+    ...globalStyles.DEBUG
+  },
+  buttonSend: {
+    alignItems: 'flex-end',
+    // alignSelf: 'flex-end'
   },
 });
 
