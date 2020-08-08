@@ -114,8 +114,8 @@ export function RegisterScreen({navigation}) {
                 value={formik.values.nombrerzb}
                 onBlur={formik.handleBlur('nombrerzb')}
                 onChange={formik.handleChange('nombrerzb')}
-                style={styles.nombrerzb}
                 valid={!formik.errors.nombrerzb}
+                style={styles.nombrerzb}
               />
               <InputStyled
                 placeholder="Cedula o RIF"
