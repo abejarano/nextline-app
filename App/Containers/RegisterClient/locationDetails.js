@@ -19,8 +19,34 @@ import {resetStore} from '../../actions/utils';
 import {StyledStatusBar} from '../../Components/statusBar';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {scale} from '../../utils';
+import {useFormik} from 'formik';
 export const LocationDetails = ({navigation}) => {
   const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      direction: '',
+      refpoint: '',
+    },
+
+    // Custom sync validation
+    validate: (values) => {
+      const errors = {};
+
+      for (const key in values) {
+        if (values.hasOwnProperty(key)) {
+          const element = values[key];
+          if (!element) {
+            errors[key] = key + ' es requerido';
+          }
+        }
+      }
+
+      return errors;
+    },
+    onSubmit: (values, {setSubmitting}) => {
+      dispatch(signup(values.direction + ' ' + values.refpoint));
+    },
+  });
   const [direction, setDirection] = useState('');
   const [refpoint, setRefpoint] = useState('');
   const loading = useSelector((state) => state.auth.sending);
@@ -82,19 +108,19 @@ export const LocationDetails = ({navigation}) => {
             keyboardVerticalOffset={8}>
             <InputStyled
               placeholder="Dirección"
-              onChange={(text) => {
-                setDirection(text);
-              }}
-              value={direction}
+              value={formik.values.direction}
+              onBlur={formik.handleBlur('direction')}
+              onChange={formik.handleChange('direction')}
+              valid={!formik.errors.direction && !formik.touched.direction}
               // Icon={DirectionSvg}
               iconColor={globalStyles.PRIMARY_COLOR}
             />
             <InputStyled
               placeholder="Refpoint ..."
-              onChange={(text) => {
-                setRefpoint(text);
-              }}
-              value={refpoint}
+              value={formik.values.refpoint}
+              onBlur={formik.handleBlur('refpoint')}
+              onChange={formik.handleChange('refpoint')}
+              valid={!formik.errors.refpoint && !formik.touched.refpoint}
               // Icon={RefpointSvg}
               iconColor={globalStyles.PRIMARY_COLOR}
             />
@@ -105,7 +131,7 @@ export const LocationDetails = ({navigation}) => {
           <View style={styles.buttonContainer}>
             <ButtonStyled
               onPress={() => {
-                dispatch(signup(direction + ' ' + refpoint));
+                formik.handleSubmit();
               }}
               loading={loading}
               disabled={loading}
