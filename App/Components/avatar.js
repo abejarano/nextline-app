@@ -10,6 +10,7 @@ import {
 import ImagePicker from 'react-native-image-picker';
 import globalStyles from '../styles';
 import ProfileSvg from '../assets/svg/Profile';
+import {verticalScale} from '../utils';
 
 const options = {
   title: 'Seleccionar Avatar',
@@ -85,8 +86,8 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: 100,
-    height: 80,
-    width: 80,
+    height: verticalScale(80),
+    width: verticalScale(80),
   },
   imageEmpty: {
     display: 'flex',

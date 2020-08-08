@@ -4,6 +4,7 @@ import InfoSvg from '../assets/svg/Info';
 import globalStyles from '../styles';
 import ArrowPointerSvg from '../assets/svg/ArrowPointer';
 import HamburguerSvg from '../assets/svg/Hamburguer';
+import {verticalScale} from '../utils';
 
 export const AuthHeader = ({navigation, onPress, title, backVisble}) => {
   return (
@@ -55,8 +56,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    maxHeight: 45,
-    minHeight: 45,
+    maxHeight: verticalScale(45),
+    minHeight: verticalScale(45),
     top: 0,
     zIndex: 100,
   },

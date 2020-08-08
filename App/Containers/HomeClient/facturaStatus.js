@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import globalStyles from '../../styles';
-import {scale} from '../../utils';
+import {scale, verticalScale} from '../../utils';
 
 export const FacturaStatus = ({}) => {
   return (
@@ -31,20 +31,23 @@ const styles = StyleSheet.create({
     ...globalStyles.SHADOW,
     backgroundColor: '#fff',
     borderRadius: 10,
-    marginBottom: 15,
-    // marginTop: 'auto',
+    marginBottom: verticalScale(25),
+    // alignSelf: 'flex-end',
+    marginTop: 'auto',
   },
   child: {
     flex: 1,
     height: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
+    // ...globalStyles.DEBUG,
   },
   label: {
-    marginTop: scale(10),
+    marginTop: scale(2),
     textTransform: 'uppercase',
     fontFamily: globalStyles.POPPINS_REGULAR,
     fontSize: scale(10),
+    // ...globalStyles.DEBUG,
   },
   sep: {
     marginHorizontal: 15,
@@ -55,15 +58,20 @@ const styles = StyleSheet.create({
     height: '80%',
   },
   usd: {
-    marginTop: 'auto',
+    marginBottom: 'auto',
     fontFamily: globalStyles.POPPINS_BOLD,
     fontSize: scale(25),
     color: globalStyles.PRIMARY_COLOR_DARK,
+    textAlignVertical: 'bottom',
+    textAlign: 'center',
+    marginTop: scale(5),
+    // ...globalStyles.DEBUG,
   },
   bs: {
     fontFamily: globalStyles.POPPINS_BOLD,
     fontSize: scale(14),
     color: globalStyles.PRIMARY_COLOR_DARK,
+    // ...globalStyles.DEBUG,
   },
   date: {
     marginBottom: 'auto',

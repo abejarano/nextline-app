@@ -13,6 +13,7 @@ import {FacturaStatus} from './facturaStatus';
 import {StatusService} from './statusService';
 import {AuthHeader} from '../../Components/authHeader';
 import {ScrollView} from 'react-native';
+import {CentralHomeButton} from './centerButton';
 
 const HomeClientScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -37,49 +38,29 @@ const HomeClientScreen = ({navigation}) => {
         style={globalStyles.BACKGROUNDIMAGE}>
         <View style={styles.view}>
           <AuthHeader navigation={navigation} title={''} backVisible={false} />
-          <ScrollView style={styles.scrollView}>
-            <View style={styles.view}>
-              <View style={styles.userContainer}>
-                <Avatar />
-                <View style={styles.usernameContainer}>
-                  <Text style={styles.usernameLabel}>Usuario</Text>
-                  <Text style={styles.usernameText}>
-                    {user && user.nombre_razsoc}
-                  </Text>
-                </View>
+          {/* <ScrollView style={styles.scrollView}> */}
+          <View style={styles.view}>
+            <View style={styles.userContainer}>
+              <Avatar />
+              <View style={styles.usernameContainer}>
+                <Text style={styles.usernameLabel}>Usuario</Text>
+                <Text style={styles.usernameText}>
+                  {user && user.nombre_razsoc}
+                </Text>
               </View>
-              <StatusBar barStyle="dark-content" />
-              <Text style={styles.serviceLabel}>tipo de servicio</Text>
-              <Text style={styles.serviceText}>{service.servicio}</Text>
-              <View style={styles.gradientContainer}>
-                <LinearGradient
-                  colors={[
-                    globalStyles.LIGTH_BLUE_COLOR,
-                    globalStyles.PRIMARY_COLOR,
-                    globalStyles.PRIMARY_COLOR_DARK,
-                  ]}
-                  angle={180}
-                  style={styles.linearGradient}>
-                  <View style={styles.whiteCircle}>
-                    <SolidLogin
-                      scale={0.35}
-                      style={styles.logo}
-                      color={globalStyles.GRAY_COLOR + '80'}
-                    />
-                    <Text style={styles.buttonText}>
-                      {plan?.plan.split(' ').join('')}
-                    </Text>
-                    <Text style={styles.buttonLowerText}>PLAN</Text>
-                  </View>
-                </LinearGradient>
-              </View>
-              <SpeedGroup
-                upSpeed={plan.velocidad_subida}
-                downSpeed={plan.velocidad_baja}
-              />
-              {isClient ? <FacturaStatus /> : <StatusService status={status} />}
             </View>
-          </ScrollView>
+            <StatusBar barStyle="dark-content" />
+            <Text style={styles.serviceLabel}>tipo de servicio</Text>
+            <Text style={styles.serviceText}>{service.servicio}</Text>
+            <CentralHomeButton plan={plan} />
+            <SpeedGroup
+              style={{marginBottom: verticalScale(10)}}
+              upSpeed={plan.velocidad_subida}
+              downSpeed={plan.velocidad_baja}
+            />
+            {isClient ? <FacturaStatus /> : <StatusService status={status} />}
+          </View>
+          {/* </ScrollView> */}
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -102,48 +83,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginBottom: '3%',
   },
-  gradientContainer: {
-    width: verticalScale(200),
-    height: verticalScale(200),
-    marginBottom: '3%',
-  },
-  linearGradient: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 15,
-    borderRadius: 240,
-    ...globalStyles.SHADOW,
-  },
-  buttonText: {
-    fontSize: scale(33),
-    textAlign: 'center',
-    fontFamily: globalStyles.POPPINS_SEMIBOLD,
-    color: globalStyles.WHITE_COLOR,
-    backgroundColor: 'transparent',
-    textTransform: 'uppercase',
-  },
-  logo: {},
-  whiteCircle: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    overflow: 'hidden',
-    borderRadius: 240,
-    borderColor: globalStyles.WHITE_COLOR,
-    borderWidth: 15,
-    padding: verticalScale(7),
-    // ...globalStyles.DEBUG,
-  },
-  buttonLowerText: {
-    fontSize: 12,
-    textAlign: 'center',
-    color: globalStyles.WHITE_COLOR,
-    textTransform: 'uppercase',
-    fontFamily: globalStyles.POPPINS_SEMIBOLD,
-  },
+
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
@@ -152,28 +92,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   serviceLabel: {
-    fontSize: scale(10),
+    fontSize: verticalScale(10),
     fontFamily: globalStyles.TREBUCHET_FONT,
     opacity: 1,
     color: globalStyles.LIGTH_BLUE_COLOR,
     textTransform: 'uppercase',
   },
   serviceText: {
-    fontSize: scale(25),
+    fontSize: verticalScale(25),
     fontFamily: globalStyles.POPPINS_REGULAR,
     color: globalStyles.WHITE_COLOR,
     textTransform: 'uppercase',
-    marginBottom: '3%',
+    marginBottom: verticalScale(5),
   },
   statusLabel: {
-    fontSize: scale(10),
+    fontSize: verticalScale(10),
     fontFamily: globalStyles.TREBUCHET_FONT,
     color: globalStyles.GRAY_TEXT_COLOR,
     textTransform: 'uppercase',
     marginTop: 'auto',
   },
   statusText: {
-    fontSize: scale(16),
+    fontSize: verticalScale(16),
     fontFamily: globalStyles.POPPINS_REGULAR,
     color: globalStyles.PRIMARY_COLOR,
     textTransform: 'uppercase',
@@ -202,9 +142,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginVertical: '3%',
-    maxHeight: 100,
-    minHeight: 75,
+    marginVertical: verticalScale(15),
+    maxHeight: verticalScale(100),
+    minHeight: verticalScale(75),
   },
   usernameContainer: {
     flex: 1,
@@ -213,14 +153,14 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   usernameLabel: {
-    fontSize: scale(10),
+    fontSize: verticalScale(10),
     fontFamily: globalStyles.TREBUCHET_FONT,
     opacity: 1,
     color: globalStyles.LIGTH_BLUE_COLOR,
     textTransform: 'uppercase',
   },
   usernameText: {
-    fontSize: scale(20),
+    fontSize: verticalScale(20),
     fontFamily: globalStyles.SEGOE_FONT,
     color: globalStyles.WHITE_COLOR,
     textTransform: 'capitalize',
