@@ -23,21 +23,24 @@ import {useIsDrawerOpen} from '@react-navigation/drawer';
 const items = [
   {
     label: 'CAMBIO DE PLAN',
+    url: '',
     icon: <ChangePlanSvg scale={scale(18) / 24} />,
   },
   {
     label: 'FACTURACIÓN',
+    url: '',
     icon: <FacturacionSvg scale={scale(18) / 24} />,
   },
   {
     label: 'ASISTENCIA TÉCNICA',
+    url: 'TicketsClient',
     icon: <CustomerServiceSvg scale={scale(18) / 24} />,
   },
 ];
 
 const Sidebar = ({navigation}) => {
   const dispatch = useDispatch();
-  const isDrawerOpen = useIsDrawerOpen();
+  // const isDrawerOpen = useIsDrawerOpen();
   return (
     <View style={styles.container}>
       {/* {isDrawerOpen && <StyledStatusBar color={globalStyles.WHITE_COLOR} />} */}
@@ -52,7 +55,7 @@ const Sidebar = ({navigation}) => {
         source={require('../assets/images/LogoMenu.png')}
       />
       {items.map((item) => (
-        <MenuItem item={item} key={item.label} />
+        <MenuItem item={item} key={item.label} navigation={navigation} />
       ))}
 
       <TouchableOpacity
@@ -67,10 +70,14 @@ const Sidebar = ({navigation}) => {
   );
 };
 
-const MenuItem = ({item, style}) => {
+const MenuItem = ({item, style, navigation}) => {
   return (
     <View style={styles.itemContainer}>
-      <TouchableOpacity style={styles.itemTouch}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(item.url);
+        }}
+        style={styles.itemTouch}>
         {item.icon}
         <Text style={[styles.label, styles.itemLabel]}>{item.label}</Text>
       </TouchableOpacity>
