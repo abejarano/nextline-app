@@ -4,143 +4,110 @@ import {useDispatch, useSelector} from 'react-redux';
 import globalStyles from '../../styles';
 import {Avatar} from '../../Components/avatar';
 import {Header} from '../../Components/header';
-import { TouchableOpacity, ScrollView, FlatList } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {AuthHeader} from '../../Components/authHeader';
+import {StyledStatusBar} from '../../Components/statusBar';
 
 export const TicketsScreen = ({navigation}) => {
   const dispatch = useDispatch();
-  const status = useSelector(
-    (state) => state.servicio.status.data.solicitud_servicio,
+
+  const TickectItem = ({item, onPress, style}) => (
+    <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+      <Text>{item.title}</Text>
+      <Text>{item.id.substring(0, 20)}</Text>
+    </TouchableOpacity>
   );
-  const user = useSelector((state) => state.auth.user);
-  const plan = useSelector((state) => state.plans.selected);
-  const service = useSelector((state) => state.servicio.selected);
-	const isClient = useSelector((state) => state.auth.isClient);
-	const DATA = [
-		{
-			id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-			title: 'First Item',
-			status: 'c'
-		},
-		{
-			id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-			title: 'Second Item',
-			status: 'a'
-		},
-		{
-			id: '58694a0f-3da1-471f-bd96-145571e29d72',
-			title: 'Third Item',
-			status: 'b'
-		},
-		{
-			id: '58694a0f-3da1-271f-bd96-145571e29d72',
-			title: 'Third Item',
-			status: 'b'
-		},
-		{
-			id: '58694a0f-3da1-271f-bd96-145d71e29d72',
-			title: 'asd Item',
-			status: 'b'
-		},
-		{
-			id: '58694a0f-3da1-271f-bd96-141871e29d72',
-			title: 'last Item',
-			status: 'b'
-		},
-	];
 
-	const TickectItem = ({ item, onPress, style }) => (
-		<TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-			<Text>{item.title}</Text>
-			<Text>{item.id.substring(0, 20)}</Text>
-		</TouchableOpacity>
-	);
-
-	const renderItem = ({ item }) => {
-    const backgroundColor = item.id ? "#6e3b6e" : "#f9c2ff";
+  const renderItem = ({item}) => {
+    const backgroundColor = item.id ? '#6e3b6e' : '#f9c2ff';
 
     return (
-			<View style={styles.itemContainer}>
-				<TickectItem
-					item={item}
-					style={styles.textContainer}
-				/>
-				<View style={{
-						...styles.redCircle,
-						backgroundColor,
-				}} />
-			</View>
-      
+      <View style={styles.itemContainer}>
+        <TickectItem item={item} style={styles.textContainer} />
+        <View
+          style={{
+            ...styles.redCircle,
+            backgroundColor,
+          }}
+        />
+      </View>
     );
   };
-	
+
   return (
-    <View style={styles.view}>
+    <SafeAreaView style={styles.safe}>
+      <StyledStatusBar />
       <ImageBackground
         source={require('../../assets/images/wallpapers/home.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
-        <Header backVisible={false} />
-        <View style={styles.userContainer}>
-          <Avatar />
-          <View style={styles.usernameContainer}>
-            <Text style={styles.usernameLabel}>Usuario</Text>
-            <Text style={styles.usernameText}>
-              {user && user.nombre_razsoc}
-            </Text>
-          </View>
+        <AuthHeader
+          backVisble
+          navigation={navigation}
+          title="Asistencia Tecnica"
+        />
+        <View style={styles.view}>
+          <StatusBar barStyle="dark-content" />
+          <>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.push('TicketsCreateClient');
+              }}>
+              <Text style={styles.statusLabel}>Crear un Nuevo Ticket</Text>
+            </TouchableOpacity>
+          </>
+          <>
+            <Text style={styles.statusLabel}>Historial de Tickets</Text>
+          </>
+          <SafeAreaView style={styles.containerSafe}>
+            <>
+              <View style={styles.tableContainer}>
+                <View style={styles.tableRow}>
+                  <Text style={styles.tableText}>titulo</Text>
+                </View>
+                <View style={styles.tableRow}>
+                  <Text style={styles.tableText}>Descripcion</Text>
+                </View>
+                <View style={styles.tableRow}>
+                  <Text style={styles.tableText}>Estatus</Text>
+                </View>
+              </View>
+            </>
+            <FlatList
+              data={DATA}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+            />
+          </SafeAreaView>
         </View>
-        <StatusBar barStyle="dark-content" />
-        <Text style={styles.serviceText}>{service.servicio}</Text>
-				<View style={styles.gradientContainer}></View>
-				<>
-          <TouchableOpacity onPress={() => {
-              navigation.push('TicketsCreateClient');
-            }}>
-            <Text style={styles.statusLabel}>Crear un Nuevo Ticket</Text>
-          </TouchableOpacity>
-        </>
-				<>
-					<Text style={styles.statusLabel}>Historial de Tickets</Text>
-        </>
-				<SafeAreaView style={styles.containerSafe}>
-					<>
-						<View style={styles.tableContainer}>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableText}>titulo</Text>
-							</View>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableText}>Descripcion</Text>
-							</View>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableText}>Estatus</Text>
-							</View>
-						</View>
-					</>
-					<FlatList
-						data={DATA}
-						renderItem={renderItem}
-						keyExtractor={(item) => item.id}
-					/>
-				</SafeAreaView>
-        
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   view: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-	},
-	containerSafe: {
-		width: '100%',
+    marginTop: 60,
+    paddingTop: 60,
+  },
+  containerSafe: {
+    width: '100%',
     flex: 1,
     marginBottom: 10,
   },
-	scrollView: {
-		alignItems: 'center',
+  scrollView: {
+    alignItems: 'center',
     padding: 0,
     width: '100%',
   },
@@ -170,17 +137,17 @@ const styles = StyleSheet.create({
     color: globalStyles.WHITE_COLOR,
     backgroundColor: 'transparent',
     textTransform: 'uppercase',
-	},
-	tableContainer: {
-		flexDirection: 'row',
-		marginLeft: 10
-	},
-	tableRow: {
-		width: '33%'
-	},
-	tableText: {
-		marginLeft: 20
-	},
+  },
+  tableContainer: {
+    flexDirection: 'row',
+    marginLeft: 10,
+  },
+  tableRow: {
+    width: '33%',
+  },
+  tableText: {
+    marginLeft: 20,
+  },
   logo: {
     marginTop: 10,
     marginBottom: -30,
@@ -234,24 +201,23 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     display: 'flex',
-		flexDirection: 'row',
-		marginLeft: 20,
+    flexDirection: 'row',
+    marginLeft: 20,
     justifyContent: 'space-around',
     backgroundColor: globalStyles.GRAY_TEXT_COLOR + '15',
     width: 250,
     height: 36,
     alignItems: 'center',
     borderRadius: 2,
-	},
-	itemContainer: {
-		margin: 5,
-		width: '90%',
-		flexDirection: 'row',
+  },
+  itemContainer: {
+    margin: 5,
+    width: '90%',
+    flexDirection: 'row',
     alignItems: 'center',
-
-	},
+  },
   redCircle: {
-		marginLeft: 10,
+    marginLeft: 10,
     width: 20,
     height: 20,
     borderRadius: 20,
@@ -282,7 +248,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: globalStyles.WHITE_COLOR,
     textTransform: 'capitalize',
-	},
+  },
 });
 
 export default TicketsScreen;
@@ -290,5 +256,35 @@ export default TicketsScreen;
 // export const TicketsScreen = ({navigation}) => {
 // 	const tickets = [{id:123, name:'low speed'}, {id:234, name:'too much speed'},  {id:1, name:'testing the chat and ticket'}];
 
- 
- 
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+    status: 'c',
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item',
+    status: 'a',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item',
+    status: 'b',
+  },
+  {
+    id: '58694a0f-3da1-271f-bd96-145571e29d72',
+    title: 'Third Item',
+    status: 'b',
+  },
+  {
+    id: '58694a0f-3da1-271f-bd96-145d71e29d72',
+    title: 'asd Item',
+    status: 'b',
+  },
+  {
+    id: '58694a0f-3da1-271f-bd96-141871e29d72',
+    title: 'last Item',
+    status: 'b',
+  },
+];

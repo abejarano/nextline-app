@@ -6,7 +6,12 @@ import ArrowPointerSvg from '../assets/svg/ArrowPointer';
 import HamburguerSvg from '../assets/svg/Hamburguer';
 import {verticalScale} from '../utils';
 
-export const AuthHeader = ({navigation, onPress, title, backVisble}) => {
+export const AuthHeader = ({
+  navigation,
+  onPress,
+  title,
+  backVisble = false,
+}) => {
   return (
     <View style={styles.view} pointerEvents="box-none">
       <View style={styles.back}>
