@@ -15,11 +15,13 @@ export const MainNavigator = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
-    console.log('_init_');
-    // FcmService();
-    dispatch(connectFmc());
     dispatch(checkToken());
   }, [dispatch]);
+  useEffect(() => {
+    if (token != null) {
+      dispatch(connectFmc());
+    }
+  }, [token]);
 
   useEffect(() => {
     SplashScreen.hide();

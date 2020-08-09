@@ -22,6 +22,7 @@ const HomeClientScreen = ({navigation}) => {
     (state) => state.servicio.status.data.solicitud_servicio,
   );
   const user = useSelector((state) => state.auth.user);
+  const contrato = useSelector((state) => state.auth.contrato);
   const plan = useSelector((state) => state.plans.selected);
   const service = useSelector((state) => state.servicio.selected);
   const isClient = useSelector((state) => state.auth.isClient);
@@ -60,7 +61,11 @@ const HomeClientScreen = ({navigation}) => {
               upSpeed={plan.velocidad_subida}
               downSpeed={plan.velocidad_baja}
             />
-            {isClient ? <FacturaStatus /> : <StatusService status={status} />}
+            {isClient ? (
+              <FacturaStatus plan={plan} contrato={contrato} />
+            ) : (
+              <StatusService status={status} />
+            )}
           </View>
           {/* </ScrollView> */}
         </View>

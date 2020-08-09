@@ -11,7 +11,10 @@ import {
   RESET_AUTH_ERROR,
 } from '../actions/auth';
 import {PLAN_SELECTED} from '../actions/plan';
-import {SERVICIO_STATUS_FETCH_SUCCESS} from '../actions/servicio';
+import {
+  SERVICIO_STATUS_FETCH_SUCCESS,
+  CONTRATO_STATUS_FETCH_SUCCESS,
+} from '../actions/servicio';
 import {LOAD_PROFILE_SUCCESS} from '../actions/profile';
 import {RESET_STORE} from '../actions/utils';
 
@@ -32,6 +35,7 @@ const authState = {
   loggedIn: false,
   message: '',
   isClient: false,
+  contrato: null,
 };
 
 export const authReducer = (state = authState, {type, payload}) => {
@@ -122,6 +126,11 @@ export const authReducer = (state = authState, {type, payload}) => {
       return {
         ...state,
         error: '',
+      };
+    case CONTRATO_STATUS_FETCH_SUCCESS:
+      return {
+        ...state,
+        contrato: payload,
       };
     case RESET_STORE:
       return authState;

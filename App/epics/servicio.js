@@ -19,6 +19,7 @@ import {
 import {planSelect} from '../actions/plan';
 import {loadProfileSuccess} from '../actions/profile';
 import {signout} from '../actions/auth';
+import {facturaSelect} from '../actions/factura';
 
 const fetchServicioStatusEpic = (action$, state$) =>
   action$.pipe(
@@ -50,9 +51,10 @@ const fetchContratoStatusEpic = (action$, state$) =>
       ).pipe(
         mergeMap((response) => {
           return of(
-            contratoStatusFetchSucces(response.data),
+            contratoStatusFetchSucces(response.data.contratos[0]),
             loadProfileSuccess(response.data.cliente),
             planSelect(response.data.contratos[0].plan),
+            facturaSelect(response.data.factura),
             servicioSelect(response.data.contratos[0].plan.tipo_servicio),
           );
         }),

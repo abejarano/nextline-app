@@ -1,20 +1,25 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import globalStyles from '../../styles';
-import {scale, verticalScale} from '../../utils';
+import {scale, verticalScale, getUsd, getBs} from '../../utils';
 
-export const FacturaStatus = ({}) => {
+export const FacturaStatus = ({plan, factura, contrato}) => {
   return (
     <View style={styles.view}>
       <View style={styles.child}>
         <Text style={styles.label}>fecha de pago</Text>
-        <Text style={styles.date}>04/09/2020</Text>
+        <Text style={styles.date}>
+          {contrato?.dia_corte}/{new Date().toISOString().split('-')[1]}/
+          {new Date().toISOString().split('-')[0]}
+        </Text>
       </View>
       <View style={styles.sep} />
       <View style={styles.child}>
-        <Text style={styles.label}>fecha de pago</Text>
-        <Text style={styles.usd}>20$</Text>
-        <Text style={styles.bs}>Bs 20.000.00</Text>
+        <Text style={styles.label}>total a pagar</Text>
+        <Text style={styles.usd}>${plan?.precio && getUsd(plan.precio)}</Text>
+        <Text style={styles.bs}>
+          {plan?.precio_bs && getBs(plan.precio_bs)}
+        </Text>
       </View>
     </View>
   );
