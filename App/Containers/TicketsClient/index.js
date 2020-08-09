@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 10,
     ...globalStyles.SHADOW,
+    elevation: 15,
   },
   itemChild: {
     flex: 1,
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     // ...globalStyles.DEBUG,
     marginLeft: 15,
-    marginRight: -15,
+    marginRight: -50,
   },
   itemChild2: {
     alignItems: 'flex-end',
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
   },
   itemStatus: {
     borderRadius: 20,
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
     backgroundColor: globalStyles.PRIMARY_COLOR,
     fontFamily: globalStyles.POPPINS_REGULAR,
     fontSize: scale(10),
