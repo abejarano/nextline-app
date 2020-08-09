@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:320564611786:ios:b12b4c98f0f4cc374b8233</string>
+	<string>1:320564611786:ios:35b2cfdcd0e7856c4b8233</string>
 	<key>DATABASE_URL</key>
 	<string>https://nextline-2ac90.firebaseio.com</string>
 </dict>
