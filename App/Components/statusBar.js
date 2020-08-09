@@ -5,7 +5,6 @@ import globalStyles from '../styles';
 export const StyledStatusBar = ({color}) => {
   return (
     <StatusBar
-      translucent={true}
       backgroundColor={color || globalStyles.STATUS_BAR_COLOR}
       //   barStyle={styles.styleStatusBar}
       barStyle="dark-content"
