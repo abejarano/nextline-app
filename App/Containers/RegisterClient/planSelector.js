@@ -16,7 +16,7 @@ import globalStyles from '../../styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SpeedGroup} from '../../Components/speedGroup';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {scale} from '../../utils';
+import {scale, getUsd, getBs} from '../../utils';
 
 const PlanItem = ({item: plan, position, navigation}) => {
   const dispatch = useDispatch();
@@ -34,15 +34,8 @@ const PlanItem = ({item: plan, position, navigation}) => {
       />
       <Text style={styles.month}>Precio Mes</Text>
       <View style={styles.pricing}>
-        <Text style={styles.dollarPrice}>
-          ${plan.precio.split('USD')[0].split('.')[0]} /
-        </Text>
-        <Text style={styles.bsPrice}>
-          {' '}
-          {plan.precio_bs.split('.')[0] +
-            ' ' +
-            plan.precio_bs.split('.')[1].split(',').join('.')}
-        </Text>
+        <Text style={styles.dollarPrice}>${getUsd(plan.precio)} /</Text>
+        <Text style={styles.bsPrice}> {getBs(plan.precio_bs)}</Text>
       </View>
     </TouchableOpacity>
   );

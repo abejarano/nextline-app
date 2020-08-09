@@ -10,6 +10,7 @@ import {
 import ImagePicker from 'react-native-image-picker';
 import globalStyles from '../styles';
 import ProfileSvg from '../assets/svg/Profile';
+import {verticalScale} from '../utils';
 
 const options = {
   title: 'Seleccionar Avatar',
@@ -63,23 +64,18 @@ const onPress = async (setImage) => {
 export const Avatar = ({image, setImage}) => {
   return (
     <View style={{...styles.view}}>
-      {image ? (
-        <TouchableOpacity
-          onPress={() => {
-            onPress(setImage);
-          }}>
+      <TouchableOpacity
+        onPress={() => {
+          onPress(setImage);
+        }}>
+        {image ? (
           <Image source={image} style={styles.image} />
-        </TouchableOpacity>
-      ) : (
-        <View style={styles.imageEmpty} title="Image">
-          <TouchableOpacity
-            onPress={() => {
-              onPress(setImage);
-            }}>
+        ) : (
+          <View style={styles.imageEmpty} title="Image">
             <ProfileSvg color={globalStyles.PRIMARY_COLOR} />
-          </TouchableOpacity>
-        </View>
-      )}
+          </View>
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -90,8 +86,8 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: 100,
-    height: 80,
-    width: 80,
+    height: verticalScale(80),
+    width: verticalScale(80),
   },
   imageEmpty: {
     display: 'flex',

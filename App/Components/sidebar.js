@@ -17,6 +17,8 @@ import globalStyles from '../styles';
 import {scale} from '../utils';
 import {useDispatch} from 'react-redux';
 import {signout} from '../actions/auth';
+import {StyledStatusBar} from './statusBar';
+import {useIsDrawerOpen} from '@react-navigation/drawer';
 
 const items = [
   {
@@ -35,9 +37,16 @@ const items = [
 
 const Sidebar = ({navigation}) => {
   const dispatch = useDispatch();
+  const isDrawerOpen = useIsDrawerOpen();
   return (
     <View style={styles.container}>
-      <CloseSvg style={styles.close} />
+      {/* {isDrawerOpen && <StyledStatusBar color={globalStyles.WHITE_COLOR} />} */}
+
+      <TouchableOpacity
+        style={styles.close}
+        onPress={() => navigation.closeDrawer()}>
+        <CloseSvg />
+      </TouchableOpacity>
       <Image
         style={styles.logo}
         source={require('../assets/images/LogoMenu.png')}
@@ -51,7 +60,7 @@ const Sidebar = ({navigation}) => {
         onPress={() => {
           dispatch(signout());
         }}>
-        <Text style={styles.label}>CERRAR SESIÓN</Text>
+        <Text style={[styles.label, {fontSize: scale(14)}]}>CERRAR SESIÓN</Text>
         <LogoutSvg />
       </TouchableOpacity>
     </View>
@@ -99,7 +108,9 @@ const styles = StyleSheet.create({
   label: {
     color: '#005FAB',
     fontSize: scale(18),
+    fontFamily: globalStyles.POPPINS_REGULAR,
     textAlign: 'center',
+    textAlignVertical: 'bottom',
   },
   logoutContainer: {
     flex: 1,

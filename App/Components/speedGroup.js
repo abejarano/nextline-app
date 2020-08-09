@@ -3,9 +3,9 @@ import {StyleSheet, View, Text} from 'react-native';
 import ArrowSvg from '../assets/svg/Arrow';
 import globalStyles from '../styles';
 
-export const SpeedGroup = ({upSpeed, downSpeed}) => {
+export const SpeedGroup = ({upSpeed, downSpeed, style}) => {
   return (
-    <View style={styles.speedGroup}>
+    <View style={[styles.speedGroup, style]}>
       <View style={styles.speedItem}>
         <ArrowSvg style={styles.arrow} color={globalStyles.GREEN_COLOR} />
         <Text style={styles.speed}>{upSpeed} Mb</Text>

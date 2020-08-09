@@ -2,10 +2,18 @@ import {combineEpics} from 'redux-observable';
 import {catchError} from 'rxjs/operators';
 import {authEpics} from './auth';
 import {planEpics} from './plan';
+import {facturaEpics} from './factura';
 import {servicioEpics} from './servicio';
 import {profileEpics} from './profile';
 import {fcmEpics} from './fcm';
-const epics = [authEpics, planEpics, servicioEpics, profileEpics, fcmEpics];
+const epics = [
+  authEpics,
+  planEpics,
+  servicioEpics,
+  profileEpics,
+  fcmEpics,
+  facturaEpics,
+];
 export const rootEpic = (action$, store$, dependencies) =>
   combineEpics(...epics)(action$, store$, dependencies).pipe(
     catchError((error, source) => {
