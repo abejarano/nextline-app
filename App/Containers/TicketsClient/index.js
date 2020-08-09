@@ -1,49 +1,29 @@
 import React, {useEffect} from 'react';
-import {View, Text, StatusBar, StyleSheet, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import globalStyles from '../../styles';
-import {Avatar} from '../../Components/avatar';
-import {Header} from '../../Components/header';
-import {
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AuthHeader} from '../../Components/authHeader';
 import {StyledStatusBar} from '../../Components/statusBar';
+import {scale, verticalScale} from '../../utils';
 
 export const TicketsScreen = ({navigation}) => {
   const dispatch = useDispatch();
-
-  const TickectItem = ({item, onPress, style}) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-      <Text>{item.title}</Text>
-      <Text>{item.id.substring(0, 20)}</Text>
-    </TouchableOpacity>
-  );
-
-  const renderItem = ({item}) => {
-    const backgroundColor = item.id ? '#6e3b6e' : '#f9c2ff';
-
-    return (
-      <View style={styles.itemContainer}>
-        <TickectItem item={item} style={styles.textContainer} />
-        <View
-          style={{
-            ...styles.redCircle,
-            backgroundColor,
-          }}
-        />
-      </View>
-    );
-  };
 
   return (
     <SafeAreaView style={styles.safe}>
       <StyledStatusBar />
       <ImageBackground
-        source={require('../../assets/images/wallpapers/home.png')}
+        source={require('../../assets/images/wallpapers/profile.png')}
         style={globalStyles.BACKGROUNDIMAGE}>
         <AuthHeader
           backVisble
@@ -52,34 +32,20 @@ export const TicketsScreen = ({navigation}) => {
         />
         <View style={styles.view}>
           <StatusBar barStyle="dark-content" />
-          <>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.push('TicketsCreateClient');
-              }}>
-              <Text style={styles.statusLabel}>Crear un Nuevo Ticket</Text>
-            </TouchableOpacity>
-          </>
-          <>
-            <Text style={styles.statusLabel}>Historial de Tickets</Text>
-          </>
-          <SafeAreaView style={styles.containerSafe}>
-            <>
-              <View style={styles.tableContainer}>
-                <View style={styles.tableRow}>
-                  <Text style={styles.tableText}>titulo</Text>
-                </View>
-                <View style={styles.tableRow}>
-                  <Text style={styles.tableText}>Descripcion</Text>
-                </View>
-                <View style={styles.tableRow}>
-                  <Text style={styles.tableText}>Estatus</Text>
-                </View>
-              </View>
-            </>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.push('TicketsCreateClient');
+            }}>
+            <Text style={styles.title}>Crear un Nuevo Ticket</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>Histórico de tickets</Text>
+
+          <SafeAreaView style={styles.container}>
             <FlatList
               data={DATA}
-              renderItem={renderItem}
+              renderItem={TickectItem}
+              // horizontal={true}
+              contentContainerStyle={styles.scrollView}
               keyExtractor={(item) => item.id}
             />
           </SafeAreaView>
@@ -89,6 +55,56 @@ export const TicketsScreen = ({navigation}) => {
   );
 };
 
+const TickectItem = ({item, onPress, style}) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+    <View style={styles.itemChild}>
+      <Text style={styles.itemTitle}>{item.title}</Text>
+      <Text style={styles.itemMotive}>
+        {(item.motivo || 'intenrnet nletooassssssssssssssssssss').substr(0, 14)}
+        {(item?.motivo?.length() ||
+          'intenrnet nletooassssssssssssssssssss'.length) > 14 && ' . . .'}
+      </Text>
+    </View>
+    <View style={[styles.itemChild, styles.itemChild2]}>
+      <Text
+        style={[
+          styles.itemStatus,
+          {backgroundColor: statusColors[getStatusColor(item.status)]},
+        ]}>
+        {getStatusLabel(item.status)}
+      </Text>
+      <Text style={styles.itemDate}>
+        {item.fecha || new Date().toISOString().split('T')[0]}
+      </Text>
+    </View>
+  </TouchableOpacity>
+);
+
+const statusColors = ['#52C0F2', '#FFD401', '#FF7800', '#D571FF'];
+const getStatusColor = (status) => {
+  switch (status) {
+    case 'a':
+      return 0;
+    case 'b':
+      return 1;
+    case 'c':
+      return 2;
+    case 'd':
+      return 3;
+  }
+};
+const getStatusLabel = (status) => {
+  switch (status) {
+    case 'a':
+      return 'Atención en curso';
+    case 'b':
+      return 'Pendiente por atención';
+    case 'c':
+      return 'Técnico Asignado';
+    case 'd':
+      return 'Pendiente soporte técnico';
+  }
+};
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
@@ -101,75 +117,6 @@ const styles = StyleSheet.create({
     marginTop: 60,
     paddingTop: 60,
   },
-  containerSafe: {
-    width: '100%',
-    flex: 1,
-    marginBottom: 10,
-  },
-  scrollView: {
-    alignItems: 'center',
-    padding: 0,
-    width: '100%',
-  },
-  gradientContainer: {
-    width: 240,
-    height: '20%',
-  },
-  linearGradient: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 15,
-
-    borderRadius: 240,
-    shadowColor: globalStyles.PRIMARY_COLOR_DARK + '33',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-  },
-  buttonText: {
-    fontSize: 44,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: globalStyles.WHITE_COLOR,
-    backgroundColor: 'transparent',
-    textTransform: 'uppercase',
-  },
-  tableContainer: {
-    flexDirection: 'row',
-    marginLeft: 10,
-  },
-  tableRow: {
-    width: '33%',
-  },
-  tableText: {
-    marginLeft: 20,
-  },
-  logo: {
-    marginTop: 10,
-    marginBottom: -30,
-  },
-  whiteCircle: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    width: '100%',
-    overflow: 'hidden',
-    borderRadius: 240,
-    borderColor: globalStyles.WHITE_COLOR,
-    borderWidth: 15,
-  },
-  buttonLowerText: {
-    fontSize: 12,
-    textAlign: 'center',
-    color: globalStyles.WHITE_COLOR,
-    backgroundColor: 'transparent',
-    textTransform: 'uppercase',
-  },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
@@ -177,77 +124,69 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  serviceLabel: {
-    fontSize: 10,
-    opacity: 1,
-    color: globalStyles.LIGTH_BLUE_COLOR,
+  title: {
+    fontSize: scale(14),
+    color: globalStyles.PRIMARY_COLOR_DARK,
     textTransform: 'uppercase',
+    fontFamily: globalStyles.POPPINS_REGULAR,
+    marginVertical: verticalScale(35),
   },
-  serviceText: {
-    fontSize: 25,
-    color: globalStyles.WHITE_COLOR,
-    textTransform: 'uppercase',
-    marginBottom: 20,
-  },
-  statusLabel: {
-    fontSize: 10,
-    color: globalStyles.GRAY_TEXT_COLOR,
-    textTransform: 'uppercase',
-    marginTop: '4%',
-  },
-  statusText: {
-    color: globalStyles.PRIMARY_COLOR,
-    textTransform: 'uppercase',
-  },
-  textContainer: {
-    display: 'flex',
+  item: {
+    flex: 1,
+    maxWidth: '85%',
+    minWidth: '85%',
     flexDirection: 'row',
-    marginLeft: 20,
-    justifyContent: 'space-around',
-    backgroundColor: globalStyles.GRAY_TEXT_COLOR + '15',
-    width: 250,
-    height: 36,
-    alignItems: 'center',
-    borderRadius: 2,
+    backgroundColor: '#fff',
+    minHeight: scale(80),
+    maxHeight: scale(80),
+    marginVertical: 10,
+    borderRadius: 10,
+    ...globalStyles.SHADOW,
   },
-  itemContainer: {
-    margin: 5,
-    width: '90%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  redCircle: {
-    marginLeft: 10,
-    width: 20,
-    height: 20,
-    borderRadius: 20,
-    backgroundColor: globalStyles.RED_COLOR,
-  },
-  userContainer: {
-    display: 'flex',
-    width: '80%',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+  itemChild: {
+    flex: 1,
     alignItems: 'flex-start',
-    marginTop: -20,
-    marginBottom: 20,
+    justifyContent: 'space-between',
+    marginVertical: 10,
+    // ...globalStyles.DEBUG,
+    marginLeft: 15,
+    marginRight: -15,
   },
-  usernameContainer: {
-    display: 'flex',
-    justifyContent: 'flex-start',
+  itemChild2: {
+    alignItems: 'flex-end',
+    marginRight: 15,
+    marginLeft: 0,
+  },
+  itemTitle: {
+    fontFamily: globalStyles.POPPINS_BOLD,
+    color: globalStyles.PRIMARY_COLOR_DARK,
+    fontSize: scale(16),
+  },
+  itemMotive: {
+    fontFamily: globalStyles.POPPINS_REGULAR,
+    fontSize: scale(14),
+  },
+  itemDate: {
+    fontFamily: globalStyles.POPPINS_REGULAR,
+    fontSize: scale(12),
+  },
+  itemStatus: {
+    borderRadius: 20,
+    paddingHorizontal: 8,
+    backgroundColor: globalStyles.PRIMARY_COLOR,
+    fontFamily: globalStyles.POPPINS_REGULAR,
+    fontSize: scale(10),
+  },
+  scrollView: {
+    minWidth: '100%',
     alignItems: 'center',
-    marginLeft: 20,
   },
-  usernameLabel: {
-    fontSize: 10,
-    opacity: 1,
-    color: globalStyles.LIGTH_BLUE_COLOR,
-    textTransform: 'uppercase',
-  },
-  usernameText: {
-    fontSize: 20,
-    color: globalStyles.WHITE_COLOR,
-    textTransform: 'capitalize',
+  container: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...globalStyles.DEBUG,
   },
 });
 
@@ -284,6 +223,36 @@ const DATA = [
   },
   {
     id: '58694a0f-3da1-271f-bd96-141871e29d72',
+    title: 'last Item',
+    status: 'b',
+  },
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba1',
+    title: 'First Item',
+    status: 'c',
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f631',
+    title: 'Second Item',
+    status: 'a',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d721',
+    title: 'Third Item',
+    status: 'b',
+  },
+  {
+    id: '58694a0f-3da1-271f-bd96-145571e29d721',
+    title: 'Third Item',
+    status: 'b',
+  },
+  {
+    id: '58694a0f-3da1-271f-bd96-145d71e29d721',
+    title: 'asd Item',
+    status: 'b',
+  },
+  {
+    id: '58694a0f-3da1-271f-bd96-141871e29d721',
     title: 'last Item',
     status: 'b',
   },
